@@ -1,0 +1,12 @@
+.breadcrumb-item-text{
+    color: #dd9933;
+}
+.breadcrumb-item-text:hover{
+    color: #dd9933;
+}
+
+.btn-new-tour-item{
+   background: #dd9933;
+    color: white;
+}
+

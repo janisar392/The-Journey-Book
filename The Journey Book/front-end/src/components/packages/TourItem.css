@@ -1,0 +1,26 @@
+.card{
+    width: 100%;
+}
+.breadcrumb-container{
+    padding-top: 90px;
+}
+.package-main-header{
+    font-family: "Playfair Display", Helvetica, Arial, sans-serif !important;
+    color: #dd9933;
+}
+.package-sub-headers{
+    font-family: "Josefin Slab", Helvetica, Arial, sans-serif !important;
+    font-size: 15px;
+    line-height: 25px;
+    color: #7a7a7a;
+    font-weight: normal!important;
+}
+.tour-list-container{
+    padding-top: 100px;
+}
+.tour-item{
+    margin-bottom: 4.5rem;
+}
+.card-img-top{
+    height: 350px;
+}
