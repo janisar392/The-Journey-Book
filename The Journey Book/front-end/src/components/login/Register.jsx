@@ -18,76 +18,84 @@ const Register = () => {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+    
+    // In Register.jsx, add the same function
+    const handleGoogleLogin = () => {
+        window.location.href = 'http://localhost:8080/oauth2/authorization/google';
+    };
+    
 
+    // In Register.jsx, update the handleSubmit function:
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setError('');
+    e.preventDefault();
+    setLoading(true);
+    setError('');
 
-        if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
-            setError('Please fill in all fields');
-            setLoading(false);
-            return;
-        }
+    if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
+        setError('Please fill in all fields');
+        setLoading(false);
+        return;
+    }
 
-        if (formData.password !== formData.confirmPassword) {
-            setError('Passwords do not match');
-            setLoading(false);
-            return;
-        }
+    if (formData.password !== formData.confirmPassword) {
+        setError('Passwords do not match');
+        setLoading(false);
+        return;
+    }
 
-        if (formData.password.length < 6) {
-            setError('Password must be at least 6 characters');
-            setLoading(false);
-            return;
-        }
+    if (formData.password.length < 6) {
+        setError('Password must be at least 6 characters');
+        setLoading(false);
+        return;
+    }
 
-        try {
-            const response = await fetch('http://localhost:8080/api/user/register', {
+    try {
+        const response = await fetch('http://localhost:8080/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: formData.name,
+                email: formData.email,
+                password: formData.password
+            }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Auto-login after successful registration
+            const loginResponse = await fetch('http://localhost:8080/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    name: formData.name,
                     email: formData.email,
                     password: formData.password
                 }),
             });
 
-            const data = await response.json();
+            const loginData = await loginResponse.json();
 
-            if (response.ok) {
-                const loginResponse = await fetch('http://localhost:8080/api/user/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email: formData.email,
-                        password: formData.password
-                    }),
-                });
-
-                const loginData = await loginResponse.json();
-
-                if (loginResponse.ok) {
-                    login(loginData.user, loginData.token);
-                    navigate('/tours');
-                } else {
-                    setError(loginData.message || 'Auto-login failed. Please log in manually.');
-                    navigate('/login');
-                }
+            if (loginResponse.ok) {
+                login(loginData.user, loginData.token);
+                navigate('/tours');
             } else {
-                setError(data.message || 'Registration failed');
+                setError(loginData.message || 'Auto-login failed. Please log in manually.');
+                navigate('/login');
             }
-        } catch (error) {
-            setError('Network error. Please try again.');
-            console.error('Registration error:', error);
-        } finally {
-            setLoading(false);
+        } else {
+            setError(data.message || 'Registration failed');
         }
-    };
+    } catch (error) {
+        setError('Network error. Please try again.');
+        console.error('Registration error:', error);
+    } finally {
+        setLoading(false);
+    }
+};
 
     return (
         <div className="register-container">
@@ -184,7 +192,11 @@ const Register = () => {
                     </div>
 
                     <div className="social-register">
-                        <button type="button" className="social-btn google-btn">
+                        <button 
+                            type="button" 
+                            className="social-btn google-btn"
+                            onClick={handleGoogleLogin}
+                        >
                             <i className="fab fa-google"></i>
                             Google
                         </button>

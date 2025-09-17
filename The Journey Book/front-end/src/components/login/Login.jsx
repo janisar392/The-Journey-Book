@@ -17,41 +17,50 @@ const Login = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    // In Login.jsx, add the Google login function
+        const handleGoogleLogin = () => {
+            window.location.href = 'http://localhost:8080/oauth2/authorization/google';
+        };
+
+    // In Login.jsx, update the handleSubmit function:
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setError('');
+    e.preventDefault();
+    setLoading(true);
+    setError('');
 
-        if (!formData.email || !formData.password) {
-            setError('Please fill in all fields');
-            setLoading(false);
-            return;
+    if (!formData.email || !formData.password) {
+        setError('Please fill in all fields');
+        setLoading(false);
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:8080/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: formData.email,
+                password: formData.password
+            }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            login(data.user, data.token);
+            navigate('/tours');
+        } else {
+            setError(data.message || 'Login failed. Please check your credentials.');
         }
-
-        try {
-            const response = await fetch('http://localhost:8080/api/user/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                login(data.user, data.token);
-                navigate('/tours');
-            } else {
-                setError(data.message || 'Login failed. Please check your credentials.');
-            }
-        } catch (error) {
-            setError('Network error. Please try again.');
-            console.error('Login error:', error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    } catch (error) {
+        setError('Network error. Please try again.');
+        console.error('Login error:', error);
+    } finally {
+        setLoading(false);
+    }
+};
 
     return (
         <div className="login-container">
@@ -127,7 +136,11 @@ const Login = () => {
                     </div>
 
                     <div className="social-login">
-                        <button type="button" className="social-btn google-btn">
+                        <button 
+                            type="button" 
+                            className="social-btn google-btn"
+                            onClick={handleGoogleLogin}
+                        >
                             <i className="fab fa-google"></i>
                             Google
                         </button>

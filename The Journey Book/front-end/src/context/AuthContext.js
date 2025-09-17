@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+// REMOVE this import: import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
@@ -13,6 +14,7 @@ export const useAuth = () => {
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    // REMOVE this line: const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -40,6 +42,8 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setUser(null);
+        // REMOVE this line: navigate('/login');
+        // Let individual components handle the redirect
     };
 
     const value = {
@@ -56,5 +60,4 @@ const AuthProvider = ({ children }) => {
     );
 };
 
-// Make sure this line is at the bottom - this is the default export
 export default AuthProvider;

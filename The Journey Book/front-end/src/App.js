@@ -11,6 +11,7 @@ import Footer from './components/navigation/Footer';
 import ExplorePage from './components/ExplorePage';
 import ScrollToTop from './components/ScrollToTop'; // Import the ScrollToTop component
 
+import OAuthSuccess from './components/login/OAuthSuccess';
 // Import the components you just created
 import TopDestinations from './components/home/TopDestinations';
 import Bookings from './components/home/Bookings';
@@ -31,6 +32,8 @@ function App() {
             <Route path="/tours" element={<TourList />} />
             <Route path="/add" element={<NewTourItem />} />
             <Route path="/explore" element={<ExplorePage />} />
+            
+            <Route path="/oauth2-success" element={<OAuthSuccess />} />
             
             {/* Add these new routes */}
             <Route path="/destinations" element={<TopDestinations />} />
