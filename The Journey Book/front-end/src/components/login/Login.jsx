@@ -50,7 +50,7 @@ const Login = () => {
 
         if (response.ok) {
             login(data.user, data.token);
-            navigate('/tours');
+            navigate('/');
         } else {
             setError(data.message || 'Login failed. Please check your credentials.');
         }

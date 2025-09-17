@@ -81,7 +81,7 @@ const Register = () => {
 
             if (loginResponse.ok) {
                 login(loginData.user, loginData.token);
-                navigate('/tours');
+                navigate('/');
             } else {
                 setError(loginData.message || 'Auto-login failed. Please log in manually.');
                 navigate('/login');

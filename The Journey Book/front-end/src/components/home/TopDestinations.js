@@ -2,12 +2,12 @@ import React from 'react';
 
 const TopDestinations = () => {
   const destinations = [
-    { id: 1, name: 'Paris, France', image: 'https://via.placeholder.com/300x200?text=Paris' },
-    { id: 2, name: 'Tokyo, Japan', image: 'https://via.placeholder.com/300x200?text=Tokyo' },
-    { id: 3, name: 'New York, USA', image: 'https://via.placeholder.com/300x200?text=New+York' },
-    { id: 4, name: 'Rome, Italy', image: 'https://via.placeholder.com/300x200?text=Rome' },
-    { id: 5, name: 'Sydney, Australia', image: 'https://via.placeholder.com/300x200?text=Sydney' },
-    { id: 6, name: 'Bali, Indonesia', image: 'https://via.placeholder.com/300x200?text=Bali' },
+    { id: 1, name: 'Paris, France', image: 'paris.jpg' },
+    { id: 2, name: 'Tokyo, Japan', image: 'tokyo.jpg' },
+    { id: 3, name: 'New York, USA', image: 'newyork.jpg' },
+    { id: 4, name: 'Rome, Italy', image: 'rome.jpg' },
+    { id: 5, name: 'Dubai, UAE', image: 'dubai.jpg' },
+    { id: 6, name: 'Santorini, Greece', image: 'santorini.jpg' },
   ];
 
   return (
@@ -18,12 +18,16 @@ const TopDestinations = () => {
           <div className="row">
             {destinations.map(destination => (
               <div key={destination.id} className="col-md-4 mb-4">
-                <div className="card h-100">
-                  <img src={destination.image} className="card-img-top" alt={destination.name} />
-                  <div className="card-body">
+                <div className="card h-100 shadow-sm">
+                  <img 
+                    src={`/images/${destination.image}`} 
+                    className="card-img-top destination-image" 
+                    alt={destination.name} 
+                  />
+                  <div className="card-body d-flex flex-column">
                     <h5 className="card-title">{destination.name}</h5>
-                    <p className="card-text">Experience the beauty and culture of {destination.name} with our exclusive tours.</p>
-                    <button className="btn btn-primary">Explore</button>
+                    <p className="card-text flex-grow-1">Experience the beauty and culture of {destination.name.split(',')[0]} with our exclusive tours.</p>
+                    <button className="btn btn-primary mt-auto">Explore</button>
                   </div>
                 </div>
               </div>
@@ -31,6 +35,19 @@ const TopDestinations = () => {
           </div>
         </div>
       </div>
+      
+      <style jsx>{`
+        .destination-image {
+          height: 200px;
+          object-fit: cover;
+        }
+        .card {
+          transition: transform 0.3s ease;
+        }
+        .card:hover {
+          transform: translateY(-5px);
+        }
+      `}</style>
     </div>
   );
 };
