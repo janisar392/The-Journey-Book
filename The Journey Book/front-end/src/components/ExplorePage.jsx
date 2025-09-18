@@ -1,10 +1,16 @@
-// ExplorePage.jsx
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ExplorePage.css';
 
 const ExplorePage = () => {
+  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState('all');
   const [animatedText, setAnimatedText] = useState(0);
+  const [searchData, setSearchData] = useState({
+    destination: '',
+    date: '',
+    travelers: ''
+  });
   
   const textOptions = ["Beaches", "Mountains", "Cities", "Safaris"];
   
@@ -16,6 +22,20 @@ const ExplorePage = () => {
     return () => clearInterval(interval);
   }, []);
   
+  const handleSearchChange = (e) => {
+    setSearchData({
+      ...searchData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    console.log('Search data:', searchData);
+    // Navigate to search results with the search data
+    navigate('/search-results', { state: { searchData } });
+  };
+
   // Featured destinations data
   const destinations = [
     { id: 1, name: "Bali, Indonesia", category: "beaches", image: "/images/bali2.jpg", description: "Tropical paradise with beaches, culture & adventure." },
@@ -71,18 +91,36 @@ const ExplorePage = () => {
             <span className="animated-text">{textOptions[animatedText]}</span>
           </div>
           
-          <div className="search-container">
+          <form className="search-container" onSubmit={handleSearchSubmit}>
             <div className="search-input-group">
               <i className="fas fa-map-marker-alt"></i>
-              <input type="text" placeholder="Where to?" />
+              <input 
+                type="text" 
+                name="destination"
+                placeholder="Where to?" 
+                value={searchData.destination}
+                onChange={handleSearchChange}
+                required
+              />
             </div>
             <div className="search-input-group">
               <i className="fas fa-calendar"></i>
-              <input type="date" />
+              <input 
+                type="date" 
+                name="date"
+                value={searchData.date}
+                onChange={handleSearchChange}
+                required
+              />
             </div>
             <div className="search-input-group">
               <i className="fas fa-users"></i>
-              <select>
+              <select 
+                name="travelers"
+                value={searchData.travelers}
+                onChange={handleSearchChange}
+                required
+              >
                 <option value="">Travelers</option>
                 <option value="1">1 Traveler</option>
                 <option value="2">2 Travelers</option>
@@ -90,10 +128,10 @@ const ExplorePage = () => {
                 <option value="4">4+ Travelers</option>
               </select>
             </div>
-            <button className="search-button">
+            <button type="submit" className="search-button">
               <i className="fas fa-search"></i> Search
             </button>
-          </div>
+          </form>
         </div>
       </section>
       

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
 
 const Home = () => {
+    const navigate = useNavigate();
+    
     const [searchData, setSearchData] = useState({
         destination: '',
         date: '',
@@ -19,7 +21,8 @@ const Home = () => {
     const handleSearchSubmit = (e) => {
         e.preventDefault();
         console.log('Search data:', searchData);
-        // Add your search logic here
+        // Navigate to search results with the search data
+        navigate('/search-results', { state: { searchData } });
     };
 
     return (
@@ -60,6 +63,7 @@ const Home = () => {
                                             value={searchData.destination}
                                             onChange={handleSearchChange}
                                             className="search-input"
+                                            required
                                         />
                                     </div>
                                     
@@ -71,6 +75,7 @@ const Home = () => {
                                             value={searchData.date}
                                             onChange={handleSearchChange}
                                             className="search-input"
+                                            required
                                         />
                                     </div>
                                     
@@ -81,6 +86,7 @@ const Home = () => {
                                             value={searchData.travelers}
                                             onChange={handleSearchChange}
                                             className="search-input"
+                                            required
                                         >
                                             <option value="">Travelers</option>
                                             <option value="1">1 Traveler</option>
