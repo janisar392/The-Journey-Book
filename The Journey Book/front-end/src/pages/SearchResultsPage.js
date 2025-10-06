@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './SearchResultsPage.css';
 
 const SearchResultsPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeFilter, setActiveFilter] = useState('all');
   const location = useLocation();
+  const navigate = useNavigate();
   const searchData = location.state?.searchData || {};
+
+  // Filter results based on category
+  const filteredResults = activeFilter === 'all' 
+    ? searchResults 
+    : searchResults.filter(place => place.category === activeFilter);
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -35,30 +42,70 @@ const SearchResultsPage = () => {
         
       } catch (error) {
         console.error("Error fetching search results:", error);
-        // Fallback to mock data if API call fails
-        setSearchResults([
+        // Enhanced mock data with categories
+        const mockData = [
           { 
             placeId: '1', 
-            name: 'Eiffel Tower', 
-            imageUrl: 'https://cdn.pixabay.com/photo/2018/04/25/09/26/eiffel-tower-3349075_1280.jpg', 
-            address: 'Champ de Mars, 5 Av. Anatole France, 75007 Paris, France', 
-            rating: 4.7 
+            name: 'Tokyo Skytree', 
+            imageUrl: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400', 
+            address: 'Tokyo, Japan', 
+            rating: 4.7,
+            category: 'tours',
+            price: 25,
+            duration: '2-3 hours'
           },
           { 
             placeId: '2', 
-            name: 'Louvre Museum', 
-            imageUrl: 'https://cdn.pixabay.com/photo/2016/11/18/19/01/louvre-1836415_1280.jpg', 
-            address: 'Rue de Rivoli, 75001 Paris, France', 
-            rating: 4.8 
+            name: 'Senso-ji Temple', 
+            imageUrl: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=400', 
+            address: 'Tokyo, Japan', 
+            rating: 4.8,
+            category: 'museums',
+            price: 15,
+            duration: '1-2 hours'
           },
           { 
             placeId: '3', 
-            name: 'Notre-Dame Cathedral', 
-            imageUrl: 'https://cdn.pixabay.com/photo/2017/04/18/14/53/notre-dame-2239909_1280.jpg', 
-            address: '6 Parvis Notre-Dame - Pl. Jean-Paul II, 75004 Paris, France', 
-            rating: 4.6 
+            name: 'Shibuya Crossing', 
+            imageUrl: 'https://images.unsplash.com/photo-1583407723467-9b2d22504831?w=400', 
+            address: 'Tokyo, Japan', 
+            rating: 4.6,
+            category: 'entertainment',
+            price: 0,
+            duration: '30 mins'
+          },
+          { 
+            placeId: '4', 
+            name: 'Meiji Shrine', 
+            imageUrl: 'https://images.unsplash.com/photo-1571679940117-0a32b3a4c3a8?w=400', 
+            address: 'Tokyo, Japan', 
+            rating: 4.5,
+            category: 'nature',
+            price: 0,
+            duration: '1-2 hours'
+          },
+          { 
+            placeId: '5', 
+            name: 'Tokyo National Museum', 
+            imageUrl: 'https://images.unsplash.com/photo-1552466852-eb5759325cb0?w=400', 
+            address: 'Tokyo, Japan', 
+            rating: 4.4,
+            category: 'museums',
+            price: 12,
+            duration: '2-3 hours'
+          },
+          { 
+            placeId: '6', 
+            name: 'Ueno Park', 
+            imageUrl: 'https://images.unsplash.com/photo-1566416800996-ec16e3d683a0?w=400', 
+            address: 'Tokyo, Japan', 
+            rating: 4.3,
+            category: 'nature',
+            price: 0,
+            duration: '2-3 hours'
           }
-        ]);
+        ];
+        setSearchResults(mockData);
         setIsLoading(false);
       }
     };
@@ -70,26 +117,123 @@ const SearchResultsPage = () => {
     }
   }, [searchData]);
 
+  const handleViewDetails = (place) => {
+    navigate(`/experience/${place.placeId}`, { 
+      state: { experience: place } 
+    });
+  };
+
+  const getCategoryIcon = (category) => {
+    switch(category) {
+      case 'tours': return '🏛️';
+      case 'museums': return '🖼️';
+      case 'nature': return '🌳';
+      case 'entertainment': return '🎭';
+      default: return '📍';
+    }
+  };
+
+  const getDefaultPrice = (category) => {
+  const prices = {
+    'tours': 25,
+    'museums': 15,
+    'nature': 0,
+    'entertainment': 20
+  };
+  return prices[category] || 25;
+};
+
   if (isLoading) {
     return <div className="loading">Searching for amazing destinations...</div>;
   }
 
   return (
     <div className="search-results-container">
-      <h1>Search Results for "{searchData.destination || 'your destination'}"</h1>
+      <div className="results-header">
+        <h1>Search Results for "{searchData.destination || 'your destination'}"</h1>
+        <p className="results-count">{filteredResults.length} experiences found</p>
+      </div>
+
+      {/* Category Filters */}
+      <div className="filters-section">
+        <h3>Filter by Category:</h3>
+        <div className="filter-buttons">
+          <button 
+            className={activeFilter === 'all' ? 'active' : ''}
+            onClick={() => setActiveFilter('all')}
+          >
+            All Experiences
+          </button>
+          <button 
+            className={activeFilter === 'tours' ? 'active' : ''}
+            onClick={() => setActiveFilter('tours')}
+          >
+            🏛️ Tours & Sightseeing
+          </button>
+          <button 
+            className={activeFilter === 'museums' ? 'active' : ''}
+            onClick={() => setActiveFilter('museums')}
+          >
+            🖼️ Museums & Culture
+          </button>
+          <button 
+            className={activeFilter === 'nature' ? 'active' : ''}
+            onClick={() => setActiveFilter('nature')}
+          >
+            🌳 Nature & Outdoor
+          </button>
+          <button 
+            className={activeFilter === 'entertainment' ? 'active' : ''}
+            onClick={() => setActiveFilter('entertainment')}
+          >
+            🎭 Entertainment
+          </button>
+        </div>
+      </div>
+
       <div className="results-grid">
-        {searchResults.map(place => (
+        {filteredResults.map(place => (
           <div key={place.placeId} className="place-card">
-            <img src={place.imageUrl} alt={place.name} />
+            <div className="place-image-container">
+              <img src={place.imageUrl} alt={place.name} />
+              <div className="category-badge">
+                {getCategoryIcon(place.category)}
+              </div>
+              {place.price === 0 && (
+                <div className="free-badge">Free</div>
+              )}
+            </div>
             <div className="place-info">
               <h3>{place.name}</h3>
-              <p>{place.address}</p>
-              <p>⭐ {place.rating}</p>
-              <button className="view-details-btn">View Details & Book</button>
+              <p className="place-address">{place.address}</p>
+              <div className="place-meta">
+                <span className="rating">⭐ {place.rating}</span>
+                <span className="duration">⏱️ {place.duration}</span>
+              </div>
+              <div className="place-price">
+                {place.price === 0 ? (
+                  <span className="free">Free Entry</span>
+                ) : (
+                  <span className="price">From ${place.price || getDefaultPrice(place.category)}</span>
+                )}
+              </div>
+              <button 
+                className="view-details-btn"
+                onClick={() => handleViewDetails(place)}
+              >
+                View Details & Book
+              </button>
             </div>
           </div>
         ))}
       </div>
+
+      {filteredResults.length === 0 && !isLoading && (
+        <div className="no-results">
+          <h3>No experiences found</h3>
+          <p>Try adjusting your filters or search criteria</p>
+        </div>
+      )}
     </div>
   );
 };

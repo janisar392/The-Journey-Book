@@ -1,0 +1,418 @@
+.place-details-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: 400px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  color: white;
+  padding: 30px;
+}
+
+.experience-title {
+  font-size: 2.5rem;
+  margin: 0 0 10px 0;
+  font-weight: bold;
+}
+
+.experience-meta {
+  display: flex;
+  gap: 20px;
+  font-size: 1.1rem;
+}
+
+.experience-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Main Content Layout */
+.details-content {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Sections */
+.description-section,
+.highlights-section,
+.included-section,
+.info-section {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.description-section h2,
+.highlights-section h2,
+.included-section h2,
+.info-section h2 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.description-section p {
+  line-height: 1.6;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+/* Highlights Grid */
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.highlight-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+}
+
+.highlight-icon {
+  font-size: 1.2rem;
+}
+
+/* Lists */
+.included-list,
+.info-list {
+  list-style: none;
+  padding: 0;
+}
+
+.included-list li,
+.info-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.included-list li:last-child,
+.info-list li:last-child {
+  border-bottom: none;
+}
+
+/* Booking Widget */
+.booking-widget {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.widget-content {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 2px solid #e9ecef;
+}
+
+.widget-content h3 {
+  margin: 0 0 20px 0;
+  color: #2c3e50;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+/* Availability Badge */
+.availability-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #d4edda;
+  color: #155724;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.available-dot {
+  width: 10px;
+  height: 10px;
+  background: #28a745;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Date Selection */
+.date-selection {
+  margin-bottom: 20px;
+}
+
+.date-selection label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+}
+
+.date-selection input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.date-selection input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* Ticket Selection */
+.ticket-selection {
+  margin-bottom: 20px;
+}
+
+.ticket-selection h4 {
+  margin: 0 0 15px 0;
+  color: #555;
+}
+
+.ticket-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.ticket-type:last-child {
+  border-bottom: none;
+}
+
+.ticket-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.ticket-price {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.ticket-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ticket-controls button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ticket-controls button:hover:not(:disabled) {
+  background: #3498db;
+  color: white;
+}
+
+.ticket-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ticket-controls span {
+  min-width: 30px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Total Price */
+.total-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-top: 2px solid #eee;
+  border-bottom: 2px solid #eee;
+  margin: 20px 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.price {
+  color: #e74c3c;
+  font-size: 1.4rem;
+}
+
+/* Book Button */
+.book-now-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.book-now-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}
+
+/* Cancellation Badge */
+.cancellation-badge {
+  text-align: center;
+  color: #27ae60;
+  font-size: 0.9rem;
+  padding: 10px;
+  background: #d4edda;
+  border-radius: 6px;
+  border: 1px solid #c3e6cb;
+}
+
+/* Loading and Error States */
+.loading, .error {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.2rem;
+}
+
+.loading {
+  color: #3498db;
+}
+
+.error {
+  color: #e74c3c;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .details-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .booking-widget {
+    position: static;
+  }
+  
+  .hero-section {
+    height: 300px;
+  }
+  
+  .experience-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .place-details-container {
+    padding: 0 10px;
+  }
+  
+  .hero-section {
+    height: 250px;
+  }
+  
+  .experience-title {
+    font-size: 1.5rem;
+  }
+  
+  .experience-meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Error State */
+.error {
+  text-align: center;
+  padding: 50px 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin: 50px auto;
+  max-width: 500px;
+}
+
+.error h2 {
+  color: #e74c3c;
+  margin-bottom: 15px;
+}
+
+.error p {
+  color: #7f8c8d;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.back-home-btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.back-home-btn:hover {
+  background: #2980b9;
+}

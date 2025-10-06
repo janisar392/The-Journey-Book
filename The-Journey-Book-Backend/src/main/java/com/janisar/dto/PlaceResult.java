@@ -6,6 +6,7 @@ public class PlaceResult {
     private String imageUrl;
     private String address;
     private double rating;
+    private String category;
 
     // Constructor for easy creation in the Controller
     public PlaceResult(String placeId, String name, String imageUrl, String address, double rating) {
@@ -14,6 +15,17 @@ public class PlaceResult {
         this.imageUrl = imageUrl;
         this.address = address;
         this.rating = rating;
+        this.category = "tours"; // Default category
+    }
+
+    // New constructor with category
+    public PlaceResult(String placeId, String name, String imageUrl, String address, double rating, String category) {
+        this.placeId = placeId;
+        this.name = name;
+        this.imageUrl = imageUrl;
+        this.address = address;
+        this.rating = rating;
+        this.category = category;
     }
 
     // Default constructor (necessary for Spring)
@@ -34,4 +46,7 @@ public class PlaceResult {
 
     public double getRating() { return rating; }
     public void setRating(double rating) { this.rating = rating; }
+
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
 }

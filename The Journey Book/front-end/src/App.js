@@ -15,7 +15,9 @@ import TopDestinations from './components/home/TopDestinations';
 import Bookings from './components/home/Bookings';
 import Gallery from './components/home/Gallery';
 import Contact from './components/home/Contact';
-import SearchResultsPage from './pages/SearchResultsPage'; // Add this import
+import SearchResultsPage from './pages/SearchResultsPage';
+import PlaceDetailsPage from './components/placedetails/PlaceDetailsPage';
+
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
             <Route path="/bookings" element={<Bookings />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/experience/:id" element={<PlaceDetailsPage />} />
+
           </Routes>
           <Footer />
         </div>
