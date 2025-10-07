@@ -17,7 +17,7 @@ const OAuthSuccess = () => {
                 if (response.ok) {
                     const data = await response.json();
                     login(data.user, data.token);
-                    navigate('/tours');
+                    navigate('/');
                 } else {
                     navigate('/login');
                 }

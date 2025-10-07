@@ -150,7 +150,7 @@ const SearchResultsPage = () => {
   return (
     <div className="search-results-container">
       <div className="results-header">
-        <h1>Search Results for "{searchData.destination || 'your destination'}"</h1>
+        <h1>Showing Results for "{searchData.destination || 'your destination'} Attractions "</h1>
         <p className="results-count">{filteredResults.length} experiences found</p>
       </div>
 

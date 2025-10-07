@@ -1,6 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const TopDestinations = () => {
+  const navigate = useNavigate();
+  
   const destinations = [
     { id: 1, name: 'Paris, France', image: 'paris.jpg' },
     { id: 2, name: 'Tokyo, Japan', image: 'tokyo.jpg' },
@@ -9,6 +12,18 @@ const TopDestinations = () => {
     { id: 5, name: 'Dubai, UAE', image: 'dubai.jpg' },
     { id: 6, name: 'Santorini, Greece', image: 'santorini.jpg' },
   ];
+
+  const handleExplore = (destinationName) => {
+    // Use the exact same structure as Home.jsx search
+    const searchData = {
+      destination: destinationName,
+      date: '',
+      travelers: ''
+    };
+    
+    // Navigate exactly like Home.jsx does
+    navigate('/search-results', { state: { searchData } });
+  };
 
   return (
     <div className="container mt-5 pt-5">
@@ -27,7 +42,12 @@ const TopDestinations = () => {
                   <div className="card-body d-flex flex-column">
                     <h5 className="card-title">{destination.name}</h5>
                     <p className="card-text flex-grow-1">Experience the beauty and culture of {destination.name.split(',')[0]} with our exclusive tours.</p>
-                    <button className="btn btn-primary mt-auto">Explore</button>
+                    <button 
+                      className="btn btn-primary mt-auto"
+                      onClick={() => handleExplore(destination.name)}
+                    >
+                      Explore
+                    </button>
                   </div>
                 </div>
               </div>
