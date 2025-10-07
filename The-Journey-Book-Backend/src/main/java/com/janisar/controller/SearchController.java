@@ -89,78 +89,78 @@ public class SearchController {
         // Paris - 6 attractions
         else if (location.contains("paris")) {
             return List.of(
-                    new PlaceResult("13", "Eiffel Tower", "https://images.unsplash.com/photo-1543349689-9a4d426bee8e?w=800", "Paris, France", 4.8, "tours"),
-                    new PlaceResult("14", "Louvre Museum", "https://images.unsplash.com/photo-1594651691728-82c5d3594277?w=800", "Paris, France", 4.9, "museums"),
-                    new PlaceResult("15", "Notre-Dame Cathedral", "https://images.unsplash.com/photo-1566416800996-ec16e3d683a0?w=800", "Paris, France", 4.7, "museums"),
-                    new PlaceResult("16", "Arc de Triomphe", "https://images.unsplash.com/photo-1587333607318-46c0e6f74c5b?w=800", "Paris, France", 4.6, "tours"),
-                    new PlaceResult("17", "Montmartre", "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800", "Paris, France", 4.5, "tours"),
-                    new PlaceResult("18", "Seine River Cruise", "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800", "Paris, France", 4.7, "entertainment")
+                    new PlaceResult("13", "Eiffel Tower", "https://cdn.pixabay.com/photo/2017/09/26/20/13/eiffel-2789943_640.jpg", "Paris, France", 4.8, "tours"),
+                    new PlaceResult("14", "Louvre Museum", "https://cdn.pixabay.com/photo/2021/09/04/07/29/louvre-6597169_1280.jpg", "Paris, France", 4.9, "museums"),
+                    new PlaceResult("15", "Notre-Dame Cathedral", "https://cdn.pixabay.com/photo/2015/06/05/17/13/notre-dame-798704_640.jpg", "Paris, France", 4.7, "museums"),
+                    new PlaceResult("16", "Arc de Triomphe", "https://cdn.pixabay.com/photo/2013/04/07/21/31/arc-de-triomphe-101638_640.jpg", "Paris, France", 4.6, "tours"),
+                    new PlaceResult("17", "Montmartre", "https://cdn.pixabay.com/photo/2019/10/13/12/35/paris-4546007_1280.jpg", "Paris, France", 4.5, "tours"),
+                    new PlaceResult("18", "Seine River Cruise", "https://cdn.pixabay.com/photo/2022/06/19/11/52/germany-7271696_640.jpg", "Paris, France", 4.7, "entertainment")
             );
         }
         // Dubai - 6 attractions
         else if (location.contains("dubai")) {
             return List.of(
                     new PlaceResult("19", "Burj Khalifa", "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800", "Dubai, UAE", 4.8, "tours"),
-                    new PlaceResult("20", "Dubai Mall", "https://images.unsplash.com/photo-1582573618381-c9a77c31f6b6?w=800", "Dubai, UAE", 4.6, "entertainment"),
+                    new PlaceResult("20", "Dubai Mall", "https://cdn.pixabay.com/photo/2017/08/08/15/11/shopping-2611645_640.jpg", "Dubai, UAE", 4.6, "entertainment"),
                     new PlaceResult("21", "Palm Jumeirah", "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=800", "Dubai, UAE", 4.7, "tours"),
-                    new PlaceResult("22", "Dubai Fountain", "https://images.unsplash.com/photo-1587333607318-46c0e6f74c5b?w=800", "Dubai, UAE", 4.5, "entertainment"),
-                    new PlaceResult("23", "Desert Safari", "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800", "Dubai, UAE", 4.9, "nature"),
-                    new PlaceResult("24", "Miracle Garden", "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800", "Dubai, UAE", 4.4, "nature")
+                    new PlaceResult("22", "Dubai Fountain", "https://cdn.pixabay.com/photo/2022/01/20/21/34/dubai-6953422_640.jpg", "Dubai, UAE", 4.5, "entertainment"),
+                    new PlaceResult("23", "Desert Safari", "https://cdn.pixabay.com/photo/2014/12/02/14/11/tree-554045_640.jpg", "Dubai, UAE", 4.9, "nature"),
+                    new PlaceResult("24", "Miracle Garden", "https://cdn.pixabay.com/photo/2017/02/17/05/05/gardens-mexico-2073360_640.jpg", "Dubai, UAE", 4.4, "nature")
             );
         }
         // Bali - 6 attractions
         else if (location.contains("bali")) {
             return List.of(
                     new PlaceResult("25", "Tanah Lot Temple", "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=800", "Bali, Indonesia", 4.7, "museums"),
-                    new PlaceResult("26", "Uluwatu Temple", "https://images.unsplash.com/photo-1553659971-f01207815908?w=800", "Bali, Indonesia", 4.8, "museums"),
+                    new PlaceResult("26", "Uluwatu Temple", "https://cdn.pixabay.com/photo/2022/04/25/05/48/rain-7155121_640.jpg", "Bali, Indonesia", 4.8, "museums"),
                     new PlaceResult("27", "Tegallalang Rice Terraces", "https://images.unsplash.com/photo-1566552881560-0be862a7c445?w=800", "Bali, Indonesia", 4.6, "nature"),
-                    new PlaceResult("28", "Mount Batur Sunrise", "https://images.unsplash.com/photo-1587333607318-46c0e6f74c5b?w=800", "Bali, Indonesia", 4.9, "nature"),
-                    new PlaceResult("29", "Ubud Monkey Forest", "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800", "Bali, Indonesia", 4.5, "nature"),
-                    new PlaceResult("30", "Waterbom Bali", "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800", "Bali, Indonesia", 4.7, "entertainment")
+                    new PlaceResult("28", "Mount Batur Sunrise", "https://cdn.pixabay.com/photo/2022/05/29/00/27/huangshan-7228173_640.jpg", "Bali, Indonesia", 4.9, "nature"),
+                    new PlaceResult("29", "Ubud Monkey Forest", "https://cdn.pixabay.com/photo/2023/06/21/08/58/monkey-8078840_640.jpg", "Bali, Indonesia", 4.5, "nature"),
+                    new PlaceResult("30", "Waterbom Bali", "https://cdn.pixabay.com/photo/2019/08/01/01/21/surfer-4376412_640.jpg", "Bali, Indonesia", 4.7, "entertainment")
             );
         }
         // New York - 6 attractions
         else if (location.contains("new york") || location.contains("nyc")) {
             return List.of(
-                    new PlaceResult("31", "Statue of Liberty", "https://images.unsplash.com/photo-1548013146-72479768bada?w=800", "New York, USA", 4.8, "tours"),
+                    new PlaceResult("31", "Statue of Liberty", "https://cdn.pixabay.com/photo/2018/01/11/17/55/architecture-3076565_640.jpg", "New York, USA", 4.8, "tours"),
                     new PlaceResult("32", "Times Square", "https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?w=800", "New York, USA", 4.7, "entertainment"),
-                    new PlaceResult("33", "Central Park", "https://images.unsplash.com/photo-1422255198496-21531f12a6e8?w=800", "New York, USA", 4.6, "nature"),
-                    new PlaceResult("34", "Empire State Building", "https://images.unsplash.com/photo-1587333607318-46c0e6f74c5b?w=800", "New York, USA", 4.5, "tours"),
-                    new PlaceResult("35", "Metropolitan Museum", "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800", "New York, USA", 4.9, "museums"),
-                    new PlaceResult("36", "Brooklyn Bridge", "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800", "New York, USA", 4.7, "tours")
+                    new PlaceResult("33", "Central Park", "https://cdn.pixabay.com/photo/2021/08/21/20/21/central-park-6563522_640.jpg", "New York, USA", 4.6, "nature"),
+                    new PlaceResult("34", "Empire State Building", "https://cdn.pixabay.com/photo/2020/10/23/06/23/city-5677823_640.jpg", "New York, USA", 4.5, "tours"),
+                    new PlaceResult("35", "Metropolitan Museum", "https://cdn.pixabay.com/photo/2025/01/17/16/06/building-9340309_640.jpg", "New York, USA", 4.9, "museums"),
+                    new PlaceResult("36", "Brooklyn Bridge", "https://cdn.pixabay.com/photo/2016/10/28/16/43/usa-1778564_640.jpg", "New York, USA", 4.7, "tours")
             );
         }
         // Delhi - 6 attractions
         else if (location.contains("delhi")) {
             return List.of(
                     new PlaceResult("37", "India Gate", "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800", "New Delhi, India", 4.7, "tours"),
-                    new PlaceResult("38", "Red Fort", "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=800", "Old Delhi, India", 4.8, "museums"),
-                    new PlaceResult("39", "Qutub Minar", "https://images.unsplash.com/photo-1580477667995-2b94f01c9516?w=800", "Mehrauli, Delhi, India", 4.6, "museums"),
-                    new PlaceResult("40", "Lotus Temple", "https://images.unsplash.com/photo-1587333607318-46c0e6f74c5b?w=800", "New Delhi, India", 4.5, "museums"),
-                    new PlaceResult("41", "Akshardham Temple", "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800", "New Delhi, India", 4.9, "museums"),
-                    new PlaceResult("42", "Chandni Chowk", "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800", "Old Delhi, India", 4.4, "entertainment")
+                    new PlaceResult("38", "Red Fort", "https://cdn.pixabay.com/photo/2022/04/13/13/55/india-7130382_640.jpg", "Old Delhi, India", 4.8, "museums"),
+                    new PlaceResult("39", "Qutub Minar", "https://cdn.pixabay.com/photo/2014/07/01/17/44/qutb-minar-381473_640.jpg", "Mehrauli, Delhi, India", 4.6, "museums"),
+                    new PlaceResult("40", "Lotus Temple", "https://cdn.pixabay.com/photo/2023/07/22/19/01/lotus-8143968_640.jpg", "New Delhi, India", 4.5, "museums"),
+                    new PlaceResult("41", "Akshardham Temple", "https://cdn.pixabay.com/photo/2023/06/29/09/52/angkor-thom-8096092_640.jpg", "New Delhi, India", 4.9, "museums"),
+                    new PlaceResult("42", "Chandni Chowk", "https://cdn.pixabay.com/photo/2018/01/30/12/11/street-life-3118639_640.jpg", "Old Delhi, India", 4.4, "entertainment")
             );
         }
         // Shimla - Enhanced with 6 attractions
         else if (location.contains("shimla")) {
             return List.of(
-                    new PlaceResult("43", "The Ridge", "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800", "Shimla, Himachal Pradesh", 4.6, "nature"),
-                    new PlaceResult("44", "Jakhoo Temple", "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800", "Shimla, Himachal Pradesh", 4.5, "museums"),
-                    new PlaceResult("45", "Mall Road", "https://images.unsplash.com/photo-1587333607318-46c0e6f74c5b?w=800", "Shimla, Himachal Pradesh", 4.4, "entertainment"),
-                    new PlaceResult("46", "Kufri Fun World", "https://images.unsplash.com/photo-1587333607318-46c0e6f74c5b?w=800", "Shimla, Himachal Pradesh", 4.3, "entertainment"),
-                    new PlaceResult("47", "Christ Church", "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800", "Shimla, Himachal Pradesh", 4.2, "museums"),
-                    new PlaceResult("48", "Summer Hill", "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800", "Shimla, Himachal Pradesh", 4.5, "nature")
+                    new PlaceResult("43", "The Ridge", "https://cdn.pixabay.com/photo/2014/12/03/22/03/shimla-555906_640.jpg", "Shimla, Himachal Pradesh", 4.6, "nature"),
+                    new PlaceResult("44", "Jakhoo Temple", "https://cdn.pixabay.com/photo/2018/05/15/17/25/shimla-3403683_640.jpg", "Shimla, Himachal Pradesh", 4.5, "museums"),
+                    new PlaceResult("45", "Mall Road", "https://cdn.pixabay.com/photo/2022/09/21/03/34/thailand-7469405_640.jpg", "Shimla, Himachal Pradesh", 4.4, "entertainment"),
+                    new PlaceResult("46", "Kufri Fun World", "https://cdn.pixabay.com/photo/2016/07/04/01/44/mountain-world-1495832_640.jpg", "Shimla, Himachal Pradesh", 4.3, "entertainment"),
+                    new PlaceResult("47", "Christ Church", "https://cdn.pixabay.com/photo/2017/07/25/22/16/church-2539749_640.jpg", "Shimla, Himachal Pradesh", 4.2, "museums"),
+                    new PlaceResult("48", "Summer Hill", "https://cdn.pixabay.com/photo/2024/03/05/19/43/mountains-8615203_640.jpg", "Shimla, Himachal Pradesh", 4.5, "nature")
             );
         }
         // Singapore - 6 attractions
         else if (location.contains("singapore")) {
             return List.of(
-                    new PlaceResult("49", "Marina Bay Sands", "https://images.unsplash.com/photo-1525625293386-3f8ec9936665?w=800", "Singapore", 4.8, "tours"),
-                    new PlaceResult("50", "Gardens by the Bay", "https://images.unsplash.com/photo-1586510913096-ca5ae72b2f6e?w=800", "Singapore", 4.7, "nature"),
-                    new PlaceResult("51", "Sentosa Island", "https://images.unsplash.com/photo-1596436883440-4f784ab64583?w=800", "Singapore", 4.6, "entertainment"),
-                    new PlaceResult("52", "Universal Studios", "https://images.unsplash.com/photo-1587333607318-46c0e6f74c5b?w=800", "Singapore", 4.9, "entertainment"),
-                    new PlaceResult("53", "Singapore Zoo", "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800", "Singapore", 4.5, "nature"),
-                    new PlaceResult("54", "Merlion Park", "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800", "Singapore", 4.4, "tours")
+                    new PlaceResult("49", "Marina Bay Sands", "https://cdn.pixabay.com/photo/2012/12/27/19/40/marina-bay-sands-72817_640.jpg", "Singapore", 4.8, "tours"),
+                    new PlaceResult("50", "Gardens by the Bay", "https://cdn.pixabay.com/photo/2020/02/21/23/30/singapore-gardens-by-the-bay-4869019_640.jpg", "Singapore", 4.7, "nature"),
+                    new PlaceResult("51", "Sentosa Island", "https://cdn.pixabay.com/photo/2017/11/26/12/33/boats-2978737_640.jpg", "Singapore", 4.6, "entertainment"),
+                    new PlaceResult("52", "Universal Studios", "https://cdn.pixabay.com/photo/2018/10/27/20/59/hogwarts-3777461_640.jpg", "Singapore", 4.9, "entertainment"),
+                    new PlaceResult("53", "Singapore Zoo", "https://cdn.pixabay.com/photo/2020/04/29/09/20/airport-5108010_640.jpg", "Singapore", 4.5, "nature"),
+                    new PlaceResult("54", "Merlion Park", "https://cdn.pixabay.com/photo/2023/12/02/20/08/ferris-wheel-8426414_640.jpg", "Singapore", 4.4, "tours")
             );
         }
 
@@ -168,11 +168,25 @@ public class SearchController {
         else {
             return List.of(
                     new PlaceResult("55", "City Center Tour", "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800", searchLocation, 4.5, "tours"),
-                    new PlaceResult("56", "Local Museum", "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800", searchLocation, 4.3, "museums"),
+                    new PlaceResult("56", "Local Museum", "https://cdn.pixabay.com/photo/2020/12/09/21/11/stairs-5818603_640.jpg", searchLocation, 4.3, "museums"),
                     new PlaceResult("57", "Scenic Viewpoint", "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800", searchLocation, 4.7, "nature"),
-                    new PlaceResult("58", "Cultural Show", "https://images.unsplash.com/photo-1587333607318-46c0e6f74c5b?w=800", searchLocation, 4.4, "entertainment"),
-                    new PlaceResult("59", "Historic Landmark", "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800", searchLocation, 4.6, "tours"),
-                    new PlaceResult("60", "Botanical Garden", "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800", searchLocation, 4.2, "nature")
+                    new PlaceResult("58", "Cultural Show", "https://cdn.pixabay.com/photo/2017/10/25/20/34/khon-2889163_640.jpg", searchLocation, 4.4, "entertainment"),
+                    new PlaceResult("59", "Historic Landmark", "https://cdn.pixabay.com/photo/2021/07/24/15/47/venice-6489813_640.jpg", searchLocation, 4.6, "tours"),
+                    new PlaceResult("60", "Botanical Garden", "https://cdn.pixabay.com/photo/2022/08/06/15/16/grapevine-7368800_640.jpg", searchLocation, 4.2, "nature"),
+                    new PlaceResult("61", "Food Market Tour", "https://cdn.pixabay.com/photo/2020/08/09/11/24/fish-5475257_640.jpg", searchLocation, 4.8, "entertainment"),
+                    new PlaceResult("62", "River Cruise", "https://cdn.pixabay.com/photo/2022/03/21/14/18/boats-7083304_640.jpg", searchLocation, 4.5, "tours"),
+                    new PlaceResult("63", "Art Gallery", "https://cdn.pixabay.com/photo/2014/01/14/22/33/art-gallery-245251_640.jpg", searchLocation, 4.4, "museums"),
+                    new PlaceResult("64", "Mountain Hiking", "https://cdn.pixabay.com/photo/2022/02/13/15/59/river-7011476_640.jpg", searchLocation, 4.9, "nature"),
+                    new PlaceResult("65", "Traditional Workshop", "https://cdn.pixabay.com/photo/2019/09/26/14/23/vice-4506104_640.jpg", searchLocation, 4.6, "entertainment"),
+                    new PlaceResult("66", "Sunset Photography Tour", "https://cdn.pixabay.com/photo/2020/10/07/10/51/mountains-5634817_640.jpg", searchLocation, 4.7, "tours"),
+                    new PlaceResult("67", "Local Craft Brewery", "https://cdn.pixabay.com/photo/2017/06/24/23/41/beer-2439237_1280.jpg", searchLocation, 4.3, "entertainment"),
+                    new PlaceResult("68", "Ancient Ruins Exploration", "https://cdn.pixabay.com/photo/2018/10/14/13/01/ruin-3746423_640.jpg", searchLocation, 4.8, "museums"),
+                    new PlaceResult("69", "Wildlife Safari", "https://cdn.pixabay.com/photo/2017/10/20/10/58/elephant-2870777_1280.jpg", searchLocation, 4.9, "nature"),
+                    new PlaceResult("70", "Cooking Class Experience", "https://cdn.pixabay.com/photo/2016/12/10/21/26/food-1898194_640.jpg", searchLocation, 4.6, "entertainment"),
+                    new PlaceResult("71", "Night City Tour", "https://cdn.pixabay.com/photo/2021/07/30/08/21/street-6509043_640.jpg", searchLocation, 4.5, "tours"),
+                    new PlaceResult("73", "Historic Castle Visit", "https://cdn.pixabay.com/photo/2015/11/26/12/45/garden-1063833_640.jpg", searchLocation, 4.7, "museums"),
+                    new PlaceResult("74", "Beach Day Experience", "https://cdn.pixabay.com/photo/2023/03/29/17/50/beach-7886067_640.jpg", searchLocation, 4.6, "nature"),
+                    new PlaceResult("75", "Street Art Walking Tour", "https://cdn.pixabay.com/photo/2023/09/01/19/09/couple-8227550_640.jpg", searchLocation, 4.4, "tours")
             );
         }
     }
