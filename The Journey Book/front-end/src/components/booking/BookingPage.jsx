@@ -197,17 +197,55 @@ useEffect(() => {
   };
 
   const completeBooking = async (method, paymentId = null) => {
-    const bookingId = generateBookingId();
-    
-    const bookingDetails = {
-      ...bookingData,
-      guestDetails,
+  const bookingId = generateBookingId();
+  
+  const bookingDetails = {
+    ...bookingData,
+    guestDetails,
+    paymentMethod: method,
+    paymentId: paymentId || (method === 'online' ? 'demo_payment_' + Date.now() : null),
+    bookingId,
+    bookingDate: new Date().toISOString(),
+    status: method === 'online' ? 'confirmed' : 'pending_payment'
+  };
+
+  try {
+    // Save booking to backend
+    const bookingDataToSave = {
+      bookingId: bookingId,
+      userId: user.id, // Make sure user object has id
+      experienceId: bookingData.experience.id,
+      experienceName: bookingData.experience.name,
+      experienceImage: bookingData.experience.image,
+      location: bookingData.experience.location,
+      duration: bookingData.experience.duration,
+      selectedDate: bookingData.selectedDate,
+      ticketQuantities: bookingData.ticketQuantities,
+      totalPrice: bookingData.totalPrice,
+      guestFullName: guestDetails.fullName,
+      guestEmail: guestDetails.email,
+      guestPhone: guestDetails.phone,
+      specialRequests: guestDetails.specialRequests,
       paymentMethod: method,
-      paymentId: paymentId || (method === 'online' ? 'demo_payment_' + Date.now() : null),
-      bookingId,
-      bookingDate: new Date().toISOString(),
+      paymentId: paymentId || null,
       status: method === 'online' ? 'confirmed' : 'pending_payment'
     };
+
+    const response = await fetch('http://localhost:8080/api/bookings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify(bookingDataToSave)
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to save booking');
+    }
+
+    const savedBooking = await response.json();
+    console.log('Booking saved to backend:', savedBooking);
 
     // Navigate to confirmation page
     navigate('/booking-confirmation', {
@@ -215,7 +253,17 @@ useEffect(() => {
         bookingDetails
       }
     });
-  };
+  } catch (error) {
+    console.error('Error saving booking:', error);
+    // Still navigate to confirmation but show error message
+    alert('Booking completed but failed to save details. Please contact support.');
+    navigate('/booking-confirmation', {
+      state: {
+        bookingDetails
+      }
+    });
+  }
+};
 
   const handleConfirmBooking = async () => {
     // Validation

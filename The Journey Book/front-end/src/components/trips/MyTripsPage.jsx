@@ -11,76 +11,6 @@ const MyTripsPage = () => {
   const [filter, setFilter] = useState('all');
   const [isLoading, setIsLoading] = useState(true);
 
-  // Mock bookings data - in real app, you'd fetch from backend
-  const mockBookings = [
-    {
-      id: 'BK123456789',
-      experience: {
-        id: '1',
-        name: 'Tokyo Skytree',
-        image: 'https://cdn.pixabay.com/photo/2020/02/05/16/10/tokyo-skytree-4821334_1280.jpg',
-        location: 'Tokyo, Japan',
-        duration: '2-3 hours'
-      },
-      selectedDate: '2024-12-15',
-      ticketQuantities: { adult: 2, child: 1, senior: 0 },
-      totalPrice: 65,
-      guestDetails: {
-        fullName: 'John Doe',
-        email: 'john@example.com',
-        phone: '9876543210'
-      },
-      paymentMethod: 'online',
-      paymentId: 'pay_123456789',
-      bookingDate: '2024-11-10T10:30:00Z',
-      status: 'confirmed'
-    },
-    {
-      id: 'BK987654321',
-      experience: {
-        id: '13',
-        name: 'Eiffel Tower',
-        image: 'https://cdn.pixabay.com/photo/2017/09/26/20/13/eiffel-2789943_640.jpg',
-        location: 'Paris, France',
-        duration: '1-2 hours'
-      },
-      selectedDate: '2024-12-20',
-      ticketQuantities: { adult: 1, child: 0, senior: 0 },
-      totalPrice: 25,
-      guestDetails: {
-        fullName: 'John Doe',
-        email: 'john@example.com',
-        phone: '9876543210'
-      },
-      paymentMethod: 'venue',
-      paymentId: null,
-      bookingDate: '2024-11-08T14:20:00Z',
-      status: 'pending_payment'
-    },
-    {
-      id: 'BK555666777',
-      experience: {
-        id: '7',
-        name: 'Big Ben',
-        image: 'https://cdn.pixabay.com/photo/2017/09/26/20/13/eiffel-2789943_640.jpg',
-        location: 'London, UK',
-        duration: '1 hour'
-      },
-      selectedDate: '2024-11-25',
-      ticketQuantities: { adult: 3, child: 0, senior: 1 },
-      totalPrice: 95,
-      guestDetails: {
-        fullName: 'John Doe',
-        email: 'john@example.com',
-        phone: '9876543210'
-      },
-      paymentMethod: 'online',
-      paymentId: 'pay_555666777',
-      bookingDate: '2024-10-15T09:15:00Z',
-      status: 'completed'
-    }
-  ];
-
   useEffect(() => {
     if (!user) {
       navigate('/login', { 
@@ -92,26 +22,61 @@ const MyTripsPage = () => {
       return;
     }
 
-    // Simulate API call
-    const fetchBookings = async () => {
-      setIsLoading(true);
-      try {
-        // In real app: const response = await fetch('/api/bookings');
-        // const data = await response.json();
-        
-        // Using mock data for demo
-        setTimeout(() => {
-          setBookings(mockBookings);
-          setIsLoading(false);
-        }, 1000);
-      } catch (error) {
-        console.error('Error fetching bookings:', error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchBookings();
+    fetchUserBookings();
   }, [user, navigate]);
+
+  const fetchUserBookings = async () => {
+    setIsLoading(true);
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:8080/api/bookings/user/${user.id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch bookings');
+      }
+
+      const userBookings = await response.json();
+      
+      // Transform backend data to match frontend format
+      const transformedBookings = userBookings.map(booking => ({
+        id: booking.bookingId,
+        experience: {
+          id: booking.experienceId,
+          name: booking.experienceName,
+          image: booking.experienceImage,
+          location: booking.location,
+          duration: booking.duration
+        },
+        selectedDate: booking.selectedDate,
+        ticketQuantities: booking.ticketQuantities,
+        totalPrice: booking.totalPrice,
+        guestDetails: {
+          fullName: booking.guestFullName,
+          email: booking.guestEmail,
+          phone: booking.guestPhone,
+          specialRequests: booking.specialRequests || ''
+        },
+        paymentMethod: booking.paymentMethod,
+        paymentId: booking.paymentId,
+        bookingDate: booking.bookingDate,
+        status: booking.status
+      }));
+
+      setBookings(transformedBookings);
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+      alert('Failed to load your trips. Please try again.');
+      // Fallback to empty array instead of mock data
+      setBookings([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const filteredBookings = bookings.filter(booking => {
     if (filter === 'all') return true;
@@ -139,15 +104,21 @@ const MyTripsPage = () => {
     }
 
     try {
-      // In real app: await fetch(`/api/bookings/${bookingId}/cancel`, { method: 'POST' });
-      
-      // Update local state for demo
-      setBookings(prev => prev.map(booking => 
-        booking.id === bookingId 
-          ? { ...booking, status: 'cancelled' }
-          : booking
-      ));
-      
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:8080/api/bookings/${bookingId}/cancel`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to cancel booking');
+      }
+
+      // Refresh bookings after cancellation
+      await fetchUserBookings();
       alert('Booking cancelled successfully!');
     } catch (error) {
       console.error('Error cancelling booking:', error);

@@ -110,21 +110,40 @@
   overflow: hidden;
   display: flex;
   transition: transform 0.3s ease;
+  min-height: 280px; /* Ensure consistent height */
 }
 
 .booking-card:hover {
   transform: translateY(-2px);
 }
 
+/* Fixed Image Section - 45% width */
 .booking-image {
   position: relative;
-  min-width: 250px;
+  width: 45%; /* Exactly 45% of the card */
+  min-width: 45%; /* Prevent shrinking */
+  max-width: 45%; /* Prevent growing */
+  overflow: hidden;
+  background: #f8f9fa; /* Fallback background */
 }
 
 .booking-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* This ensures images fill the container properly */
+  object-position: center; /* Center the image */
+  display: block;
+}
+
+/* Fixed Content Section - 55% width */
+.booking-card-content {
+  padding: 1.5rem;
+  width: 55%; /* Exactly 55% of the card */
+  min-width: 55%; /* Prevent shrinking */
+  max-width: 55%; /* Prevent growing */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .status-badge {
@@ -136,6 +155,7 @@
   font-size: 0.8rem;
   font-weight: 600;
   color: white;
+  z-index: 2;
 }
 
 .status-confirmed {
@@ -158,18 +178,11 @@
   background: #7f8c8d;
 }
 
-.booking-card-content {
-  padding: 1.5rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
 .booking-header h3 {
   margin: 0 0 0.5rem 0;
   color: #2c3e50;
   font-size: 1.3rem;
+  line-height: 1.3;
 }
 
 .booking-meta {
@@ -177,12 +190,14 @@
   gap: 1rem;
   color: #7f8c8d;
   font-size: 0.9rem;
+  flex-wrap: wrap;
 }
 
 .booking-details {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  flex: 1;
 }
 
 .detail-row {
@@ -190,6 +205,8 @@
   justify-content: space-between;
   padding: 0.5rem 0;
   border-bottom: 1px solid #f8f9fa;
+  align-items: center;
+  min-height: 2rem;
 }
 
 .detail-row:last-child {
@@ -202,6 +219,7 @@
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-size: 0.85rem;
+  word-break: break-all;
 }
 
 .booking-total {
@@ -211,6 +229,8 @@
   border-top: 2px solid #e9ecef;
   font-weight: 600;
   font-size: 1.1rem;
+  align-items: center;
+  margin-top: auto; /* Push to bottom */
 }
 
 .price {
@@ -222,6 +242,7 @@
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
+  margin-top: auto; /* Ensure actions stay at bottom */
 }
 
 .btn-primary, .btn-secondary, .btn-outline {
@@ -232,6 +253,9 @@
   font-weight: 500;
   transition: all 0.3s ease;
   font-size: 0.9rem;
+  flex: 1;
+  min-width: 120px;
+  text-align: center;
 }
 
 .btn-primary {
@@ -370,11 +394,20 @@
 @media (max-width: 768px) {
   .booking-card {
     flex-direction: column;
+    min-height: auto;
   }
   
   .booking-image {
+    width: 100%;
     min-width: 100%;
-    height: 200px;
+    max-width: 100%;
+    height: 200px; /* Fixed height on mobile */
+  }
+  
+  .booking-card-content {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
   }
   
   .trips-stats {
@@ -391,5 +424,30 @@
   
   .trips-filters {
     justify-content: center;
+  }
+  
+  .btn-primary, .btn-secondary, .btn-outline {
+    min-width: auto;
+    width: 100%;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .booking-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .booking-total {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
 }
