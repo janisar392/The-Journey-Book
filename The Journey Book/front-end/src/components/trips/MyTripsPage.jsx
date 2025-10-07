@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { generateTextTicket } from '../../utils/textTicketGenerator';
 import './MyTripsPage.css';
 
 const MyTripsPage = () => {
@@ -10,6 +11,7 @@ const MyTripsPage = () => {
   const [bookings, setBookings] = useState([]);
   const [filter, setFilter] = useState('all');
   const [isLoading, setIsLoading] = useState(true);
+  const [downloadingTicket, setDownloadingTicket] = useState(null);
 
   useEffect(() => {
     if (!user) {
@@ -64,10 +66,17 @@ const MyTripsPage = () => {
         paymentMethod: booking.paymentMethod,
         paymentId: booking.paymentId,
         bookingDate: booking.bookingDate,
-        status: booking.status
+        status: booking.status,
+        // Add raw booking date for sorting
+        rawBookingDate: booking.bookingDate
       }));
 
-      setBookings(transformedBookings);
+      // FIX: Sort bookings by booking date (most recent first)
+      const sortedBookings = transformedBookings.sort((a, b) => {
+        return new Date(b.rawBookingDate) - new Date(a.rawBookingDate);
+      });
+
+      setBookings(sortedBookings);
     } catch (error) {
       console.error('Error fetching bookings:', error);
       alert('Failed to load your trips. Please try again.');
@@ -134,9 +143,16 @@ const MyTripsPage = () => {
     navigate(`/experience/${experience.id}`);
   };
 
-  const handleDownloadTicket = (booking) => {
-    // Simulate ticket download
-    alert(`Ticket for ${booking.experience.name} downloaded!`);
+  const handleDownloadTicket = async (booking) => {
+    try {
+      setDownloadingTicket(booking.id);
+      generateTextTicket(booking, user);
+    } catch (error) {
+      console.error('Ticket download failed:', error);
+      alert('Failed to download ticket. Please try again.');
+    } finally {
+      setDownloadingTicket(null);
+    }
   };
 
   const formatDate = (dateString) => {
@@ -303,8 +319,9 @@ const MyTripsPage = () => {
                         <button 
                           className="btn-secondary"
                           onClick={() => handleDownloadTicket(booking)}
+                          disabled={downloadingTicket === booking.id}
                         >
-                          📄 Download Ticket
+                          {downloadingTicket === booking.id ? '⏳ Downloading...' : '📄 Download Ticket'}
                         </button>
                         <button 
                           className="btn-outline"
