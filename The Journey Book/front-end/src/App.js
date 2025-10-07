@@ -17,6 +17,9 @@ import Gallery from './components/home/Gallery';
 import Contact from './components/home/Contact';
 import SearchResultsPage from './pages/SearchResultsPage';
 import PlaceDetailsPage from './components/placedetails/PlaceDetailsPage';
+import BookingPage from './components/booking/BookingPage';
+import BookingConfirmationPage from './components/booking/BookingConfirmationPage';
+import MyTripsPage from './components/trips/MyTripsPage';
 
 
 function App() {
@@ -40,6 +43,9 @@ function App() {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/experience/:id" element={<PlaceDetailsPage />} />
+            <Route path="/booking" element={<BookingPage />} />
+            <Route path="/booking-confirmation" element={<BookingConfirmationPage />} />
+            <Route path="/my-trips" element={<MyTripsPage />} />
 
           </Routes>
           <Footer />
