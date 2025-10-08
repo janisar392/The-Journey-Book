@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { generatePDFTicket } from '../../utils/pdfTicketGenerator';
 import { generateTextTicket } from '../../utils/textTicketGenerator';
 import './MyTripsPage.css';
 
@@ -146,10 +147,12 @@ const MyTripsPage = () => {
   const handleDownloadTicket = async (booking) => {
     try {
       setDownloadingTicket(booking.id);
-      generateTextTicket(booking, user);
+      await generatePDFTicket(booking, user);
     } catch (error) {
-      console.error('Ticket download failed:', error);
-      alert('Failed to download ticket. Please try again.');
+      console.error('PDF download failed:', error);
+      // Fallback to text ticket if PDF fails
+      alert('PDF generation failed. Downloading text version instead.');
+      generateTextTicket(booking, user);
     } finally {
       setDownloadingTicket(null);
     }
