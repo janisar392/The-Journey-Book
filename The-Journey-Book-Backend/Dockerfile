@@ -1,14 +1,13 @@
-# Use Java 22
-FROM openjdk:22-slim
-
-# Set working directory
+# Use Maven with Java 22 to build the project
+FROM maven:3.9-eclipse-temurin-22 AS builder
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copy the JAR file (you'll need to build it first)
-COPY target/*.jar app.jar
-
-# Expose port 8080
+# Use Java 22 runtime
+FROM openjdk:22-slim
+WORKDIR /app
+COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
