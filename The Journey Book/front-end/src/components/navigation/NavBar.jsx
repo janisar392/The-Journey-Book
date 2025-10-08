@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'; // ADD useNavigate
 import { useAuth } from '../../context/AuthContext';
 import './NavBar.css';
 
+
 const NavBar = () => {
     const { user, logout } = useAuth();
     const navigate = useNavigate(); // ADD this
@@ -60,8 +61,8 @@ const NavBar = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/bookings">
-                                Bookings
+                            <Link className="nav-link" to="/travel-essentials">
+                                Travel Essentials
                             </Link>
                         </li>
                         <li className="nav-item">
@@ -87,6 +88,7 @@ const NavBar = () => {
                                     </Link>
                                 </li>
                                 <li className="nav-item dropdown">
+                                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                     <a 
                                         className="nav-link dropdown-toggle" 
                                         href="#" 
