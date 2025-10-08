@@ -36,6 +36,19 @@ const ExplorePage = () => {
     navigate('/search-results', { state: { searchData } });
   };
 
+  // Add the explore destination function (same as TopDestinations.js)
+  const handleExploreDestination = (destinationName) => {
+    // Use the exact same structure as Home.jsx search
+    const searchData = {
+      destination: destinationName,
+      date: '',
+      travelers: ''
+    };
+    
+    // Navigate exactly like Home.jsx does
+    navigate('/search-results', { state: { searchData } });
+  };
+
   // Featured destinations data
   const destinations = [
     { id: 1, name: "Bali, Indonesia", category: "beaches", image: "/images/bali2.jpg", description: "Tropical paradise with beaches, culture & adventure." },
@@ -151,7 +164,12 @@ const ExplorePage = () => {
                   <div className="destination-overlay">
                     <h3 className="destination-name">{destination.name}</h3>
                     <p className="destination-description">{destination.description}</p>
-                    <button className="explore-button">Explore Destination</button>
+                    <button 
+                      className="explore-button"
+                      onClick={() => handleExploreDestination(destination.name)}
+                    >
+                      Explore Destination
+                    </button>
                   </div>
                 </div>
               </div>
