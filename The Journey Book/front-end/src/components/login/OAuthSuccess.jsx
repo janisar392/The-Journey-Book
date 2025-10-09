@@ -11,43 +11,53 @@ const OAuthSuccess = () => {
     useEffect(() => {
         const processOAuth = async () => {
             try {
-                console.log('🔄 OAuthSuccess: Processing Google login...');
+                console.log('🔄 OAuthSuccess: Starting Google login processing...');
 
-                // Wait for OAuth2 redirect to complete
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                // Wait longer for OAuth2 to complete
+                await new Promise(resolve => setTimeout(resolve, 3000));
 
-                // Try the NEW callback endpoint
-                console.log('🔄 Calling OAuth2 callback endpoint...');
-                const response = await fetch(`${BASE_URL}/oauth2/user`, {
-                    method: 'GET',
-                    credentials: 'include',
-                    headers: {
-                        'Accept': 'application/json',
-                    },
-                });
+                // Try endpoints in order
+                const endpoints = [
+                    '/api/auth/oauth2/user',
+                    '/api/auth/oauth2/success'
+                ];
 
-                console.log('📡 Response status:', response.status);
-                console.log('📡 Response headers:', response.headers);
+                for (const endpoint of endpoints) {
+                    try {
+                        console.log(`🔄 Trying endpoint: ${endpoint}`);
+                        const response = await fetch(`${BASE_URL}${endpoint}`, {
+                            method: 'GET',
+                            credentials: 'include',
+                            headers: {
+                                'Accept': 'application/json',
+                            },
+                        });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log('✅ OAuth2 SUCCESS:', data);
-                    
-                    if (data.user && data.token) {
-                        login(data.user, data.token);
-                        navigate('/', { replace: true });
-                        return;
+                        console.log(`📡 ${endpoint} Status:`, response.status);
+
+                        if (response.ok) {
+                            const data = await response.json();
+                            console.log(`✅ ${endpoint} SUCCESS:`, data);
+                            
+                            if (data.user && data.token) {
+                                console.log('🎉 Login successful!');
+                                login(data.user, data.token);
+                                navigate('/', { replace: true });
+                                return;
+                            }
+                        } else {
+                            const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
+                            console.log(`❌ ${endpoint} Error:`, errorData);
+                        }
+                    } catch (error) {
+                        console.log(`❌ ${endpoint} Failed:`, error.message);
                     }
                 }
 
-                // If failed, show the actual error
-                const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
-                console.error('❌ OAuth2 FAILED:', errorData);
-                
+                // All endpoints failed
+                console.error('💥 All OAuth2 endpoints failed');
                 navigate('/login', {
-                    state: { 
-                        error: errorData.message || 'Google login failed. Please try email login.' 
-                    },
+                    state: { error: 'Google login failed. Please try email login or contact support.' },
                     replace: true
                 });
 
@@ -69,7 +79,7 @@ const OAuthSuccess = () => {
                 <span className="visually-hidden">Loading...</span>
             </div>
             <p className="mt-3">Completing Google login...</p>
-            <p className="text-muted small">Please wait while we verify your session</p>
+            <p className="text-muted small">This may take a few moments</p>
         </div>
     );
 };
