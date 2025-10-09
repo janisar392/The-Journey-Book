@@ -7,12 +7,15 @@ import com.janisar.repository.UserRepository;
 import com.janisar.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @RestController
@@ -76,6 +79,36 @@ public class OAuth2Controller {
             return ResponseEntity.internalServerError().body(
                     new AuthResponse("Error during Google login: " + e.getMessage(), null, null)
             );
+        }
+    }
+
+    // ADD THIS DEBUG ENDPOINT
+    @GetMapping("/oauth2/callback")
+    public ResponseEntity<?> oauth2Callback(HttpServletRequest request) {
+        try {
+            System.out.println("🔵 OAuth2 Callback Received");
+            System.out.println("🔵 Query String: " + request.getQueryString());
+            System.out.println("🔵 Full URL: " + request.getRequestURL());
+
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            System.out.println("🔵 Authentication: " + (auth != null ? auth.getName() : "NULL"));
+            System.out.println("🔵 Authenticated: " + (auth != null && auth.isAuthenticated()));
+
+            if (auth != null && auth.getPrincipal() instanceof OAuth2User) {
+                OAuth2User oauth2User = (OAuth2User) auth.getPrincipal();
+                System.out.println("🔵 OAuth2User attributes: " + oauth2User.getAttributes().keySet());
+            }
+
+            return ResponseEntity.ok(Map.of(
+                    "status", "callback_received",
+                    "authenticated", auth != null && auth.isAuthenticated(),
+                    "auth_name", auth != null ? auth.getName() : "null",
+                    "auth_class", auth != null ? auth.getClass().getSimpleName() : "null"
+            ));
+        } catch (Exception e) {
+            System.out.println("❌ Callback error: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
     }
 }
