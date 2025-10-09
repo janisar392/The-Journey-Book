@@ -6,81 +6,103 @@ const OAuthSuccess = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
 
-    const BASE_URL = 'https://the-journey-book-backend.onrender.com';
-
     useEffect(() => {
-        const fetchUserData = async () => {
+        const handleOAuthSuccess = async () => {
             try {
-                console.log('🔵 STEP 1: Starting OAuth2 success flow...');
+                console.log('🔄 Starting OAuth2 processing...');
+
+                // Method 1: Try to get user data from backend
+                try {
+                    const response = await fetch('https://the-journey-book-backend.onrender.com/api/auth/oauth2/success', {
+                        method: 'GET',
+                        credentials: 'include', // Important for cookies
+                        headers: {
+                            'Accept': 'application/json',
+                        },
+                    });
+
+                    console.log('📡 Backend response status:', response.status);
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log('✅ Backend OAuth2 success:', data);
+                        
+                        if (data.user && data.token) {
+                            login(data.user, data.token);
+                            navigate('/', { replace: true });
+                            return;
+                        }
+                    } else {
+                        console.log('❌ Backend returned error:', response.status);
+                        const errorData = await response.json().catch(() => null);
+                        console.log('Error details:', errorData);
+                    }
+                } catch (backendError) {
+                    console.log('❌ Backend call failed:', backendError);
+                }
+
+                // Method 2: Check URL parameters for OAuth2 data
+                const urlParams = new URLSearchParams(window.location.search);
+                const error = urlParams.get('error');
+                const code = urlParams.get('code');
                 
-                const response = await fetch(`${BASE_URL}/api/auth/oauth2/success`, {
-                    method: 'GET',
-                    credentials: 'include',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    },
+                console.log('🔍 URL Parameters:', { error, code });
+
+                if (error) {
+                    console.error('❌ OAuth2 error from URL:', error);
+                    navigate('/login', {
+                        state: { error: `Google login failed: ${error}` },
+                        replace: true
+                    });
+                    return;
+                }
+
+                // Method 3: If we have a code, try to exchange it for token
+                if (code) {
+                    console.log('🔄 Exchanging authorization code for token...');
+                    try {
+                        const tokenResponse = await fetch('https://the-journey-book-backend.onrender.com/api/auth/oauth2/token', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ code })
+                        });
+
+                        if (tokenResponse.ok) {
+                            const tokenData = await tokenResponse.json();
+                            console.log('✅ Token exchange successful:', tokenData);
+                            
+                            if (tokenData.user && tokenData.token) {
+                                login(tokenData.user, tokenData.token);
+                                navigate('/', { replace: true });
+                                return;
+                            }
+                        }
+                    } catch (tokenError) {
+                        console.error('❌ Token exchange failed:', tokenError);
+                    }
+                }
+
+                // If all methods fail, show generic error
+                console.error('💥 All OAuth2 methods failed');
+                navigate('/login', {
+                    state: { error: 'Google login failed. Please try again or use email login.' },
+                    replace: true
                 });
 
-                console.log('🔵 STEP 2: Response status:', response.status);
-                console.log('🔵 STEP 2: Response OK:', response.ok);
-
-                // Check if response is OK before parsing
-                if (!response.ok) {
-                    console.error('❌ HTTP Error:', response.status, response.statusText);
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-
-                const data = await response.json();
-                console.log('🔵 STEP 3: Response data received:', data);
-
-                // Check if we have the required data
-                if (data && data.user && data.token) {
-                    console.log('✅ STEP 4: OAuth2 successful!');
-                    console.log('User data:', data.user);
-                    console.log('Token received:', data.token ? 'YES' : 'NO');
-                    
-                    // Call login function
-                    console.log('🔵 STEP 5: Calling login function...');
-                    login(data.user, data.token);
-                    
-                    console.log('🔵 STEP 6: Navigating to home page...');
-                    // Use replace: true to prevent going back to this page
-                    navigate('/', { replace: true });
-                } else {
-                    console.error('❌ STEP 4: Missing user data or token in response');
-                    console.log('User present:', !!data.user);
-                    console.log('Token present:', !!data.token);
-                    console.log('Full response:', data);
-                    
-                    navigate('/login', { 
-                        replace: true,
-                        state: { 
-                            error: 'Login failed: Missing user information' 
-                        }
-                    });
-                }
-
             } catch (error) {
-                console.error('💥 STEP ERROR: OAuth2 failed completely:', error);
-                console.error('Error details:', error.message);
-                
-                navigate('/login', { 
-                    replace: true,
-                    state: { 
-                        error: `Google login failed: ${error.message}` 
-                    }
+                console.error('💥 OAuth2 processing failed:', error);
+                navigate('/login', {
+                    state: { error: 'Login failed. Please try again.' },
+                    replace: true
                 });
             }
         };
 
-        // Small delay to ensure everything is loaded
-        const timer = setTimeout(() => {
-            fetchUserData();
-        }, 1000);
-
-        return () => clearTimeout(timer);
-    }, [login, navigate, BASE_URL]);
+        // Start processing
+        handleOAuthSuccess();
+    }, [login, navigate]);
 
     return (
         <div className="container text-center mt-5">
@@ -88,7 +110,7 @@ const OAuthSuccess = () => {
                 <span className="visually-hidden">Loading...</span>
             </div>
             <p className="mt-3">Completing Google login...</p>
-            <p className="text-muted small">Please wait while we set up your account</p>
+            <p className="text-muted small">This may take a few moments</p>
         </div>
     );
 };
