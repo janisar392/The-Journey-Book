@@ -58,7 +58,7 @@ const Contact = () => {
                   </div>
                   <div className="contact-text">
                     <h4>Email Address</h4>
-                    <p>support@thejourneybook.com</p>
+                    <p>janisar392@gmail.com</p>
                   </div>
                 </div>
                 
@@ -68,7 +68,7 @@ const Contact = () => {
                   </div>
                   <div className="contact-text">
                     <h4>Phone Number</h4>
-                    <p>+1 (555) 123-4567</p>
+                    <p>+91 9608456392</p>
                   </div>
                 </div>
                 
@@ -78,7 +78,7 @@ const Contact = () => {
                   </div>
                   <div className="contact-text">
                     <h4>Headquarters</h4>
-                    <p>123 Adventure Lane, Travel City, TC 12345</p>
+                    <p> Greater NOida</p>
                   </div>
                 </div>
                 
@@ -88,8 +88,8 @@ const Contact = () => {
                   </div>
                   <div className="contact-text">
                     <h4>Office Hours</h4>
-                    <p>Monday - Friday: 9am - 6pm</p>
-                    <p>Saturday: 10am - 4pm</p>
+                    <p>Mon - Fri</p>
+                    <p> 9am - 6pm</p>
                   </div>
                 </div>
               </div>
