@@ -19,10 +19,12 @@ const OAuthSuccess = () => {
                 });
                 
                 if (response.ok) {
+                    debugger;
                     const data = await response.json();
                     login(data.user, data.token);
                     navigate('/');
                 } else {
+                    debugger;
                     navigate('/login');
                 }
             } catch (error) {
