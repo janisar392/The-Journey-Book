@@ -9,56 +9,50 @@ const OAuthSuccess = () => {
     const BASE_URL = 'https://the-journey-book-backend.onrender.com';
 
     useEffect(() => {
-        const fetchUserData = async () => {
+        const processOAuth = async () => {
             try {
-                console.log('🔄 Starting OAuth2 processing...');
+                console.log('🔄 OAuthSuccess: Processing Google login...');
 
-                // Try multiple endpoints
-                const endpoints = [
-                    '/api/auth/oauth2/user',
-                    '/api/auth/oauth2/success'
-                ];
+                // Wait for OAuth2 redirect to complete
+                await new Promise(resolve => setTimeout(resolve, 2000));
 
-                for (const endpoint of endpoints) {
-                    try {
-                        console.log(`🔄 Trying endpoint: ${endpoint}`);
-                        const response = await fetch(`${BASE_URL}${endpoint}`, {
-                            method: 'GET',
-                            credentials: 'include',
-                            headers: {
-                                'Accept': 'application/json',
-                            },
-                        });
+                // Try the NEW callback endpoint
+                console.log('🔄 Calling OAuth2 callback endpoint...');
+                const response = await fetch(`${BASE_URL}/oauth2/user`, {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                });
 
-                        console.log(`📡 ${endpoint} response status:`, response.status);
+                console.log('📡 Response status:', response.status);
+                console.log('📡 Response headers:', response.headers);
 
-                        if (response.ok) {
-                            const data = await response.json();
-                            console.log(`✅ ${endpoint} success:`, data);
-                            
-                            if (data.user && data.token) {
-                                login(data.user, data.token);
-                                navigate('/', { replace: true });
-                                return;
-                            }
-                        } else {
-                            const errorData = await response.json().catch(() => null);
-                            console.log(`❌ ${endpoint} error:`, errorData);
-                        }
-                    } catch (error) {
-                        console.log(`❌ ${endpoint} failed:`, error.message);
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('✅ OAuth2 SUCCESS:', data);
+                    
+                    if (data.user && data.token) {
+                        login(data.user, data.token);
+                        navigate('/', { replace: true });
+                        return;
                     }
                 }
 
-                // All endpoints failed
-                console.error('💥 All OAuth2 endpoints failed');
+                // If failed, show the actual error
+                const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
+                console.error('❌ OAuth2 FAILED:', errorData);
+                
                 navigate('/login', {
-                    state: { error: 'Google login failed. Please try email login.' },
+                    state: { 
+                        error: errorData.message || 'Google login failed. Please try email login.' 
+                    },
                     replace: true
                 });
 
             } catch (error) {
-                console.error('💥 OAuth2 processing failed:', error);
+                console.error('💥 OAuth2 processing error:', error);
                 navigate('/login', {
                     state: { error: 'Network error during Google login' },
                     replace: true
@@ -66,11 +60,7 @@ const OAuthSuccess = () => {
             }
         };
 
-        // Wait for OAuth2 redirect to complete
-        setTimeout(() => {
-            fetchUserData();
-        }, 2000);
-
+        processOAuth();
     }, [login, navigate, BASE_URL]);
 
     return (

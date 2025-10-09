@@ -15,12 +15,11 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/api/auth/**", "/oauth2/**", "/login/oauth2/**").permitAll()
-                        .anyRequest().permitAll()
+                        .anyRequest().permitAll() // Allow ALL requests
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .defaultSuccessUrl("https://the-journey-book.netlify.app/oauth2-success", true)
-                        .failureUrl("https://the-journey-book.netlify.app/oauth2-success?error=oauth_failed") // Changed this
+                        .failureUrl("https://the-journey-book.netlify.app/login?error=oauth_failed")
                 );
 
         return http.build();
