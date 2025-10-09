@@ -6,90 +6,40 @@ const OAuthSuccess = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
 
+    // Base URL configuration - Change this for production
+    const BASE_URL = 'https://the-journey-book-backend.onrender.com'; // PRODUCTION
+    // const BASE_URL = 'http://localhost:8080'; // LOCAL DEVELOPMENT
+
     useEffect(() => {
-        console.log('🔄 OAuthSuccess: Checking URL parameters...');
-        
-        // Check for token in URL parameters (from success handler)
-        const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
-        
-        console.log('📋 URL Parameters:', { token });
-
-        if (token) {
-            console.log('✅ Token found in URL, completing login...');
-            // You might need to decode user data from URL or make a backend call
-            // For now, let's try to get user data from backend
-            fetchUserData(token);
-        } else {
-            console.log('❌ No token in URL, trying backend...');
-            fetchUserData();
-        }
-
-        async function fetchUserData(existingToken = null) {
+        // Fetch user data from backend after OAuth success
+        const fetchUserData = async () => {
             try {
-                const BASE_URL = 'https://the-journey-book-backend.onrender.com';
-                
-                if (existingToken) {
-                    // If we have token, verify it and get user data
-                    console.log('🔄 Verifying existing token...');
-                    const response = await fetch(`${BASE_URL}/api/auth/verify`, {
-                        headers: {
-                            'Authorization': `Bearer ${existingToken}`
-                        }
-                    });
-                    
-                    if (response.ok) {
-                        const userData = await response.json();
-                        login(userData, existingToken);
-                        navigate('/', { replace: true });
-                        return;
-                    }
-                }
-
-                // Fallback: try to get OAuth2 user data
-                console.log('🔄 Falling back to OAuth2 user endpoint...');
-                const response = await fetch(`${BASE_URL}/api/auth/oauth2/user`, {
-                    credentials: 'include',
-                    headers: {
-                        'Accept': 'application/json',
-                    },
+                const response = await fetch(`${BASE_URL}/api/auth/oauth2/success`, {
+                    credentials: 'include'
                 });
-
-                console.log('📡 Response status:', response.status);
-
+                
                 if (response.ok) {
                     const data = await response.json();
-                    console.log('✅ OAuth2 user data:', data);
-                    
-                    if (data.user && data.token) {
-                        login(data.user, data.token);
-                        navigate('/', { replace: true });
-                    } else {
-                        throw new Error('Missing user data in response');
-                    }
+                    login(data.user, data.token);
+                    navigate('/');
                 } else {
-                    const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
-                    console.error('❌ OAuth2 failed:', errorData);
-                    throw new Error(errorData.message || 'Authentication failed');
+                    navigate('/login');
                 }
             } catch (error) {
-                console.error('💥 OAuth2 processing failed:', error);
-                navigate('/login', {
-                    state: { error: 'Google login failed. Please try email login.' },
-                    replace: true
-                });
+                console.error('OAuth error:', error);
+                navigate('/login');
             }
-        }
+        };
 
-    }, [login, navigate]);
+        fetchUserData();
+    }, [login, navigate, BASE_URL]);
 
     return (
         <div className="container text-center mt-5">
             <div className="spinner-border text-primary" role="status">
                 <span className="visually-hidden">Loading...</span>
             </div>
-            <p className="mt-3">Completing Google login...</p>
-            <p className="text-muted small">Please wait while we verify your session</p>
+            <p className="mt-3">Completing login...</p>
         </div>
     );
 };
