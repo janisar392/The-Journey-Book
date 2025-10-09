@@ -11,27 +11,36 @@ const OAuthSuccess = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+        console.log('Fetching OAuth user data...');
+        
         const response = await fetch(`${BASE_URL}/api/auth/oauth2/success`, {
           credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         });
 
+        console.log('OAuth response status:', response.status);
+        
         if (response.ok) {
           const data = await response.json();
+          console.log('OAuth response data:', data);
 
-          // Defensive check to ensure backend actually returned token & user
           if (data && data.user && data.token) {
             login(data.user, data.token);
             navigate('/');
           } else {
             console.error('Invalid OAuth response:', data);
-            navigate('/login');
+            navigate('/login', { state: { error: 'Authentication failed' } });
           }
         } else {
-          navigate('/login');
+          const errorText = await response.text();
+          console.error('OAuth request failed:', response.status, errorText);
+          navigate('/login', { state: { error: 'Authentication failed' } });
         }
       } catch (error) {
         console.error('OAuth error:', error);
-        navigate('/login');
+        navigate('/login', { state: { error: 'Network error during authentication' } });
       }
     };
 
