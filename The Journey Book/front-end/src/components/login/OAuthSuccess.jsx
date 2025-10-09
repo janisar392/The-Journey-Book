@@ -13,37 +13,49 @@ const OAuthSuccess = () => {
             try {
                 console.log('🔄 Starting OAuth2 processing...');
 
-                // FIX: Add credentials: 'include' to send cookies
-                const response = await fetch(`${BASE_URL}/api/auth/oauth2/success`, {
-                    method: 'GET',
-                    credentials: 'include', // THIS IS CRITICAL - sends cookies
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                });
+                // Try multiple endpoints
+                const endpoints = [
+                    '/api/auth/oauth2/user',
+                    '/api/auth/oauth2/success'
+                ];
 
-                console.log('📡 Backend response status:', response.status);
+                for (const endpoint of endpoints) {
+                    try {
+                        console.log(`🔄 Trying endpoint: ${endpoint}`);
+                        const response = await fetch(`${BASE_URL}${endpoint}`, {
+                            method: 'GET',
+                            credentials: 'include',
+                            headers: {
+                                'Accept': 'application/json',
+                            },
+                        });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log('✅ Backend OAuth2 success:', data);
-                    
-                    if (data.user && data.token) {
-                        login(data.user, data.token);
-                        navigate('/', { replace: true });
-                        return;
+                        console.log(`📡 ${endpoint} response status:`, response.status);
+
+                        if (response.ok) {
+                            const data = await response.json();
+                            console.log(`✅ ${endpoint} success:`, data);
+                            
+                            if (data.user && data.token) {
+                                login(data.user, data.token);
+                                navigate('/', { replace: true });
+                                return;
+                            }
+                        } else {
+                            const errorData = await response.json().catch(() => null);
+                            console.log(`❌ ${endpoint} error:`, errorData);
+                        }
+                    } catch (error) {
+                        console.log(`❌ ${endpoint} failed:`, error.message);
                     }
-                } else {
-                    console.log('❌ Backend returned error:', response.status);
-                    const errorData = await response.json();
-                    console.log('Error details:', errorData);
-                    
-                    navigate('/login', {
-                        state: { error: errorData.message || 'Google login failed' },
-                        replace: true
-                    });
                 }
+
+                // All endpoints failed
+                console.error('💥 All OAuth2 endpoints failed');
+                navigate('/login', {
+                    state: { error: 'Google login failed. Please try email login.' },
+                    replace: true
+                });
 
             } catch (error) {
                 console.error('💥 OAuth2 processing failed:', error);
@@ -54,10 +66,10 @@ const OAuthSuccess = () => {
             }
         };
 
-        // Add delay to ensure OAuth2 redirect is complete
+        // Wait for OAuth2 redirect to complete
         setTimeout(() => {
             fetchUserData();
-        }, 1000);
+        }, 2000);
 
     }, [login, navigate, BASE_URL]);
 
