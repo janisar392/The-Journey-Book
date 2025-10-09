@@ -19,7 +19,16 @@ public class SecurityConfig {
                         .anyRequest().permitAll()
                 )
                 .oauth2Login(oauth2 -> oauth2
-                        .defaultSuccessUrl("http://localhost:3000/oauth2-success", true)
+                        // LOCAL DEVELOPMENT - Uncomment when testing locally
+                        // .defaultSuccessUrl("http://localhost:3000/oauth2-success", true)
+
+                        // PRODUCTION - Uncomment for production
+                        .defaultSuccessUrl("https://the-journey-book.netlify.app/oauth2-success", true)
+
+                        // Explicit base URI configuration (works for both environments)
+                        .redirectionEndpoint(redirection -> redirection
+                                .baseUri("/login/oauth2/code/*")
+                        )
                 );
 
         return http.build();
