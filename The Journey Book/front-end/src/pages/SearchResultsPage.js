@@ -10,6 +10,10 @@ const SearchResultsPage = () => {
   const navigate = useNavigate();
   const searchData = location.state?.searchData || {};
 
+  // Base URL configuration - Change this for production
+  const BASE_URL = 'https://the-journey-book-backend.onrender.com'; // PRODUCTION
+  // const BASE_URL = 'http://localhost:8080'; // LOCAL DEVELOPMENT
+
   // Filter results based on category
   const filteredResults = activeFilter === 'all' 
     ? searchResults 
@@ -20,7 +24,7 @@ const SearchResultsPage = () => {
       setIsLoading(true);
       try {
         // REAL API CALL to your Spring Boot backend
-        const response = await fetch('http://localhost:8080/api/search', {
+        const response = await fetch(`${BASE_URL}/api/search`, {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
@@ -115,7 +119,7 @@ const SearchResultsPage = () => {
     } else {
       setIsLoading(false);
     }
-  }, [searchData]);
+  }, [searchData, BASE_URL]);
 
   const handleViewDetails = (place) => {
     navigate(`/experience/${place.placeId}`, { 
@@ -134,14 +138,14 @@ const SearchResultsPage = () => {
   };
 
   const getDefaultPrice = (category) => {
-  const prices = {
-    'tours': 25,
-    'museums': 15,
-    'nature': 0,
-    'entertainment': 20
+    const prices = {
+      'tours': 25,
+      'museums': 15,
+      'nature': 0,
+      'entertainment': 20
+    };
+    return prices[category] || 25;
   };
-  return prices[category] || 25;
-};
 
   if (isLoading) {
     return <div className="loading">Searching for amazing destinations...</div>;

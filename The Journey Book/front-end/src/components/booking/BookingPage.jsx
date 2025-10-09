@@ -19,6 +19,10 @@ const BookingPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
 
+  // Base URL configuration - Change this for production
+  const BASE_URL = 'https://the-journey-book-backend.onrender.com'; // PRODUCTION
+  // const BASE_URL = 'http://localhost:8080'; // LOCAL DEVELOPMENT
+
   // Use test key - replace with your actual key
   const RAZORPAY_KEY = 'rzp_test_RGAUVmOIy5JQnz';
 
@@ -231,7 +235,7 @@ useEffect(() => {
       status: method === 'online' ? 'confirmed' : 'pending_payment'
     };
 
-    const response = await fetch('http://localhost:8080/api/bookings', {
+    const response = await fetch(`${BASE_URL}/api/bookings`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

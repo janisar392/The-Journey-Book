@@ -14,6 +14,10 @@ const MyTripsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [downloadingTicket, setDownloadingTicket] = useState(null);
 
+  // Base URL configuration - Change this for production
+  const BASE_URL = 'https://the-journey-book-backend.onrender.com'; // PRODUCTION
+  // const BASE_URL = 'http://localhost:8080'; // LOCAL DEVELOPMENT
+
   useEffect(() => {
     if (!user) {
       navigate('/login', { 
@@ -32,7 +36,7 @@ const MyTripsPage = () => {
     setIsLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8080/api/bookings/user/${user.id}`, {
+      const response = await fetch(`${BASE_URL}/api/bookings/user/${user.id}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -115,7 +119,7 @@ const MyTripsPage = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8080/api/bookings/${bookingId}/cancel`, {
+      const response = await fetch(`${BASE_URL}/api/bookings/${bookingId}/cancel`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

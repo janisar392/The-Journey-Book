@@ -12,8 +12,6 @@ import {CLOUDINARY_IMAGE_UPLOAD_LINK, CLOUDINARY_UPLOAD_PRESET} from "../../Cons
 import Swal from "sweetalert2";
 import Foribidden from "../authorization/Foribidden";
 
-
-
 class NewTourItem extends Component {
     constructor(props) {
         super(props);
@@ -31,8 +29,11 @@ class NewTourItem extends Component {
 
     }
 
+    // Base URL configuration - Change this for production
+    BASE_URL = 'https://the-journey-book-backend.onrender.com'; // PRODUCTION
+    // BASE_URL = 'http://localhost:8080'; // LOCAL DEVELOPMENT
 
-uploader =(files)=>{
+    uploader =(files)=>{
           console.log("came");
         const formData = new FormData();
         formData.append("file", files[0]);
@@ -43,7 +44,7 @@ uploader =(files)=>{
         });
         // this.setState({uploadedImage:})
 
-}
+    }
     handleOnChange = event => {
 
         this.setState({
@@ -65,7 +66,7 @@ uploader =(files)=>{
 
         }
         console.log("came")
-        Axios.post("http://localhost:8080/tours-api/tours",tour).then(response=>{
+        Axios.post(`${this.BASE_URL}/tours-api/tours`,tour).then(response=>{
             console.log(response);
             Swal.fire({
                 title: 'Tour added successfully',

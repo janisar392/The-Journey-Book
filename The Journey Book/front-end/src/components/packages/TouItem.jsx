@@ -7,12 +7,18 @@ import {faRecycle} from "@fortawesome/free-solid-svg-icons/faRecycle";
 import {faRemoveFormat} from "@fortawesome/free-solid-svg-icons/faRemoveFormat";
 import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
 import Swal from "sweetalert2";
+
 class TourItem extends Component{
     constructor(props){
         super(props);
+        
+        // Base URL configuration - Change this for production
+        this.BASE_URL = 'https://the-journey-book-backend.onrender.com'; // PRODUCTION
+        // this.BASE_URL = 'http://localhost:8080'; // LOCAL DEVELOPMENT
     }
+    
     removeTour =(title)=>{
-        Axios.delete("http://localhost:8080/tours-api/tours/"+title).then(response=>{
+        Axios.delete(`${this.BASE_URL}/tours-api/tours/`+title).then(response=>{
 
             if(response.status == "200"){
                 Swal.fire({
@@ -35,6 +41,7 @@ class TourItem extends Component{
             });
         })
     }
+    
     render() {
         const{title,img,price,included,notIncluded,hotel,route,duration} = this.props.tour;
         let deleteBtn = null;
@@ -69,4 +76,5 @@ class TourItem extends Component{
         );
     }
 }
+
 export default TourItem;

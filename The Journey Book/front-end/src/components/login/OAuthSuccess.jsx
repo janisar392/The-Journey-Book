@@ -6,11 +6,15 @@ const OAuthSuccess = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
 
+    // Base URL configuration - Change this for production
+    const BASE_URL = 'https://the-journey-book-backend.onrender.com'; // PRODUCTION
+    // const BASE_URL = 'http://localhost:8080'; // LOCAL DEVELOPMENT
+
     useEffect(() => {
         // Fetch user data from backend after OAuth success
         const fetchUserData = async () => {
             try {
-                const response = await fetch('http://localhost:8080/api/auth/oauth2/success', {
+                const response = await fetch(`${BASE_URL}/api/auth/oauth2/success`, {
                     credentials: 'include'
                 });
                 
@@ -28,7 +32,7 @@ const OAuthSuccess = () => {
         };
 
         fetchUserData();
-    }, [login, navigate]);
+    }, [login, navigate, BASE_URL]);
 
     return (
         <div className="container text-center mt-5">

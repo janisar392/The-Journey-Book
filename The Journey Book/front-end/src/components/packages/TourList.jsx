@@ -12,9 +12,14 @@ class TourList extends Component{
         this.state={
             tours:[]
         }
+        
+        // Base URL configuration - Change this for production
+        this.BASE_URL = 'https://the-journey-book-backend.onrender.com'; // PRODUCTION
+        // this.BASE_URL = 'http://localhost:8080'; // LOCAL DEVELOPMENT
     }
+    
     componentDidMount() {
-        Axios.get("http://localhost:8080/tours-api/tours").then(response=>{
+        Axios.get(`${this.BASE_URL}/tours-api/tours`).then(response=>{
             this.setState({tours:response.data})
 
         }).catch(error=>{
