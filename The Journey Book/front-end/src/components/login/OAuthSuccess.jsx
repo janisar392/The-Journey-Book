@@ -23,6 +23,7 @@ const OAuthSuccess = () => {
                     login(data.user, data.token);
                     navigate('/');
                 } else {
+                    console.error('OAuth failed:', data.message);
                     navigate('/login');
                 }
             } catch (error) {
