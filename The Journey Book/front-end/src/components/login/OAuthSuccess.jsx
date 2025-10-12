@@ -7,17 +7,16 @@ const OAuthSuccess = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const BASE_URL = 'https://the-journey-book-backend.onrender.com'; // PRODUCTION
-    // const BASE_URL = 'http://localhost:8080'; // LOCAL DEVELOPMENT
+    const BASE_URL = 'https://the-journey-book-backend.onrender.com';
 
     useEffect(() => {
         const handleAuth0Callback = async () => {
-            // Get the authorization code from URL parameters
             const urlParams = new URLSearchParams(location.search);
             const code = urlParams.get('code');
 
             if (code) {
                 try {
+                    console.log('Exchanging code for token...');
                     const response = await fetch(`${BASE_URL}/api/auth/auth0/callback`, {
                         method: 'POST',
                         headers: {
@@ -28,20 +27,20 @@ const OAuthSuccess = () => {
 
                     if (response.ok) {
                         const data = await response.json();
+                        console.log('Login successful, redirecting to home...');
                         login(data.user, data.token);
-                        navigate('/');
+                        navigate('/', { replace: true }); // Force redirect to home
                     } else {
-                        const errorData = await response.json();
-                        console.error('Auth0 callback error:', errorData);
-                        navigate('/login', { state: { error: 'Authentication failed' } });
+                        console.error('Auth0 callback failed');
+                        navigate('/login', { replace: true });
                     }
                 } catch (error) {
                     console.error('Auth0 callback error:', error);
-                    navigate('/login', { state: { error: 'Network error during authentication' } });
+                    navigate('/login', { replace: true });
                 }
             } else {
-                // No code parameter, redirect to login
-                navigate('/login', { state: { error: 'No authorization code received' } });
+                console.error('No authorization code found');
+                navigate('/login', { replace: true });
             }
         };
 
@@ -50,15 +49,10 @@ const OAuthSuccess = () => {
 
     return (
         <div className="container text-center mt-5">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <div className="spinner-border text-primary" role="status" style={{ width: '3rem', height: '3rem' }}>
-                        <span className="visually-hidden">Loading...</span>
-                    </div>
-                    <h4 className="mt-3 text-primary">Completing Authentication</h4>
-                    <p className="text-muted">Please wait while we sign you in...</p>
-                </div>
+            <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
             </div>
+            <p className="mt-3">Signing you in...</p>
         </div>
     );
 };
