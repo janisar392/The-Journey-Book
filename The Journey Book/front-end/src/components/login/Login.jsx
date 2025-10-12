@@ -159,7 +159,11 @@ const Login = () => {
                             <i className="fab fa-google"></i>
                             Continue with Auth0
                         </button>
-                        <button type="button" className="social-btn facebook-btn">
+                        <button 
+                            type="button" 
+                            className="social-btn facebook-btn"
+                            onClick={handleAuth0Login}
+                        >
                             <i className="fab fa-facebook-f"></i>
                             Facebook
                         </button>
