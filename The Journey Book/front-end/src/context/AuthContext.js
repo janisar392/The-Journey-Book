@@ -39,12 +39,13 @@ const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        setUser(null);
-        // REMOVE this line: navigate('/login');
-        // Let individual components handle the redirect
-    };
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setUser(null);
+    
+    // Clear Auth0 session to allow account switching
+    window.location.href = `https://dev-4x4wk6evx87nelgb.us.auth0.com/v2/logout?client_id=SRcSMKIusbAcVufJVUV0ki6KpQdf95xP&returnTo=${encodeURIComponent('https://the-journey-book.netlify.app/login')}`;
+};
 
     const value = {
         user,

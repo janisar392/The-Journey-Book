@@ -11,42 +11,70 @@ const OAuthSuccess = () => {
     const BASE_URL = 'https://the-journey-book-backend.onrender.com';
 
     useEffect(() => {
-        // Prevent double execution
+        // Reset the flag when location changes (new login attempt)
+        hasProcessed.current = false;
+    }, [location.search]);
+
+    useEffect(() => {
         if (hasProcessed.current) return;
         hasProcessed.current = true;
 
         const handleAuth0Callback = async () => {
             const urlParams = new URLSearchParams(location.search);
             const code = urlParams.get('code');
+            const error = urlParams.get('error');
 
-            console.log('OAuthSuccess: Processing code...');
+            console.log('OAuthSuccess: Processing...', { code: !!code, error });
+
+            // Handle OAuth errors
+            if (error) {
+                console.error('OAuthSuccess: Auth error:', error);
+                navigate('/login', { 
+                    replace: true,
+                    state: { error: `Authentication failed: ${error}` }
+                });
+                return;
+            }
 
             if (code) {
                 try {
+                    console.log('OAuthSuccess: Exchanging code for token...');
                     const response = await fetch(`${BASE_URL}/api/auth/auth0/callback`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ code }),
                     });
 
+                    console.log('OAuthSuccess: Response status:', response.status);
+
                     if (response.ok) {
                         const data = await response.json();
                         console.log('OAuthSuccess: Login successful');
+                        
+                        // Clear URL immediately to prevent reuse
+                        window.history.replaceState({}, '', window.location.pathname);
+                        
                         await login(data.user, data.token);
-                        // Clear the URL parameters to prevent reuse
-                        window.history.replaceState({}, '', '/oauth2-success');
                         navigate('/', { replace: true });
                     } else {
                         const errorData = await response.json();
                         console.error('OAuthSuccess: Backend error:', errorData);
-                        navigate('/login', { replace: true });
+                        
+                        // Clear URL on error too
+                        window.history.replaceState({}, '', window.location.pathname);
+                        
+                        navigate('/login', { 
+                            replace: true,
+                            state: { error: errorData.message || 'Authentication failed' }
+                        });
                     }
                 } catch (error) {
                     console.error('OAuthSuccess: Network error:', error);
+                    window.history.replaceState({}, '', window.location.pathname);
                     navigate('/login', { replace: true });
                 }
             } else {
-                console.error('OAuthSuccess: No code found');
+                console.log('OAuthSuccess: No code - redirecting to login');
                 navigate('/login', { replace: true });
             }
         };
