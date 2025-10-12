@@ -1,7 +1,5 @@
 package com.janisar.config;
 
-import com.auth0.spring.security.api.JwtWebSecurityConfigurer;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,18 +9,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-    @Value("${auth0.audience}")
-    private String audience;
-
-    @Value("${auth0.domain}")
-    private String issuer;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -33,11 +24,6 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**", "/api/public/**").permitAll()
                         .anyRequest().authenticated()
                 );
-
-        // Configure JWT with Auth0
-        JwtWebSecurityConfigurer
-                .forRS256(audience, issuer)
-                .configure(http);
 
         return http.build();
     }
@@ -54,7 +40,7 @@ public class SecurityConfig {
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration); // Fixed method name
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 }

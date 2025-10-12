@@ -9,7 +9,6 @@ import com.janisar.repository.UserRepository;
 import com.janisar.service.Auth0Service;
 import com.janisar.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,13 +27,10 @@ public class Auth0Controller {
     @Autowired
     private JwtService jwtService;
 
-    @Value("${frontend.oauth2.success-url:https://the-journey-book.netlify.app/oauth2-success}")
-    private String frontendSuccessUrl;
-
     @GetMapping("/auth0/login")
     public ResponseEntity<?> auth0Login() {
         try {
-            String redirectUrl = auth0Service.getAuthorizationUrl(frontendSuccessUrl);
+            String redirectUrl = auth0Service.getAuthorizationUrl(); // No arguments needed
             return ResponseEntity.ok(Map.of("redirectUrl", redirectUrl));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(
@@ -55,7 +51,7 @@ public class Auth0Controller {
             }
 
             // Exchange code for tokens
-            var tokenHolder = auth0Service.exchangeCodeForTokens(code, frontendSuccessUrl);
+            var tokenHolder = auth0Service.exchangeCodeForTokens(code); // No redirectUri needed
             String accessToken = tokenHolder.getAccessToken();
 
             // Get user info from Auth0
@@ -78,8 +74,7 @@ public class Auth0Controller {
                         User newUser = new User();
                         newUser.setEmail(email);
                         newUser.setName(name != null ? name : email.split("@")[0]);
-                        // Password is not required for Auth0 users
-                        newUser.setPassword(""); // Set empty password or handle differently
+                        newUser.setPassword(""); // Set empty password for Auth0 users
                         return userRepository.save(newUser);
                     });
 

@@ -27,16 +27,14 @@ public class Auth0Service {
         return new AuthAPI(domain, clientId, clientSecret);
     }
 
-    public String getAuthorizationUrl(String redirectUri) {
-        String actualRedirectUri = redirectUri != null ? redirectUri : defaultRedirectUri;
-        return getAuthAPI().authorizeUrl(actualRedirectUri)
+    public String getAuthorizationUrl() {
+        return getAuthAPI().authorizeUrl(defaultRedirectUri)
                 .withScope("openid profile email")
                 .build();
     }
 
-    public TokenHolder exchangeCodeForTokens(String code, String redirectUri) throws Auth0Exception {
-        String actualRedirectUri = redirectUri != null ? redirectUri : defaultRedirectUri;
-        TokenRequest tokenRequest = getAuthAPI().exchangeCode(code, actualRedirectUri);
+    public TokenHolder exchangeCodeForTokens(String code) throws Auth0Exception {
+        TokenRequest tokenRequest = getAuthAPI().exchangeCode(code, defaultRedirectUri);
         return tokenRequest.execute();
     }
 

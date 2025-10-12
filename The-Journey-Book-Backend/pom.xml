@@ -54,11 +54,11 @@
 		</dependency> -->
 
 		<!-- Auth0 Dependencies -->
-		<dependency>
-			<groupId>com.auth0</groupId>
-			<artifactId>auth0-spring-security-api</artifactId>
-			<version>1.5.0</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.auth0</groupId>-->
+<!--			<artifactId>auth0-spring-security-api</artifactId>-->
+<!--			<version>1.5.0</version>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>com.auth0</groupId>
 			<artifactId>auth0</artifactId>
