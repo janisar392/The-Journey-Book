@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
@@ -12,16 +12,26 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
 
-    // Base URL configuration - Change this for production
-    const BASE_URL = 'https://the-journey-book-backend.onrender.com'; // PRODUCTION
-    // const BASE_URL = 'http://localhost:8080'; // LOCAL DEVELOPMENT
+    // Base URL configuration
+    const BASE_URL = 'https://the-journey-book-backend.onrender.com';
+
+    // Check for OAuth errors in URL
+    useEffect(() => {
+        const oauthError = searchParams.get('error');
+        if (oauthError === 'auth_failed') {
+            setError('Google authentication failed. Please try again.');
+        }
+    }, [searchParams]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleGoogleLogin = () => {
+        console.log('Initiating Google OAuth...');
+        // Direct OAuth2 redirect - this should work with the simplified SecurityConfig
         window.location.href = `${BASE_URL}/oauth2/authorization/google`;
     };
 
@@ -142,11 +152,12 @@ const Login = () => {
                             type="button" 
                             className="social-btn google-btn"
                             onClick={handleGoogleLogin}
+                            disabled={loading}
                         >
                             <i className="fab fa-google"></i>
-                            Google
+                            {loading ? 'Redirecting...' : 'Google'}
                         </button>
-                        <button type="button" className="social-btn facebook-btn">
+                        <button type="button" className="social-btn facebook-btn" disabled>
                             <i className="fab fa-facebook-f"></i>
                             Facebook
                         </button>

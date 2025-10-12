@@ -24,7 +24,8 @@ const Register = () => {
     };
     
     const handleGoogleLogin = () => {
-        window.location.href = `${BASE_URL}/oauth2/authorization/google`;
+    console.log('Initiating Google OAuth from register...');
+    window.location.href = `${BASE_URL}/oauth2/authorization/google`;
     };
 
     const handleSubmit = async (e) => {

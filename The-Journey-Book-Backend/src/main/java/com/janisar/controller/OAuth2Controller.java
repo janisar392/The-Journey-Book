@@ -7,8 +7,6 @@ import com.janisar.repository.UserRepository;
 import com.janisar.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -24,29 +22,18 @@ public class OAuth2Controller {
     @Autowired
     private JwtService jwtService;
 
-    @GetMapping("/user")
-    public ResponseEntity<?> getCurrentUser(Authentication authentication) {
+    // SIMPLE endpoint that creates user from Google data
+    @PostMapping("/google-login")
+    public ResponseEntity<?> googleLogin(@RequestBody GoogleLoginRequest request) {
         try {
-            System.out.println("=== GET /api/auth/user called ===");
-            System.out.println("Authentication: " + authentication);
+            System.out.println("Google login request: " + request.getEmail());
 
-            if (authentication == null || !authentication.isAuthenticated()) {
-                return ResponseEntity.badRequest().body(
-                        new AuthResponse("User not authenticated", null, null)
-                );
-            }
-
-            OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
-            Map<String, Object> attributes = oauth2User.getAttributes();
-
-            System.out.println("OAuth2 Attributes: " + attributes);
-
-            String email = (String) attributes.get("email");
-            String name = (String) attributes.get("name");
+            String email = request.getEmail();
+            String name = request.getName();
 
             if (email == null || email.isEmpty()) {
                 return ResponseEntity.badRequest().body(
-                        new AuthResponse("Email not provided by Google", null, null)
+                        new AuthResponse("Email is required", null, null)
                 );
             }
 
@@ -69,7 +56,7 @@ public class OAuth2Controller {
                     user.getEmail()
             );
 
-            return ResponseEntity.ok(new AuthResponse("Login successful", userResponse, token));
+            return ResponseEntity.ok(new AuthResponse("Google login successful", userResponse, token));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,4 +65,14 @@ public class OAuth2Controller {
             );
         }
     }
+}
+
+class GoogleLoginRequest {
+    private String email;
+    private String name;
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 }
