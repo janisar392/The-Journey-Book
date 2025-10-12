@@ -157,7 +157,7 @@ const Login = () => {
                             onClick={handleAuth0Login}
                         >
                             <i className="fab fa-google"></i>
-                            Continue with Auth0
+                            Google
                         </button>
                         <button 
                             type="button" 
