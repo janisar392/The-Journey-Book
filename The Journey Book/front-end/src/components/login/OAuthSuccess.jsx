@@ -11,27 +11,30 @@ const OAuthSuccess = () => {
     // const BASE_URL = 'http://localhost:8080'; // LOCAL DEVELOPMENT
 
     useEffect(() => {
-        // Fetch user data from backend after OAuth success
-        const fetchUserData = async () => {
-            try {
-                const response = await fetch(`${BASE_URL}/api/auth/oauth2/success`, {
-                    credentials: 'include'
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    login(data.user, data.token);
-                    navigate('/');
-                } else {
-                    navigate('/login');
+    const fetchUserData = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/api/auth/user`, {
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
                 }
-            } catch (error) {
-                console.error('OAuth error:', error);
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                login(data.user, data.token);
+                navigate('/');
+            } else {
+                console.error('OAuth failed:', response.status);
                 navigate('/login');
             }
-        };
+        } catch (error) {
+            console.error('OAuth error:', error);
+            navigate('/login');
+        }
+    };
 
-        fetchUserData();
+    fetchUserData();
     }, [login, navigate, BASE_URL]);
 
     return (
