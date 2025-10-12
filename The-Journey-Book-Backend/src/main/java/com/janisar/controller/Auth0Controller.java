@@ -42,6 +42,7 @@ public class Auth0Controller {
     @PostMapping("/auth0/callback")
     public ResponseEntity<?> auth0Callback(@RequestBody Map<String, String> request) {
         try {
+            System.out.println("=== AUTH0 CALLBACK ENDPOINT CALLED ===");
             String code = request.get("code");
 
             if (code == null || code.isEmpty()) {
@@ -50,31 +51,67 @@ public class Auth0Controller {
                 );
             }
 
+            System.out.println("Received authorization code: " + code.substring(0, 10) + "...");
+
             // Exchange code for tokens
-            var tokenHolder = auth0Service.exchangeCodeForTokens(code); // No redirectUri needed
+            var tokenHolder = auth0Service.exchangeCodeForTokens(code);
             String accessToken = tokenHolder.getAccessToken();
+            System.out.println("Access token received: " + accessToken.substring(0, 20) + "...");
 
             // Get user info from Auth0
             UserInfo userInfo = auth0Service.getUserInfo(accessToken);
             Map<String, Object> userInfoMap = userInfo.getValues();
 
+            // Debug: Print all user info
+            System.out.println("=== AUTH0 USER INFO ===");
+            userInfoMap.forEach((key, value) -> {
+                System.out.println(key + ": " + value);
+            });
+
             String email = (String) userInfoMap.get("email");
             String name = (String) userInfoMap.get("name");
-            String picture = (String) userInfoMap.get("picture");
+            String sub = (String) userInfoMap.get("sub"); // Auth0 user ID
+
+            // If email is null, try to generate one from sub (Auth0 user ID)
+            if (email == null || email.isEmpty()) {
+                System.out.println("Email not provided by Auth0, generating from sub: " + sub);
+                if (sub != null && sub.contains("|")) {
+                    // sub format: "google|123456789" or "facebook|123456789"
+                    String[] parts = sub.split("\\|");
+                    if (parts.length == 2) {
+                        email = parts[1] + "@" + parts[0] + ".auth0user.com";
+                    }
+                } else {
+                    email = sub + "@auth0user.com";
+                }
+                System.out.println("Generated email: " + email);
+            }
 
             if (email == null || email.isEmpty()) {
                 return ResponseEntity.badRequest().body(
-                        new AuthResponse("Auth0 didn't provide email address", null, null)
+                        new AuthResponse("Unable to get or generate email address", null, null)
                 );
             }
 
+            // If name is null, use email username
+            if (name == null || name.isEmpty()) {
+                name = email.split("@")[0];
+            }
+
+            System.out.println("Final user info - Email: " + email + ", Name: " + name);
+
+            // Make final copies for use in lambda
+            final String finalEmail = email;
+            final String finalName = name;
+
             // Check if user exists, if not create new user
-            User user = userRepository.findByEmail(email)
+            User user = userRepository.findByEmail(finalEmail)
                     .orElseGet(() -> {
+                        System.out.println("Creating new user for email: " + finalEmail);
                         User newUser = new User();
-                        newUser.setEmail(email);
-                        newUser.setName(name != null ? name : email.split("@")[0]);
-                        newUser.setPassword(""); // Set empty password for Auth0 users
+                        newUser.setEmail(finalEmail);
+                        newUser.setName(finalName);
+                        newUser.setPassword(""); // Empty password for social users
                         return userRepository.save(newUser);
                     });
 

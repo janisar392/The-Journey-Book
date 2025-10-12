@@ -20,8 +20,7 @@ public class User {
     @Email(message = "Email should be valid")
     private String email;
 
-    @NotBlank(message = "Password is required")
-    @Size(min = 6, message = "Password must be at least 6 characters")
+    // Remove @NotBlank and @Size validation for password to allow empty for social users
     private String password;
 
     public User() {}
