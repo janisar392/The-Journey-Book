@@ -5,26 +5,26 @@ import com.auth0.exception.Auth0Exception;
 import com.auth0.json.auth.TokenHolder;
 import com.auth0.json.auth.UserInfo;
 import com.auth0.net.TokenRequest;
-import com.janisar.config.Auth0Config;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class Auth0Service {
 
-    @Autowired
-    private Auth0Config auth0Config;
+    @Value("${AUTH0_DOMAIN:dev-4x4wk6evx87nelgb.us.auth0.com}")
+    private String domain;
+
+    @Value("${AUTH0_CLIENT_ID:JOIxFAHVEkwHeKrCNMY3LTeyg62v1CNI}")
+    private String clientId;
+
+    @Value("${AUTH0_CLIENT_SECRET:Z6sZ8514y3kPh2_R0O_t7Awn87lZGCC-JVGctJryoxsdYk7UaKMLkV933IBXGje3}")
+    private String clientSecret;
 
     @Value("${frontend.oauth2.success-url:https://the-journey-book.netlify.app/oauth2-success}")
     private String defaultRedirectUri;
 
     private AuthAPI getAuthAPI() {
-        return new AuthAPI(
-                auth0Config.getDomain(),
-                auth0Config.getClientId(),
-                auth0Config.getClientSecret()
-        );
+        return new AuthAPI(domain, clientId, clientSecret);
     }
 
     public String getAuthorizationUrl(String redirectUri) {

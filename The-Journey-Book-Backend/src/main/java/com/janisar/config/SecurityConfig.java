@@ -18,10 +18,10 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Value("${auth0.audience}")
+    @Value("${AUTH0_AUDIENCE:https://dev-4x4wk6evx87nelgb.us.auth0.com/api/v2/}")
     private String audience;
 
-    @Value("${auth0.domain}")
+    @Value("${AUTH0_DOMAIN:dev-4x4wk6evx87nelgb.us.auth0.com}")
     private String issuer;
 
     @Bean
