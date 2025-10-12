@@ -30,6 +30,7 @@ public class Auth0Service {
     public String getAuthorizationUrl() {
         return getAuthAPI().authorizeUrl(defaultRedirectUri)
                 .withScope("openid profile email")
+                .withParameter("prompt", "select_account") // Force account selection
                 .build();
     }
 
