@@ -7,7 +7,7 @@ import com.janisar.repository.UserRepository;
 import com.janisar.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,21 +24,18 @@ public class OAuth2Controller {
     @Autowired
     private JwtService jwtService;
 
-    @GetMapping("/user")
-    public ResponseEntity<?> oauth2Success(Authentication authentication) {
+    @GetMapping("/oauth2/user")
+    public ResponseEntity<?> getOAuth2User(@AuthenticationPrincipal OAuth2User principal) {
         try {
-            if (authentication == null || !authentication.isAuthenticated()) {
+            if (principal == null) {
                 return ResponseEntity.badRequest().body(
-                        new AuthResponse("User not authenticated", null, null)
+                        new AuthResponse("No authenticated user found", null, null)
                 );
             }
 
-            OAuth2User principal = (OAuth2User) authentication.getPrincipal();
             Map<String, Object> attributes = principal.getAttributes();
-
             String email = (String) attributes.get("email");
             String name = (String) attributes.get("name");
-            String picture = (String) attributes.get("picture");
 
             if (email == null || email.isEmpty()) {
                 return ResponseEntity.badRequest().body(
@@ -46,13 +43,13 @@ public class OAuth2Controller {
                 );
             }
 
-            // Check if user exists, if not create new user
+            // Find or create user
             User user = userRepository.findByEmail(email)
                     .orElseGet(() -> {
                         User newUser = new User();
                         newUser.setEmail(email);
                         newUser.setName(name != null ? name : email.split("@")[0]);
-                        newUser.setPassword(""); // Empty password for OAuth users
+                        newUser.setPassword("OAUTH_USER"); // Placeholder for OAuth users
                         return userRepository.save(newUser);
                     });
 

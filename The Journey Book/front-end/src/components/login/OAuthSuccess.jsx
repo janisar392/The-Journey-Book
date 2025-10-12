@@ -13,29 +13,32 @@ const OAuthSuccess = () => {
     useEffect(() => {
     const fetchUserData = async () => {
         try {
-            const response = await fetch(`${BASE_URL}/api/auth/user`, {
-                credentials: 'include',
+            // Use the new endpoint
+            const response = await fetch(`${BASE_URL}/api/auth/oauth2/user`, {
+                method: 'GET',
+                credentials: 'include', // Important for cookies/session
                 headers: {
                     'Content-Type': 'application/json',
                 }
             });
             
+            const data = await response.json();
+            
             if (response.ok) {
-                const data = await response.json();
                 login(data.user, data.token);
                 navigate('/');
             } else {
-                console.error('OAuth failed:', response.status);
-                navigate('/login');
+                console.error('OAuth failed:', data.message);
+                navigate('/login', { state: { error: data.message } });
             }
         } catch (error) {
             console.error('OAuth error:', error);
-            navigate('/login');
+            navigate('/login', { state: { error: 'Network error during login' } });
         }
     };
 
     fetchUserData();
-    }, [login, navigate, BASE_URL]);
+}, [login, navigate, BASE_URL]);
 
     return (
         <div className="container text-center mt-5">
