@@ -1,95 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 const OAuthSuccess = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
-    const [status, setStatus] = useState('Completing login...');
+    const location = useLocation();
 
-    const BASE_URL = 'https://the-journey-book-backend.onrender.com';
+    const BASE_URL = 'https://the-journey-book-backend.onrender.com'; // PRODUCTION
+    // const BASE_URL = 'http://localhost:8080'; // LOCAL DEVELOPMENT
 
     useEffect(() => {
-        const completeOAuthLogin = async () => {
-            try {
-                setStatus('Fetching user information...');
-                
-                // Try multiple endpoints to get user data
-                const endpoints = [
-                    '/api/auth/user',
-                    '/api/auth/oauth2/success',
-                    '/api/auth/oauth2/token'
-                ];
+        const handleAuth0Callback = async () => {
+            // Get the authorization code from URL parameters
+            const urlParams = new URLSearchParams(location.search);
+            const code = urlParams.get('code');
 
-                let userData = null;
-                
-                for (const endpoint of endpoints) {
-                    try {
-                        console.log(`Trying endpoint: ${endpoint}`);
-                        const response = await fetch(`${BASE_URL}${endpoint}`, {
-                            method: 'GET',
-                            credentials: 'include',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        });
+            if (code) {
+                try {
+                    const response = await fetch(`${BASE_URL}/api/auth/auth0/callback`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ code }),
+                    });
 
-                        if (response.ok) {
-                            const data = await response.json();
-                            console.log(`Success from ${endpoint}:`, data);
-                            
-                            if (data && data.user && data.token) {
-                                userData = data;
-                                break;
-                            }
-                        }
-                    } catch (error) {
-                        console.log(`Endpoint ${endpoint} failed:`, error);
-                        continue;
+                    if (response.ok) {
+                        const data = await response.json();
+                        login(data.user, data.token);
+                        navigate('/');
+                    } else {
+                        const errorData = await response.json();
+                        console.error('Auth0 callback error:', errorData);
+                        navigate('/login', { state: { error: 'Authentication failed' } });
                     }
+                } catch (error) {
+                    console.error('Auth0 callback error:', error);
+                    navigate('/login', { state: { error: 'Network error during authentication' } });
                 }
-
-                if (userData) {
-                    setStatus('Login successful! Redirecting...');
-                    login(userData.user, userData.token);
-                    setTimeout(() => navigate('/'), 1000);
-                } else {
-                    setStatus('No user data received. Using manual approach...');
-                    // Fallback: Redirect to login with instruction to try manual login
-                    setTimeout(() => {
-                        navigate('/login', { 
-                            state: { 
-                                message: 'Google login completed. Please try manual login with your Google email.' 
-                            } 
-                        });
-                    }, 2000);
-                }
-
-            } catch (error) {
-                console.error('OAuth completion error:', error);
-                setStatus('Error occurred. Redirecting to login...');
-                setTimeout(() => navigate('/login'), 2000);
+            } else {
+                // No code parameter, redirect to login
+                navigate('/login', { state: { error: 'No authorization code received' } });
             }
         };
 
-        completeOAuthLogin();
-    }, [login, navigate, BASE_URL]);
+        handleAuth0Callback();
+    }, [location, login, navigate, BASE_URL]);
 
     return (
-        <div style={{ 
-            display: 'flex', 
-            justifyContent: 'center', 
-            alignItems: 'center', 
-            height: '100vh',
-            flexDirection: 'column',
-            padding: '20px',
-            textAlign: 'center'
-        }}>
-            <div className="spinner-border text-primary" role="status" style={{ width: '3rem', height: '3rem' }}>
-                <span className="visually-hidden">Loading...</span>
+        <div className="container text-center mt-5">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="spinner-border text-primary" role="status" style={{ width: '3rem', height: '3rem' }}>
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                    <h4 className="mt-3 text-primary">Completing Authentication</h4>
+                    <p className="text-muted">Please wait while we sign you in...</p>
+                </div>
             </div>
-            <h3 className="mt-3">Google Authentication</h3>
-            <p className="mt-2">{status}</p>
         </div>
     );
 };

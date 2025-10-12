@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { useNavigate, Link, useSearchParams } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
@@ -12,27 +12,30 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
-    const [searchParams] = useSearchParams();
 
     // Base URL configuration
-    const BASE_URL = 'https://the-journey-book-backend.onrender.com';
-
-    // Check for OAuth errors in URL
-    useEffect(() => {
-        const oauthError = searchParams.get('error');
-        if (oauthError === 'auth_failed') {
-            setError('Google authentication failed. Please try again.');
-        }
-    }, [searchParams]);
+    const BASE_URL = 'https://the-journey-book-backend.onrender.com'; // PRODUCTION
+    // const BASE_URL = 'http://localhost:8080'; // LOCAL DEVELOPMENT
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleGoogleLogin = () => {
-        console.log('Initiating Google OAuth...');
-        // Direct OAuth2 redirect - this should work with the simplified SecurityConfig
-        window.location.href = `${BASE_URL}/oauth2/authorization/google`;
+    const handleAuth0Login = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/api/auth/auth0/login`);
+            const data = await response.json();
+            
+            if (response.ok) {
+                // Redirect to Auth0 login page
+                window.location.href = data.redirectUrl;
+            } else {
+                setError('Failed to initiate login');
+            }
+        } catch (error) {
+            setError('Network error. Please try again.');
+            console.error('Auth0 login error:', error);
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -151,13 +154,12 @@ const Login = () => {
                         <button 
                             type="button" 
                             className="social-btn google-btn"
-                            onClick={handleGoogleLogin}
-                            disabled={loading}
+                            onClick={handleAuth0Login}
                         >
                             <i className="fab fa-google"></i>
-                            {loading ? 'Redirecting...' : 'Google'}
+                            Continue with Auth0
                         </button>
-                        <button type="button" className="social-btn facebook-btn" disabled>
+                        <button type="button" className="social-btn facebook-btn">
                             <i className="fab fa-facebook-f"></i>
                             Facebook
                         </button>
