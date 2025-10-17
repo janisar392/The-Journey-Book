@@ -211,7 +211,7 @@ const Register = () => {
                             onClick={handleAuth0Login}
                         >
                             <i className="fab fa-google"></i>
-                            Continue with Auth0
+                            Google
                         </button>
                         <button type="button" className="social-btn facebook-btn">
                             <i className="fab fa-facebook-f"></i>
