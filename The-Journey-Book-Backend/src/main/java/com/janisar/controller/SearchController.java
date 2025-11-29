@@ -200,27 +200,27 @@ public class SearchController {
         }
 
 // Jaipur
-        else if (location.contains("jaipur")) {
-            return List.of(
-                    new PlaceResult("119", "Hawa Mahal", "https://images.unsplash.com/photo-1611629097579-b4bfe7f56019?w=800", "Jaipur, India", 4.9, "tours"),
-                    new PlaceResult("120", "Amber Fort", "https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?w=800", "Jaipur, India", 4.8, "museums"),
-                    new PlaceResult("121", "City Palace", "https://images.unsplash.com/photo-1616696363001-895c3e1a5f85?w=800", "Jaipur, India", 4.7, "museums"),
-                    new PlaceResult("122", "Jantar Mantar", "https://images.unsplash.com/photo-1694549168659-2c7545260793?w=800", "Jaipur, India", 4.6, "museums"),
-                    new PlaceResult("123", "Nahargarh Fort", "https://images.unsplash.com/photo-1661933551258-b092287f2d79?w=800", "Jaipur, India", 4.7, "tours"),
-                    new PlaceResult("124", "Jal Mahal", "https://images.unsplash.com/photo-1615224288524-fbc32f735931?w=800", "Jaipur, India", 4.8, "tours")
-            );
-        }
-// Agra
         else if (location.contains("agra")) {
             return List.of(
-                    new PlaceResult("125", "Taj Mahal", "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800", "Agra, India", 5.0, "museums"),
-                    new PlaceResult("126", "Agra Fort", "https://images.unsplash.com/photo-1710336017304-ba11aad6ad64?w=800", "Agra, India", 4.8, "museums"),
-                    new PlaceResult("127", "Mehtab Bagh", "https://images.unsplash.com/photo-1715559860222-6b44a2e8bf61?w=800", "Agra, India", 4.7, "nature"),
-                    new PlaceResult("128", "Fatehpur Sikri", "https://images.unsplash.com/photo-1717576425796-30be3f0665d0?w=800", "Agra, India", 4.8, "museums"),
-                    new PlaceResult("129", "Akbar’s Tomb", "https://images.unsplash.com/photo-1697799781971-016ebda30f83?w=800", "Agra, India", 4.5, "museums"),
-                    new PlaceResult("130", "Kinari Bazaar", "https://images.unsplash.com/photo-1642622596432-b7dab1dcf3af?w=800", "Agra, India", 4.3, "entertainment")
+                    new PlaceResult("131","Taj Mahal","http://upload.wikimedia.org/wikipedia/commons/c/c8/Taj_Mahal_in_March_2004.jpg","Agra, India",4.9,"tours"),
+                    new PlaceResult("132","Agra Fort","https://cdn.pixabay.com/photo/2014/06/29/20/20/agra-fort-379710_640.jpg","Agra, India",4.8,"museums"),
+                    new PlaceResult("133","Taj Marble Detail","https://cdn.pixabay.com/photo/2020/01/08/07/53/architecture-4749511_1280.jpg","Agra, India",4.7,"museums"),
+                    new PlaceResult("134","Fatehpur Sikri","https://cdn.pixabay.com/photo/2013/10/28/10/43/fathepur-sikri-201748_640.jpg","Fatehpur Sikri, India",4.7,"tours"),
+                    new PlaceResult("135","Mehtab Bagh","https://cdn.pixabay.com/photo/2020/01/08/07/53/architecture-4749511_1280.jpg","Agra, India",4.6,"nature"),
+                    new PlaceResult("136","Itmad-ud-Daulah's Tomb","https://cdn.pixabay.com/photo/2014/06/29/20/20/agra-fort-379710_640.jpg","Agra, India",4.5,"museums")
             );
         }
+        else if (location.contains("jaipur")) {
+            return List.of(
+                    new PlaceResult("137","Hawa Mahal","https://cdn.pixabay.com/photo/2021/04/06/11/22/hawa-mahal-6156123_1280.jpg","Jaipur, India",4.8,"tours"),
+                    new PlaceResult("138","Jal Mahal","https://cdn.pixabay.com/photo/2019/04/07/07/51/jal-mahal-4109105_1280.jpg","Jaipur, India",4.7,"tours"),
+                    new PlaceResult("139","Jantar Mantar","https://cdn.pixabay.com/photo/2019/10/05/08/53/jantar-mantar-4527397_640.jpg","Jaipur, India",4.6,"museums"),
+                    new PlaceResult("140","City Palace","https://cdn.pixabay.com/photo/2014/09/11/10/13/hawa-mahal-441563_640.jpg","Jaipur, India",4.6,"museums"),
+                    new PlaceResult("141","Nahargarh Fort","https://cdn.pixabay.com/photo/2019/04/07/07/51/jal-mahal-4109105_1280.jpg","Jaipur, India",4.5,"nature"),
+                    new PlaceResult("142","Albert Hall Museum","https://cdn.pixabay.com/photo/2021/04/06/11/22/hawa-mahal-6156123_1280.jpg","Jaipur, India",4.5,"museums")
+            );
+        }
+
 // Varanasi
         else if (location.contains("varanasi")) {
             return List.of(

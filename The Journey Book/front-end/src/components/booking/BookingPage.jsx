@@ -352,26 +352,26 @@ useEffect(() => {
                 {ticketQuantities.adult > 0 && (
                   <div className="ticket-row">
                     <span>Adult (13+):</span>
-                    <span>{ticketQuantities.adult} x ${25} = ${ticketQuantities.adult * 25}</span>
+                    <span>{ticketQuantities.adult} x &#8377;{25} = &#8377;{ticketQuantities.adult * 25}</span>
                   </div>
                 )}
                 {ticketQuantities.child > 0 && (
                   <div className="ticket-row">
                     <span>Child (4-12):</span>
-                    <span>{ticketQuantities.child} x ${15} = ${ticketQuantities.child * 15}</span>
+                    <span>{ticketQuantities.child} x &#8377;{15} = &#8377;{ticketQuantities.child * 15}</span>
                   </div>
                 )}
                 {ticketQuantities.senior > 0 && (
                   <div className="ticket-row">
                     <span>Senior (65+):</span>
-                    <span>{ticketQuantities.senior} x ${20} = ${ticketQuantities.senior * 20}</span>
+                    <span>{ticketQuantities.senior} x &#8377;{20} = &#8377;{ticketQuantities.senior * 20}</span>
                   </div>
                 )}
               </div>
 
               <div className="total-price">
                 <span>Total Amount:</span>
-                <span className="price">₹{totalPrice}</span>
+                <span className="price">&#8377;{totalPrice}</span>
               </div>
             </div>
 

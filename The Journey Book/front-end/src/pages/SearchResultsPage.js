@@ -218,7 +218,7 @@ const SearchResultsPage = () => {
                 {place.price === 0 ? (
                   <span className="free">Free Entry</span>
                 ) : (
-                  <span className="price">From ${place.price || getDefaultPrice(place.category)}</span>
+                    <span className="price">From &#8377;{place.price || getDefaultPrice(place.category)}</span>
                 )}
               </div>
               <button 

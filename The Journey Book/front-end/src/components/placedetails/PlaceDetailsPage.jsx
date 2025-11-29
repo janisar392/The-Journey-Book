@@ -260,7 +260,7 @@ const transformToExperience = (data) => {
               <div className="ticket-type">
                 <div className="ticket-info">
                   <span className="ticket-name">Adult (13+)</span>
-                  <span className="ticket-price">${ticketPrices.adult}</span>
+                  <span className="ticket-price">&#8377;{ticketPrices.adult}</span>
                 </div>
                 <div className="ticket-controls">
                   <button 
@@ -275,7 +275,7 @@ const transformToExperience = (data) => {
               <div className="ticket-type">
                 <div className="ticket-info">
                   <span className="ticket-name">Child (4-12)</span>
-                  <span className="ticket-price">${ticketPrices.child}</span>
+                  <span className="ticket-price">&#8377;{ticketPrices.child}</span>
                 </div>
                 <div className="ticket-controls">
                   <button 
@@ -290,7 +290,7 @@ const transformToExperience = (data) => {
               <div className="ticket-type">
                 <div className="ticket-info">
                   <span className="ticket-name">Senior (65+)</span>
-                  <span className="ticket-price">${ticketPrices.senior}</span>
+                  <span className="ticket-price">&#8377;{ticketPrices.senior}</span>
                 </div>
                 <div className="ticket-controls">
                   <button 
@@ -306,7 +306,7 @@ const transformToExperience = (data) => {
             {/* Total Price */}
             <div className="total-price">
               <span>Total:</span>
-              <span className="price">${calculateTotal()}</span>
+              <span className="price">&#8377;{calculateTotal()}</span>
             </div>
 
             {/* Book Button */}
