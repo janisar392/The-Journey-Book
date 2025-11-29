@@ -245,14 +245,15 @@ public class SearchController {
 
         else if (location.contains("lucknow")) {
             return List.of(
-                    new PlaceResult("155","Bara Imambara","https://upload.wikimedia.org/wikipedia/commons/8/8b/Bara_Imambara%2C_Lucknow.jpg","Lucknow, India",4.8,"tours"),
-                    new PlaceResult("156","Rumi Darwaza","https://upload.wikimedia.org/wikipedia/commons/3/3c/Rumi_Darwaza_Lucknow.jpg","Lucknow, India",4.7,"tours"),
-                    new PlaceResult("157","Chota Imambara","https://upload.wikimedia.org/wikipedia/commons/2/2b/Chota_Imambara_Lucknow.jpg","Lucknow, India",4.6,"museums"),
-                    new PlaceResult("158","Hazratganj Market","https://upload.wikimedia.org/wikipedia/commons/2/2b/Hazratganj_Market_Lucknow.jpg","Lucknow, India",4.7,"entertainment"),
-                    new PlaceResult("159","Ambedkar Memorial Park","https://upload.wikimedia.org/wikipedia/commons/9/9b/Dr._Bhimrao_Ambedkar_Smarak_Lucknow.jpg","Lucknow, India",4.6,"nature"),
-                    new PlaceResult("160","Gomti Riverfront","https://upload.wikimedia.org/wikipedia/commons/f/fa/Gomti_Riverfront_Park_Lucknow.jpg","Lucknow, India",4.5,"nature")
+                    new PlaceResult("155","Bara Imambara","https://commons.wikimedia.org/wiki/Special:FilePath/Bara_Imambara_Lucknow.jpg","Lucknow, India",4.8,"tours"),
+                    new PlaceResult("156","Rumi Darwaza","https://commons.wikimedia.org/wiki/Special:FilePath/Rumi_Gate_Lucknow.jpg","Lucknow, India",4.7,"tours"),
+                    new PlaceResult("157","Chota Imambara","https://commons.wikimedia.org/wiki/Special:FilePath/Chota_Imambara.JPG","Lucknow, India",4.6,"museums"),
+                    new PlaceResult("158","Hazratganj Market","https://commons.wikimedia.org/wiki/Special:FilePath/Hazratganj_Market,_Lucknow_(8716416603).jpg","Lucknow, India",4.7,"entertainment"),
+                    new PlaceResult("159","Ambedkar Memorial Park","https://commons.wikimedia.org/wiki/Special:FilePath/Ambedkar_Memorial_Park,_Gomti_Nagar,_Lucknow,_Uttar_Pradesh,_India_(2018).jpg","Lucknow, India",4.6,"nature"),
+                    new PlaceResult("160","Gomti Riverfront","https://commons.wikimedia.org/wiki/Special:FilePath/Gomti_River_Front_6.jpg","Lucknow, India",4.5,"nature")
             );
         }
+
 
         else if (location.contains("bengaluru") || location.contains("bangalore")) {
             return List.of(
@@ -277,53 +278,55 @@ public class SearchController {
         }
         else if (location.contains("pune")) {
             return List.of(
-                    new PlaceResult("173","Shaniwar Wada","https://upload.wikimedia.org/wikipedia/commons/2/2d/Shaniwar_Wada_Pune.jpg","Pune, India",4.8,"tours"),
-                    new PlaceResult("174","Aga Khan Palace","https://upload.wikimedia.org/wikipedia/commons/7/72/Aga_Khan_Palace.JPG","Pune, India",4.7,"museums"),
-                    new PlaceResult("175","Dagdusheth Ganpati","https://upload.wikimedia.org/wikipedia/commons/5/53/Dagdusheth_halwai_ganapati_Pune.jpg","Pune, India",4.8,"tours"),
-                    new PlaceResult("176","Sinhagad Fort","https://upload.wikimedia.org/wikipedia/commons/c/c9/Sinhagad_Fort_Pune.jpg","Near Pune, India",4.7,"nature"),
-                    new PlaceResult("177","Kelkar Museum","https://upload.wikimedia.org/wikipedia/commons/7/7c/Kelkar_Museum_Pune.jpg","Pune, India",4.6,"museums"),
-                    new PlaceResult("178","Saras Baug","https://upload.wikimedia.org/wikipedia/commons/1/1a/Saras_Baug_Pune.jpg","Pune, India",4.6,"nature")
+                    new PlaceResult("173","Shaniwar Wada","https://commons.wikimedia.org/wiki/Special:FilePath/Front_view_of_Shaniwar_Wada_illuminated.jpg","Pune, India",4.8,"tours"),
+                    new PlaceResult("174","Aga Khan Palace","https://commons.wikimedia.org/wiki/Special:FilePath/Aga_Khan_Palace_Pune_2.jpg","Pune, India",4.7,"museums"),
+                    new PlaceResult("175","Dagdusheth Ganpati","https://commons.wikimedia.org/wiki/Special:FilePath/Dagdusheth_Ganpati,_Pune.jpeg","Pune, India",4.8,"tours"),
+                    new PlaceResult("176","Sinhagad Fort","https://commons.wikimedia.org/wiki/Special:FilePath/Sinhagad_plateau.jpg","Near Pune, India",4.7,"nature"),
+                    new PlaceResult("177","Raja Dinkar Kelkar Museum","https://commons.wikimedia.org/wiki/Special:FilePath/Building_of_Raja_Dinkar_Kelkar_Museum,_Pune.jpg","Pune, India",4.6,"museums"),
+                    new PlaceResult("178","Saras Baug","https://commons.wikimedia.org/wiki/Special:FilePath/Saras_Baug.jpg","Pune, India",4.6,"nature")
             );
         }
 
+
         else if (location.contains("mysore") || location.contains("mysuru")) {
             return List.of(
-                    new PlaceResult("179","Mysore Palace","http://upload.wikimedia.org/wikipedia/commons/1/1e/Mysore_Palace_Night.jpg","Mysuru, India",4.8,"tours"),
-                    new PlaceResult("180","Brindavan Gardens","https://upload.wikimedia.org/wikipedia/commons/a/a6/Brindavan_Garden_Fountains_in_Night.jpg","Mysuru, India",4.7,"nature"),
-                    new PlaceResult("181","Chamundi Hill Temple","http://upload.wikimedia.org/wikipedia/commons/1/1e/Mysore_Palace_Night.jpg","Mysuru, India",4.7,"tours"),
-                    new PlaceResult("182","St. Philomena's Cathedral","http://upload.wikimedia.org/wikipedia/commons/1/1e/Mysore_Palace_Night.jpg","Mysuru, India",4.6,"museums"),
-                    new PlaceResult("183","Karanji Lake","https://upload.wikimedia.org/wikipedia/commons/3/32/Karanji_lake_pic.jpg","Mysuru, India",4.5,"nature"),
-                    new PlaceResult("184","Mysuru Rail Museum","https://upload.wikimedia.org/wikipedia/commons/3/38/Rail_Museum_Mysore_%281%29.jpg","Mysuru, India",4.4,"museums")
+                    new PlaceResult("179","Mysore Palace","https://commons.wikimedia.org/wiki/Special:FilePath/Mysore_Palace_-_Night_lighting.jpg","Mysuru, India",4.8,"tours"),
+                    new PlaceResult("180","Brindavan Gardens","https://commons.wikimedia.org/wiki/Special:FilePath/Brindavan_Garden_Fountains_in_Night.jpg","Near Mysuru, India",4.7,"nature"),
+                    new PlaceResult("181","Chamundi Hill Temple","https://commons.wikimedia.org/wiki/Special:FilePath/Chamundi_Temple,_Mysore.jpg","Mysuru, India",4.7,"tours"),
+                    new PlaceResult("182","St. Philomena's Church","https://commons.wikimedia.org/wiki/Special:FilePath/India_-_St._Philomena%27s_Church_02.jpg","Mysuru, India",4.6,"museums"),
+                    new PlaceResult("183","Karanji Lake","https://commons.wikimedia.org/wiki/Special:FilePath/Karanji_lake_pic.jpg","Mysuru, India",4.5,"nature"),
+                    new PlaceResult("184","Mysuru Rail Museum","https://commons.wikimedia.org/wiki/Special:FilePath/Rail_Museum_Mysore.jpg","Mysuru, India",4.4,"museums")
             );
         }
         else if (location.contains("amritsar")) {
             return List.of(
-                    new PlaceResult("185","Golden Temple","http://upload.wikimedia.org/wikipedia/commons/4/41/Sikh_pilgrim_at_the_Golden_Temple_(Harmandir_Sahib)_in_Amritsar,_India.jpg","Amritsar, India",4.9,"tours"),
-                    new PlaceResult("186","Jallianwala Bagh","https://upload.wikimedia.org/wikipedia/commons/6/66/Jallianwallah.jpg","Amritsar, India",4.8,"museums"),
-                    new PlaceResult("187","Durgiana Temple","http://upload.wikimedia.org/wikipedia/commons/4/41/Sikh_pilgrim_at_the_Golden_Temple_(Harmandir_Sahib)_in_Amritsar,_India.jpg","Amritsar, India",4.7,"tours"),
-                    new PlaceResult("188","Wagah Border Ceremony","https://upload.wikimedia.org/wikipedia/commons/6/66/Jallianwallah.jpg","Near Amritsar, India",4.7,"tours"),
-                    new PlaceResult("189","Partition Museum","https://upload.wikimedia.org/wikipedia/commons/6/66/Jallianwallah.jpg","Amritsar, India",4.6,"museums"),
-                    new PlaceResult("190","Gobindgarh Fort","http://upload.wikimedia.org/wikipedia/commons/4/41/Sikh_pilgrim_at_the_Golden_Temple_(Harmandir_Sahib)_in_Amritsar,_India.jpg","Amritsar, India",4.6,"entertainment")
+                    new PlaceResult("185","Golden Temple","https://commons.wikimedia.org/wiki/Special:FilePath/Hamandir_Sahib_(Golden_Temple).jpg","Amritsar, India",4.9,"tours"),
+                    new PlaceResult("186","Jallianwala Bagh","https://commons.wikimedia.org/wiki/Special:FilePath/Jallianwala_Bagh,_Amritsar_01.jpg","Amritsar, India",4.8,"museums"),
+                    new PlaceResult("187","Durgiana Temple","https://commons.wikimedia.org/wiki/Special:FilePath/Durgiana_Temple,_Amritsar.jpg","Amritsar, India",4.7,"tours"),
+                    new PlaceResult("188","Wagah Border Ceremony","https://commons.wikimedia.org/wiki/Special:FilePath/Attari_-_Wagah_border.jpg","Near Amritsar, India",4.7,"tours"),
+                    new PlaceResult("189","Partition Museum","https://commons.wikimedia.org/wiki/Special:FilePath/Partition_Museum,_Amritsar,_India.jpg","Amritsar, India",4.6,"museums"),
+                    new PlaceResult("190","Gobindgarh Fort","https://commons.wikimedia.org/wiki/Special:FilePath/Entrance_of_Gobindgarh_fort,_Amritsar,Punjab.jpg","Amritsar, India",4.6,"entertainment")
             );
         }
+
 
         else if (location.contains("indore")) {
             return List.of(
                     new PlaceResult("209","Rajwada Palace","https://commons.wikimedia.org/wiki/Special:FilePath/Indore_Rajwada.jpg","Indore, India",4.8,"tours"),
                     new PlaceResult("210","Lalbagh Palace","https://commons.wikimedia.org/wiki/Special:FilePath/Lalbagh_Palace%2C_Indore.jpg","Indore, India",4.7,"museums"),
-                    new PlaceResult("211","Khajrana Ganesh Temple","https://commons.wikimedia.org/wiki/Special:FilePath/Indore_Rajwada.jpg","Indore, India",4.7,"tours"),
-                    new PlaceResult("212","Sarafa Bazaar Night Market","https://commons.wikimedia.org/wiki/Special:FilePath/Indore_Rajwada.jpg","Indore, India",4.6,"entertainment"),
+                    new PlaceResult("211","Khajrana Ganesh Temple","https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/e2/a4/98/temple.jpg?w=1200&h=-1&s=1","Indore, India",4.7,"tours"),
+                    new PlaceResult("212","Sarafa Bazaar Night Market","https://wanderon-images.gumlet.io/gallery/new/2025/10/08/1759862032329-best-time-to-visit-sarafa-bazaar.webp","Indore, India",4.6,"entertainment"),
                     new PlaceResult("213","Patalpani Waterfall","https://commons.wikimedia.org/wiki/Special:FilePath/Patalpani_Waterfalls.jpg","Near Indore, India",4.7,"nature"),
                     new PlaceResult("214","Ralamandal Wildlife Sanctuary","https://commons.wikimedia.org/wiki/Special:FilePath/Patal_Pani_Waterfall.jpg","Near Indore, India",4.5,"nature")
             );
         }
         else if (location.contains("bhopal")) {
             return List.of(
-                    new PlaceResult("215","Upper Lake (Bhojtal)","https://commons.wikimedia.org/wiki/Special:FilePath/Bhopal_City.jpg","Bhopal, India",4.8,"nature"),
+                    new PlaceResult("215","Upper Lake (Bhojtal)","https://chalbanjare.com/crm/sys_images/Upper_Lake1759815545.jpg","Bhopal, India",4.8,"nature"),
                     new PlaceResult("216","Taj-ul-Masajid","https://commons.wikimedia.org/wiki/Special:FilePath/Taj_Ul_Masajid%2C_Bhopal.JPG","Bhopal, India",4.8,"tours"),
                     new PlaceResult("217","Lower Lake","https://commons.wikimedia.org/wiki/Special:FilePath/Lower_Lake_Bhopal.jpg","Bhopal, India",4.6,"nature"),
                     new PlaceResult("218","Van Vihar National Park","https://commons.wikimedia.org/wiki/Special:FilePath/Bhopal_lake.jpg","Bhopal, India",4.6,"nature"),
-                    new PlaceResult("219","Sanchi Stupa","https://commons.wikimedia.org/wiki/Special:FilePath/Sanchi_Stupa_from_the_hill.jpg","Near Bhopal, India",4.8,"museums"),
+                    new PlaceResult("219","Sanchi Stupa","https://www.mptourism.com/images/point-of-interest/The%20Great%20Stupa.webp","Near Bhopal, India",4.8,"museums"),
                     new PlaceResult("220","Bharat Bhavan","https://commons.wikimedia.org/wiki/Special:FilePath/City_of_Lakes_Bhopal.jpg","Bhopal, India",4.5,"entertainment")
             );
         }
@@ -332,7 +335,7 @@ public class SearchController {
                     new PlaceResult("221","Kamakhya Temple","https://commons.wikimedia.org/wiki/Special:FilePath/Kamakhya_Temple%2C_Guwahati.jpg","Guwahati, India",4.9,"tours"),
                     new PlaceResult("222","Brahmaputra Riverfront","https://commons.wikimedia.org/wiki/Special:FilePath/Guwahati_City_Off_Brahmaputra_Coast_%28189246519%29.jpeg","Guwahati, India",4.7,"nature"),
                     new PlaceResult("223","Umananda Temple","https://commons.wikimedia.org/wiki/Special:FilePath/Guwahati_Skyline.jpg","Guwahati, India",4.7,"tours"),
-                    new PlaceResult("224","Assam State Museum","https://commons.wikimedia.org/wiki/Special:FilePath/Dighalipukhuri%2C_Guwahati.jpg","Guwahati, India",4.6,"museums"),
+                    new PlaceResult("224","Assam State Museum","https://i0.wp.com/traveldreams.live/wp-content/uploads/2022/02/guhawati-museum-32.jpg?resize=1024%2C683&ssl=1","Guwahati, India",4.6,"museums"),
                     new PlaceResult("225","Kalakshetra Cultural Center","https://commons.wikimedia.org/wiki/Special:FilePath/Guwahati_citysky.jpg","Guwahati, India",4.6,"entertainment"),
                     new PlaceResult("226","Dighalipukhuri Lake","https://commons.wikimedia.org/wiki/Special:FilePath/Dighalipukhuri%2C_Guwahati.jpg","Guwahati, India",4.5,"nature")
             );
@@ -342,10 +345,10 @@ public class SearchController {
                     new PlaceResult("227","Golghar","https://commons.wikimedia.org/wiki/Special:FilePath/Patna_Golghar_2.jpg","Patna, India",4.7,"tours"),
                     new PlaceResult("228","Takht Sri Patna Sahib","https://commons.wikimedia.org/wiki/Special:FilePath/Takht_Sri_Patna_Sahib.jpg","Patna, India",4.9,"tours"),
                     new PlaceResult("229","Gandhi Maidan","https://commons.wikimedia.org/wiki/Special:FilePath/Patna_-_Golghar.jpg","Patna, India",4.5,"tours"),
-                    new PlaceResult("230","Bihar Museum","https://commons.wikimedia.org/wiki/Special:FilePath/Patna_Museum_building.jpg","Patna, India",4.6,"museums"),
-                    new PlaceResult("231","Patna Museum","https://commons.wikimedia.org/wiki/Special:FilePath/Patna_Museum_building.jpg","Patna, India",4.5,"museums"),
-                    new PlaceResult("232","Eco Park","https://commons.wikimedia.org/wiki/Special:FilePath/Sunset_from_Eco_Park.jpg","Patna, India",4.7,"nature")
-            );
+                    new PlaceResult("230","Bihar Museum","https://commons.wikimedia.org/wiki/Special:FilePath/Bihar_Museum_Bailey_Road_02.jpg","Patna, India",4.6,"museums"),
+                    new PlaceResult("231","Patna Museum","https://commons.wikimedia.org/wiki/Special:FilePath/Patna_Museum_-_General_View_(9221515542).jpg","Patna, India",4.5,"museums"),
+                    new PlaceResult("232","Eco Park","https://commons.wikimedia.org/wiki/Special:FilePath/Eco_Park_Patna.jpg","Patna, India",4.7,"nature")
+                    );
         }
 
 
