@@ -384,11 +384,11 @@ public class SearchController {
 
         else if (location.contains("ayodhya")) {
             return List.of(
-                    new PlaceResult("251","Shri Ram Janmbhoomi Mandir","https://commons.wikimedia.org/wiki/Special:FilePath/Uttar_Pradesh_-_Ayodhya_Ram_Mandir.jpg","Ayodhya, India",4.9,"tours"),
+                    new PlaceResult("251","Shri Ram Janmbhoomi Mandir","https://srjbtkshetra.org/wp-content/uploads/2020/11/Cam_04_01_Comp.jpg","Ayodhya, India",4.9,"tours"),
                     new PlaceResult("252","Hanuman Garhi Temple","https://commons.wikimedia.org/wiki/Special:FilePath/Hanuman_Garhi_Temple-32.jpg","Ayodhya, India",4.8,"tours"),
                     new PlaceResult("253","Kanak Bhawan Temple","https://commons.wikimedia.org/wiki/Special:FilePath/Kanak_Bhawan,_Ayodhya_India.jpg","Ayodhya, India",4.7,"tours"),
                     new PlaceResult("254","Naya Ghat, Saryu River","https://commons.wikimedia.org/wiki/Special:FilePath/Naya_ghat,_Saryu_river,_ayodhya.jpg","Ayodhya, India",4.7,"nature"),
-                    new PlaceResult("255","Saryu River Bank","https://commons.wikimedia.org/wiki/Special:FilePath/Saryu_River_Bank,_Ayodhya,_Faizabad_(U.P.),_India..JPG","Ayodhya, India",4.6,"nature"),
+                    new PlaceResult("255","Saryu River Bank","https://d2py10ayqu2jji.cloudfront.net/Ram-Ki-Paidi-Ayodhya.webp","Ayodhya, India",4.6,"nature"),
                     new PlaceResult("256","Ram Mandir Inauguration View","https://commons.wikimedia.org/wiki/Special:FilePath/Ayodhya_Ram_Mandir_Inauguration_Day_Picture.jpg","Ayodhya, India",4.9,"tours")
             );
         }
