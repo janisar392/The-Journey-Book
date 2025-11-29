@@ -163,6 +163,84 @@ public class SearchController {
                     new PlaceResult("54", "Merlion Park", "https://cdn.pixabay.com/photo/2023/12/02/20/08/ferris-wheel-8426414_640.jpg", "Singapore", 4.4, "tours")
             );
         }
+        // Mumbai
+        else if (location.contains("mumbai")) {
+            return List.of(
+                    new PlaceResult("101", "Gateway of India", "https://images.unsplash.com/photo-1581952979821-16ac1b0c2f5c?w=800", "Mumbai, India", 4.8, "tours"),
+                    new PlaceResult("102", "Marine Drive", "https://images.unsplash.com/photo-1585305978903-1cdc6363c5c7?w=800", "Mumbai, India", 4.7, "nature"),
+                    new PlaceResult("103", "Bandra-Worli Sea Link", "https://images.unsplash.com/photo-1603694081815-9bef1815a92c?w=800", "Mumbai, India", 4.6, "tours"),
+                    new PlaceResult("104", "Elephanta Caves", "https://images.unsplash.com/photo-1690128418538-7b52a1092c0f?w=800", "Mumbai, India", 4.5, "museums"),
+                    new PlaceResult("105", "Chhatrapati Shivaji Maharaj Terminus", "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800", "Mumbai, India", 4.9, "museums"),
+                    new PlaceResult("106", "Juhu Beach", "https://images.unsplash.com/photo-1561715276-a2d087060f86?w=800", "Mumbai, India", 4.4, "nature")
+            );
+        }
+// Kolkata
+        else if (location.contains("kolkata")) {
+            return List.of(
+                    new PlaceResult("107", "Howrah Bridge", "https://images.unsplash.com/photo-1605075938120-9bcab9f6bbf2?w=800", "Kolkata, India", 4.8, "tours"),
+                    new PlaceResult("108", "Victoria Memorial", "https://images.unsplash.com/photo-1599737974802-01a4e5b67ec0?w=800", "Kolkata, India", 4.9, "museums"),
+                    new PlaceResult("109", "Dakshineswar Temple", "https://images.unsplash.com/photo-1714543997141-451bcda6fc6f?w=800", "Kolkata, India", 4.7, "museums"),
+                    new PlaceResult("110", "Eden Gardens", "https://images.unsplash.com/photo-1622278647429-71a4b3a081e1?w=800", "Kolkata, India", 4.6, "entertainment"),
+                    new PlaceResult("111", "Indian Museum", "https://images.unsplash.com/photo-1690659860607-3b75b1e5a741?w=800", "Kolkata, India", 4.5, "museums"),
+                    new PlaceResult("112", "Science City", "https://images.unsplash.com/photo-1549893074-e2dec99c2147?w=800", "Kolkata, India", 4.4, "entertainment")
+            );
+        }
+// Chennai
+        else if (location.contains("chennai")) {
+            return List.of(
+                    new PlaceResult("113", "Marina Beach", "https://images.unsplash.com/photo-1646657440732-2c9953f9e0c7?w=800", "Chennai, India", 4.7, "nature"),
+                    new PlaceResult("114", "Kapaleeshwarar Temple", "https://images.unsplash.com/photo-1568733873715-f9bcef1c0947?w=800", "Chennai, India", 4.8, "museums"),
+                    new PlaceResult("115", "Fort St. George", "https://images.unsplash.com/photo-1708744556073-2c7bb84baa2d?w=800", "Chennai, India", 4.6, "museums"),
+                    new PlaceResult("116", "Valluvar Kottam", "https://images.unsplash.com/photo-1614277878833-1fd652f33706?w=800", "Chennai, India", 4.4, "tours"),
+                    new PlaceResult("117", "Government Museum", "https://images.unsplash.com/photo-1697828697716-ef4cf2fdead1?w=800", "Chennai, India", 4.5, "museums"),
+                    new PlaceResult("118", "Guindy National Park", "https://images.unsplash.com/photo-1574197364508-1cdae9c4780f?w=800", "Chennai, India", 4.3, "nature")
+            );
+        }
+// Jaipur
+        else if (location.contains("jaipur")) {
+            return List.of(
+                    new PlaceResult("119", "Hawa Mahal", "https://images.unsplash.com/photo-1611629097579-b4bfe7f56019?w=800", "Jaipur, India", 4.9, "tours"),
+                    new PlaceResult("120", "Amber Fort", "https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?w=800", "Jaipur, India", 4.8, "museums"),
+                    new PlaceResult("121", "City Palace", "https://images.unsplash.com/photo-1616696363001-895c3e1a5f85?w=800", "Jaipur, India", 4.7, "museums"),
+                    new PlaceResult("122", "Jantar Mantar", "https://images.unsplash.com/photo-1694549168659-2c7545260793?w=800", "Jaipur, India", 4.6, "museums"),
+                    new PlaceResult("123", "Nahargarh Fort", "https://images.unsplash.com/photo-1661933551258-b092287f2d79?w=800", "Jaipur, India", 4.7, "tours"),
+                    new PlaceResult("124", "Jal Mahal", "https://images.unsplash.com/photo-1615224288524-fbc32f735931?w=800", "Jaipur, India", 4.8, "tours")
+            );
+        }
+// Agra
+        else if (location.contains("agra")) {
+            return List.of(
+                    new PlaceResult("125", "Taj Mahal", "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800", "Agra, India", 5.0, "museums"),
+                    new PlaceResult("126", "Agra Fort", "https://images.unsplash.com/photo-1710336017304-ba11aad6ad64?w=800", "Agra, India", 4.8, "museums"),
+                    new PlaceResult("127", "Mehtab Bagh", "https://images.unsplash.com/photo-1715559860222-6b44a2e8bf61?w=800", "Agra, India", 4.7, "nature"),
+                    new PlaceResult("128", "Fatehpur Sikri", "https://images.unsplash.com/photo-1717576425796-30be3f0665d0?w=800", "Agra, India", 4.8, "museums"),
+                    new PlaceResult("129", "Akbar’s Tomb", "https://images.unsplash.com/photo-1697799781971-016ebda30f83?w=800", "Agra, India", 4.5, "museums"),
+                    new PlaceResult("130", "Kinari Bazaar", "https://images.unsplash.com/photo-1642622596432-b7dab1dcf3af?w=800", "Agra, India", 4.3, "entertainment")
+            );
+        }
+// Varanasi
+        else if (location.contains("varanasi")) {
+            return List.of(
+                    new PlaceResult("131", "Kashi Vishwanath Temple", "https://images.unsplash.com/photo-1548013146-9ec09f06c2c1?w=800", "Varanasi, India", 4.9, "museums"),
+                    new PlaceResult("132", "Dashashwamedh Ghat", "https://images.unsplash.com/photo-1614502689120-8fc1ec8ba163?w=800", "Varanasi, India", 4.8, "tours"),
+                    new PlaceResult("133", "Assi Ghat", "https://images.unsplash.com/photo-1717240567702-12bbdceb4455?w=800", "Varanasi, India", 4.7, "nature"),
+                    new PlaceResult("134", "Manikarnika Ghat", "https://images.unsplash.com/photo-1619447664218-f8a535a4d6c2?w=800", "Varanasi, India", 4.6, "museums"),
+                    new PlaceResult("135", "Banaras Hindu University", "https://images.unsplash.com/photo-1709221836450-0ec61a86342d?w=800", "Varanasi, India", 4.5, "museums"),
+                    new PlaceResult("136", "Sarnath", "https://images.unsplash.com/photo-1646995086901-2ecc3c979b93?w=800", "Varanasi, India", 4.8, "museums")
+            );
+        }
+// Hyderabad
+        else if (location.contains("hyderabad")) {
+            return List.of(
+                    new PlaceResult("137", "Charminar", "https://images.unsplash.com/photo-1580694478164-cb4276ec81f7?w=800", "Hyderabad, India", 4.8, "tours"),
+                    new PlaceResult("138", "Golconda Fort", "https://images.unsplash.com/photo-1589641088148-06b1a4570790?w=800", "Hyderabad, India", 4.7, "museums"),
+                    new PlaceResult("139", "Hussain Sagar Lake", "https://images.unsplash.com/photo-1606011428400-cb26cc9c1a50?w=800", "Hyderabad, India", 4.6, "nature"),
+                    new PlaceResult("140", "Birla Mandir", "https://images.unsplash.com/photo-1694516696617-32bc1e5b9fc5?w=800", "Hyderabad, India", 4.7, "museums"),
+                    new PlaceResult("141", "Ramoji Film City", "https://images.unsplash.com/photo-1706250963544-01f38eae5b43?w=800", "Hyderabad, India", 4.9, "entertainment"),
+                    new PlaceResult("142", "Salar Jung Museum", "https://images.unsplash.com/photo-1700057649123-90e64d13f8cf?w=800", "Hyderabad, India", 4.8, "museums")
+            );
+        }
+
 
         // Default for any other location - Enhanced with 6 diverse attractions
         else {
