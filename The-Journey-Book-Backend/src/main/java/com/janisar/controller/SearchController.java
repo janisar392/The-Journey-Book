@@ -351,6 +351,67 @@ public class SearchController {
                     );
         }
 
+        else if (location.contains("prayagraj") || location.contains("allahabad")) {
+            return List.of(
+                    new PlaceResult("233","Triveni Sangam","https://commons.wikimedia.org/wiki/Special:FilePath/Triveni_Sangam_Prayagraj.jpg","Prayagraj, India",4.9,"tours"),
+                    new PlaceResult("234","Allahabad Fort","https://commons.wikimedia.org/wiki/Special:FilePath/Allahabad_Fort.JPG","Prayagraj, India",4.7,"tours"),
+                    new PlaceResult("235","Anand Bhavan (Nehru House)","https://commons.wikimedia.org/wiki/Special:FilePath/Anand_Bhawan,_Allahabad.jpg","Prayagraj, India",4.7,"museums"),
+                    new PlaceResult("236","Chandrasekhar Azad Park (Company Garden)","https://commons.wikimedia.org/wiki/Special:FilePath/Queen_Victoria_Memorial_Alfred_Park.JPG","Prayagraj, India",4.6,"nature"),
+                    new PlaceResult("237","Allahabad High Court","https://commons.wikimedia.org/wiki/Special:FilePath/High_Court_of_Allahabad.jpg","Prayagraj, India",4.6,"tours"),
+                    new PlaceResult("238","Sangam River View","https://commons.wikimedia.org/wiki/Special:FilePath/Allahabad_(Prayag_Sangam).jpg","Prayagraj, India",4.7,"nature")
+            );
+        }
+        else if (location.contains("kanpur")) {
+            return List.of(
+                    new PlaceResult("239","JK Temple","https://commons.wikimedia.org/wiki/Special:FilePath/J.K._Temple.jpg","Kanpur, India",4.8,"tours"),
+                    new PlaceResult("240","Moti Jheel","https://commons.wikimedia.org/wiki/Special:FilePath/Moti_Jheel_metro_station.jpg","Kanpur, India",4.6,"tours"),
+                    new PlaceResult("241","Kanpur Memorial Church","https://commons.wikimedia.org/wiki/Special:FilePath/Kanpur_Memorial_Church.jpg","Kanpur, India",4.7,"museums"),
+                    new PlaceResult("242","Kanpur Zoological Park","https://commons.wikimedia.org/wiki/Special:FilePath/VYP_Leopard.jpg","Kanpur, India",4.6,"nature"),
+                    new PlaceResult("243","Massacre Ghat","https://commons.wikimedia.org/wiki/Special:FilePath/Massacre_Ghat,_Kanpur.jpg","Kanpur, India",4.6,"tours"),
+                    new PlaceResult("244","The Mall Road","https://commons.wikimedia.org/wiki/Special:FilePath/The_Mall_Kanpur.jpg","Kanpur, India",4.5,"entertainment")
+            );
+        }
+        else if (location.contains("noida")) {
+            return List.of(
+                    new PlaceResult("245","DLF Mall of India","https://commons.wikimedia.org/wiki/Special:FilePath/DLF_Mall_of_India.jpg","Noida, India",4.7,"entertainment"),
+                    new PlaceResult("246","Worlds of Wonder","https://commons.wikimedia.org/wiki/Special:FilePath/Worlds_Of_Wonder_amusement_park.jpg","Noida, India",4.7,"entertainment"),
+                    new PlaceResult("247","Noida Sector 78 Skyline","https://commons.wikimedia.org/wiki/Special:FilePath/Noida_sector_78.jpg","Noida, India",4.6,"tours"),
+                    new PlaceResult("248","Noida City Skyline","https://commons.wikimedia.org/wiki/Special:FilePath/Noidancrdelhiskyline.jpg","Noida, India",4.6,"tours"),
+                    new PlaceResult("249","Okhla Bird Sanctuary","https://commons.wikimedia.org/wiki/Special:FilePath/Okhla_Bird_Sanctuary_Noida_Delhi.jpg","Noida, India",4.7,"nature"),
+                    new PlaceResult("250","Greater Noida Sky View","https://commons.wikimedia.org/wiki/Special:FilePath/G._Noida_sky_view.jpg","Greater Noida, near Noida, India",4.6,"tours")
+            );
+        }
+
+        else if (location.contains("ayodhya")) {
+            return List.of(
+                    new PlaceResult("251","Shri Ram Janmbhoomi Mandir","https://commons.wikimedia.org/wiki/Special:FilePath/Uttar_Pradesh_-_Ayodhya_Ram_Mandir.jpg","Ayodhya, India",4.9,"tours"),
+                    new PlaceResult("252","Hanuman Garhi Temple","https://commons.wikimedia.org/wiki/Special:FilePath/Hanuman_Garhi_Temple-32.jpg","Ayodhya, India",4.8,"tours"),
+                    new PlaceResult("253","Kanak Bhawan Temple","https://commons.wikimedia.org/wiki/Special:FilePath/Kanak_Bhawan,_Ayodhya_India.jpg","Ayodhya, India",4.7,"tours"),
+                    new PlaceResult("254","Naya Ghat, Saryu River","https://commons.wikimedia.org/wiki/Special:FilePath/Naya_ghat,_Saryu_river,_ayodhya.jpg","Ayodhya, India",4.7,"nature"),
+                    new PlaceResult("255","Saryu River Bank","https://commons.wikimedia.org/wiki/Special:FilePath/Saryu_River_Bank,_Ayodhya,_Faizabad_(U.P.),_India..JPG","Ayodhya, India",4.6,"nature"),
+                    new PlaceResult("256","Ram Mandir Inauguration View","https://commons.wikimedia.org/wiki/Special:FilePath/Ayodhya_Ram_Mandir_Inauguration_Day_Picture.jpg","Ayodhya, India",4.9,"tours")
+            );
+        }
+        else if (location.contains("jhansi")) {
+            return List.of(
+                    new PlaceResult("257","Jhansi Fort","https://commons.wikimedia.org/wiki/Special:FilePath/Jhansi_fort.JPG","Jhansi, India",4.8,"tours"),
+                    new PlaceResult("258","Rani Mahal, Jhansi","https://commons.wikimedia.org/wiki/Special:FilePath/Rani_Mahal,_a_royal_palace_in_the_city_of_Jhansi,_Uttar_Pradesh_23.jpg","Jhansi, India",4.7,"museums"),
+                    new PlaceResult("259","St. Jude's Shrine","https://commons.wikimedia.org/wiki/Special:FilePath/St_Jude_shrine_Jhansi.jpg","Jhansi, India",4.6,"tours"),
+                    new PlaceResult("260","Jhansi Railway Station","https://commons.wikimedia.org/wiki/Special:FilePath/Jhansi_Railway_Station.JPG","Jhansi, India",4.6,"tours"),
+                    new PlaceResult("261","Barua Sagar Lake View","https://commons.wikimedia.org/wiki/Special:FilePath/Barua_Sagar_viewed_from_the_fort.jpg","Barua Sagar, near Jhansi, India",4.7,"nature"),
+                    new PlaceResult("262","Jhansi City View from Fort","https://commons.wikimedia.org/wiki/Special:FilePath/Jhansi_view.jpg","Jhansi, India",4.5,"tours")
+            );
+        }
+        else if (location.contains("meerut")) {
+            return List.of(
+                    new PlaceResult("263","Meerut Ghantaghar (Clock Tower)","https://commons.wikimedia.org/wiki/Special:FilePath/Meerut_Ghantaghar.jpg","Meerut, India",4.8,"tours"),
+                    new PlaceResult("264","St. John's Church, Meerut","https://commons.wikimedia.org/wiki/Special:FilePath/StJohnsChurchMeerut.jpg","Meerut, India",4.7,"museums"),
+                    new PlaceResult("265","Ashtapad Jain Temple, Hastinapur","https://commons.wikimedia.org/wiki/Special:FilePath/Ashtapad_Hastinapur.jpg","Hastinapur, near Meerut, India",4.7,"tours"),
+                    new PlaceResult("266","Ashtapad Temple (Hastinapur View)","https://commons.wikimedia.org/wiki/Special:FilePath/Ashtapad.jpg","Hastinapur, near Meerut, India",4.6,"tours"),
+                    new PlaceResult("267","Meerut City (Outside Junction)","https://commons.wikimedia.org/wiki/Special:FilePath/MEERUT_CITY.jpg","Meerut, India",4.5,"tours"),
+                    new PlaceResult("268","Mall Road, Meerut Cantt","https://commons.wikimedia.org/wiki/Special:FilePath/Mall_Road_Meerut_Cantt.jpg","Meerut, India",4.6,"entertainment")
+            );
+        }
 
 
 
