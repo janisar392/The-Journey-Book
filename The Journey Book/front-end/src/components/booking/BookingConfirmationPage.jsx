@@ -124,25 +124,25 @@ const BookingConfirmationPage = () => {
                 {ticketQuantities.adult > 0 && (
                   <div className="ticket-item">
                     <span>Adult (13+)</span>
-                    <span>{ticketQuantities.adult} x ${25}</span>
+                    <span>{ticketQuantities.adult} x &#8377;{25}</span>
                   </div>
                 )}
                 {ticketQuantities.child > 0 && (
                   <div className="ticket-item">
                     <span>Child (4-12)</span>
-                    <span>{ticketQuantities.child} x ${15}</span>
+                    <span>{ticketQuantities.child} x &#8377;{15}</span>
                   </div>
                 )}
                 {ticketQuantities.senior > 0 && (
                   <div className="ticket-item">
                     <span>Senior (65+)</span>
-                    <span>{ticketQuantities.senior} x ${20}</span>
+                    <span>{ticketQuantities.senior} x &#8377;{20}</span>
                   </div>
                 )}
               </div>
               <div className="total-amount">
                 <span>Total Paid:</span>
-                <span className="amount">${totalPrice}</span>
+                <span className="amount">&#8377;{totalPrice}</span>
               </div>
             </div>
           </div>

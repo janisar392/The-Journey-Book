@@ -224,25 +224,69 @@ public class SearchController {
 // Varanasi
         else if (location.contains("varanasi")) {
             return List.of(
-                    new PlaceResult("131", "Kashi Vishwanath Temple", "https://images.unsplash.com/photo-1548013146-9ec09f06c2c1?w=800", "Varanasi, India", 4.9, "museums"),
-                    new PlaceResult("132", "Dashashwamedh Ghat", "https://images.unsplash.com/photo-1614502689120-8fc1ec8ba163?w=800", "Varanasi, India", 4.8, "tours"),
-                    new PlaceResult("133", "Assi Ghat", "https://images.unsplash.com/photo-1717240567702-12bbdceb4455?w=800", "Varanasi, India", 4.7, "nature"),
-                    new PlaceResult("134", "Manikarnika Ghat", "https://images.unsplash.com/photo-1619447664218-f8a535a4d6c2?w=800", "Varanasi, India", 4.6, "museums"),
-                    new PlaceResult("135", "Banaras Hindu University", "https://images.unsplash.com/photo-1709221836450-0ec61a86342d?w=800", "Varanasi, India", 4.5, "museums"),
-                    new PlaceResult("136", "Sarnath", "https://images.unsplash.com/photo-1646995086901-2ecc3c979b93?w=800", "Varanasi, India", 4.8, "museums")
+                    new PlaceResult("143","Kashi Vishwanath Temple","https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Kashi_Vishwanath_Temple_Main_Area-3.jpg/500px-Kashi_Vishwanath_Temple_Main_Area-3.jpg","Varanasi, India",4.9,"tours"),
+                    new PlaceResult("144","Dashashwamedh Ghat","https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Dashashwamedh_Ghat_Varanasi.jpg/960px-Dashashwamedh_Ghat_Varanasi.jpg","Varanasi, India",4.8,"tours"),
+                    new PlaceResult("145","Assi Ghat","https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Assi_Ghat_Varanasi.jpg/960px-Assi_Ghat_Varanasi.jpg","Varanasi, India",4.7,"tours"),
+                    new PlaceResult("146","Sarnath – Dhamek Stupa","https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Dhamek_Stupa%2C_Sarnath.jpg/500px-Dhamek_Stupa%2C_Sarnath.jpg","Sarnath, India",4.8,"museums"),
+                    new PlaceResult("147","BHU Main Gate","https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/BHU_Main_Gate%2C_Banaras_Hindu_University_enhanced.jpg/800px-BHU_Main_Gate%2C_Banaras_Hindu_University_enhanced.jpg","Varanasi, India",4.6,"tours"),
+                    new PlaceResult("148","Manikarnika Ghat","https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Manikarnika_Ghat%2C_Varanasi%2C_Uttar_Pradesh.jpg/500px-Manikarnika_Ghat%2C_Varanasi%2C_Uttar_Pradesh.jpg","Varanasi, India",4.7,"tours")
             );
         }
-// Hyderabad
         else if (location.contains("hyderabad")) {
             return List.of(
-                    new PlaceResult("137", "Charminar", "https://images.unsplash.com/photo-1580694478164-cb4276ec81f7?w=800", "Hyderabad, India", 4.8, "tours"),
-                    new PlaceResult("138", "Golconda Fort", "https://images.unsplash.com/photo-1589641088148-06b1a4570790?w=800", "Hyderabad, India", 4.7, "museums"),
-                    new PlaceResult("139", "Hussain Sagar Lake", "https://images.unsplash.com/photo-1606011428400-cb26cc9c1a50?w=800", "Hyderabad, India", 4.6, "nature"),
-                    new PlaceResult("140", "Birla Mandir", "https://images.unsplash.com/photo-1694516696617-32bc1e5b9fc5?w=800", "Hyderabad, India", 4.7, "museums"),
-                    new PlaceResult("141", "Ramoji Film City", "https://images.unsplash.com/photo-1706250963544-01f38eae5b43?w=800", "Hyderabad, India", 4.9, "entertainment"),
-                    new PlaceResult("142", "Salar Jung Museum", "https://images.unsplash.com/photo-1700057649123-90e64d13f8cf?w=800", "Hyderabad, India", 4.8, "museums")
+                    new PlaceResult("149","Charminar","https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Hyderabad%2C_charminar_01.jpg/500px-Hyderabad%2C_charminar_01.jpg","Hyderabad, India",4.8,"tours"),
+                    new PlaceResult("150","Golconda Fort","https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/00-Golconda-Fort-Hyderabad_48.jpg/960px-00-Golconda-Fort-Hyderabad_48.jpg","Hyderabad, India",4.7,"tours"),
+                    new PlaceResult("151","Hussain Sagar Buddha Statue","https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Buddha_in_Hussain_sagar.jpg/960px-Buddha_in_Hussain_sagar.jpg","Hyderabad, India",4.7,"tours"),
+                    new PlaceResult("152","Ramoji Film City","https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Ramoji_Film_City_-_A_view_from_the_entrance_3145.JPG/960px-Ramoji_Film_City_-_A_view_from_the_entrance_3145.JPG","Hyderabad, India",4.8,"entertainment"),
+                    new PlaceResult("153","Birla Mandir","https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Birla_Mandir_in_Hyderabad%2C_2015.JPG/960px-Birla_Mandir_in_Hyderabad%2C_2015.JPG","Hyderabad, India",4.6,"museums"),
+                    new PlaceResult("154","Chowmahalla Palace","https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Chowmahalla_Palace_-_Northern_Courtyard_%284%29.jpg/960px-Chowmahalla_Palace_-_Northern_Courtyard_%284%29.jpg","Hyderabad, India",4.7,"museums")
             );
         }
+
+        else if (location.contains("lucknow")) {
+            return List.of(
+                    new PlaceResult("155","Bara Imambara","https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Bara_Imambara_Lucknow.jpg/960px-Bara_Imambara_Lucknow.jpg","Lucknow, India",4.8,"tours"),
+                    new PlaceResult("156","Rumi Darwaza","https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Bara_Imambara_Lucknow.jpg/960px-Bara_Imambara_Lucknow.jpg","Lucknow, India",4.7,"tours"),
+                    new PlaceResult("157","Chota Imambara","https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Bara_Imambara_Lucknow.jpg/960px-Bara_Imambara_Lucknow.jpg","Lucknow, India",4.6,"museums"),
+                    new PlaceResult("158","Hazratganj Market","https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Hazratganj_Lucknow.jpg/960px-Hazratganj_Lucknow.jpg","Lucknow, India",4.7,"entertainment"),
+                    new PlaceResult("159","Ambedkar Memorial Park","https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Hazratganj_Lucknow.jpg/960px-Hazratganj_Lucknow.jpg","Lucknow, India",4.6,"nature"),
+                    new PlaceResult("160","Gomti Riverfront","https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Hazratganj_Lucknow.jpg/960px-Hazratganj_Lucknow.jpg","Lucknow, India",4.5,"nature")
+            );
+        }
+        else if (location.contains("bengaluru") || location.contains("bangalore")) {
+            return List.of(
+                    new PlaceResult("161","Vidhana Soudha","https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Vidhana_Soudha_%2C_the_State_Legistlature_of_Karnataka%2C_Bengaluru%2C_India.jpg/960px-Vidhana_Soudha_%2C_the_State_Legistlature_of_Karnataka%2C_Bengaluru%2C_India.jpg","Bengaluru, India",4.8,"tours"),
+                    new PlaceResult("162","Bangalore Palace","https://upload.wikimedia.org/wikipedia/commons/1/12/Bangalore_Palace.jpg","Bengaluru, India",4.7,"museums"),
+                    new PlaceResult("163","Cubbon Park","https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Cubbon_Park%2C_Bangalore_%28TuckDB_Postcard%29.jpg/960px-Cubbon_Park%2C_Bangalore_%28TuckDB_Postcard%29.jpg","Bengaluru, India",4.6,"nature"),
+                    new PlaceResult("164","Lalbagh Glasshouse","https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Lalbagh_Glasshouse_night_panorama.jpg/960px-Lalbagh_Glasshouse_night_panorama.jpg","Bengaluru, India",4.7,"nature"),
+                    new PlaceResult("165","ISKCON Temple","https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/ISKCON_Temple_-_Bangalore_-_Karnataka_-_DSCN0101.jpg/960px-ISKCON_Temple_-_Bangalore_-_Karnataka_-_DSCN0101.jpg","Bengaluru, India",4.8,"tours"),
+                    new PlaceResult("166","UB City","https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/UB_City%2C_Bangalore.JPG/960px-UB_City%2C_Bangalore.JPG","Bengaluru, India",4.6,"entertainment")
+            );
+        }
+
+        else if (location.contains("ahmedabad")) {
+            return List.of(
+                    new PlaceResult("167","Sabarmati Riverfront","https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Sabarmati_Riverfront_in_Ahmedabad.jpg/960px-Sabarmati_Riverfront_in_Ahmedabad.jpg","Ahmedabad, India",4.8,"tours"),
+                    new PlaceResult("168","Sabarmati Ashram","https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Sabarmati-Ashram-1.jpg/1024px-Sabarmati-Ashram-1.jpg","Ahmedabad, India",4.8,"museums"),
+                    new PlaceResult("169","Sidi Saiyyed Mosque","https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sidi_Saiyyed_Mosque_Ahmedabad_Gujarat_-_Jali_Work.jpg/960px-Sidi_Saiyyed_Mosque_Ahmedabad_Gujarat_-_Jali_Work.jpg","Ahmedabad, India",4.7,"museums"),
+                    new PlaceResult("170","Adalaj Stepwell","https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Adalaj_Stepwell%2C_Ahmedabad%2C_Gujarat%2C_India.jpg/960px-Adalaj_Stepwell%2C_Ahmedabad%2C_Gujarat%2C_India.jpg","Adalaj, India",4.7,"tours"),
+                    new PlaceResult("171","Kankaria Lake","https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Kankaria_Lake_at_Ahmedabad.JPG/960px-Kankaria_Lake_at_Ahmedabad.JPG","Ahmedabad, India",4.6,"nature"),
+                    new PlaceResult("172","Atal Foot Over Bridge","https://upload.wikimedia.org/wikipedia/commons/a/a4/Atal_Pedestrian_Bridge_at_Night.jpg","Ahmedabad, India",4.8,"tours")
+            );
+        }
+        else if (location.contains("pune")) {
+            return List.of(
+                    new PlaceResult("173","Shaniwar Wada","https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Shaniwar_Wada_Fort_Pune.jpg/960px-Shaniwar_Wada_Fort_Pune.jpg","Pune, India",4.8,"tours"),
+                    new PlaceResult("174","Aga Khan Palace","https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Shaniwar_Wada_Fort_Pune.jpg/960px-Shaniwar_Wada_Fort_Pune.jpg","Pune, India",4.7,"museums"),
+                    new PlaceResult("175","Dagdusheth Ganpati","https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Shaniwar_Wada_Fort_Pune.jpg/960px-Shaniwar_Wada_Fort_Pune.jpg","Pune, India",4.8,"tours"),
+                    new PlaceResult("176","Sinhagad Fort","https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Shaniwar_Wada_Fort_Pune.jpg/960px-Shaniwar_Wada_Fort_Pune.jpg","Near Pune, India",4.7,"nature"),
+                    new PlaceResult("177","Kelkar Museum","https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Shaniwar_Wada_Fort_Pune.jpg/960px-Shaniwar_Wada_Fort_Pune.jpg","Pune, India",4.6,"museums"),
+                    new PlaceResult("178","Saras Baug","https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Shaniwar_Wada_Fort_Pune.jpg/960px-Shaniwar_Wada_Fort_Pune.jpg","Pune, India",4.6,"nature")
+            );
+        }
+
+
+
 
 
         // Default for any other location - Enhanced with 6 diverse attractions
