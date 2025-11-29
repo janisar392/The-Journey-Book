@@ -166,36 +166,39 @@ public class SearchController {
         // Mumbai
         else if (location.contains("mumbai")) {
             return List.of(
-                    new PlaceResult("101", "Gateway of India", "https://images.unsplash.com/photo-1581952979821-16ac1b0c2f5c?w=800", "Mumbai, India", 4.8, "tours"),
-                    new PlaceResult("102", "Marine Drive", "https://images.unsplash.com/photo-1585305978903-1cdc6363c5c7?w=800", "Mumbai, India", 4.7, "nature"),
-                    new PlaceResult("103", "Bandra-Worli Sea Link", "https://images.unsplash.com/photo-1603694081815-9bef1815a92c?w=800", "Mumbai, India", 4.6, "tours"),
-                    new PlaceResult("104", "Elephanta Caves", "https://images.unsplash.com/photo-1690128418538-7b52a1092c0f?w=800", "Mumbai, India", 4.5, "museums"),
-                    new PlaceResult("105", "Chhatrapati Shivaji Maharaj Terminus", "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800", "Mumbai, India", 4.9, "museums"),
-                    new PlaceResult("106", "Juhu Beach", "https://images.unsplash.com/photo-1561715276-a2d087060f86?w=800", "Mumbai, India", 4.4, "nature")
+                    new PlaceResult("101","Gateway of India","https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Historical_Gateway_Of_India.jpg/960px-Historical_Gateway_Of_India.jpg","Mumbai, India",4.8,"tours"),
+                    new PlaceResult("102","Marine Drive","https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Mumbai_Skyline_Marine_Drive_Night.jpg/330px-Mumbai_Skyline_Marine_Drive_Night.jpg","Mumbai, India",4.7,"nature"),
+                    new PlaceResult("103","Bandra-Worli Sea Link","https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/The_Bridge_In_Mumbai_%28bandra_worli_sea_link%29.jpg/960px-The_Bridge_In_Mumbai_%28bandra_worli_sea_link%29.jpg","Mumbai, India",4.7,"tours"),
+                    new PlaceResult("104","Chhatrapati Shivaji Maharaj Terminus","https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Chhatrapati_Shivaji_Maharaj_Terminus_%28CSMT%29.jpg/500px-Chhatrapati_Shivaji_Maharaj_Terminus_%28CSMT%29.jpg","Mumbai, India",4.8,"museums"),
+                    new PlaceResult("105","Juhu Beach","https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Juhu_Beach%2C_Mumbai_sunset_in_October_2017.jpg/960px-Juhu_Beach%2C_Mumbai_sunset_in_October_2017.jpg","Mumbai, India",4.6,"nature"),
+                    new PlaceResult("106","Elephanta Caves","https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Elephanta_Caves_entrance.jpg/960px-Elephanta_Caves_entrance.jpg","Mumbai, India",4.7,"museums")
             );
         }
+
 // Kolkata
         else if (location.contains("kolkata")) {
             return List.of(
-                    new PlaceResult("107", "Howrah Bridge", "https://images.unsplash.com/photo-1605075938120-9bcab9f6bbf2?w=800", "Kolkata, India", 4.8, "tours"),
-                    new PlaceResult("108", "Victoria Memorial", "https://images.unsplash.com/photo-1599737974802-01a4e5b67ec0?w=800", "Kolkata, India", 4.9, "museums"),
-                    new PlaceResult("109", "Dakshineswar Temple", "https://images.unsplash.com/photo-1714543997141-451bcda6fc6f?w=800", "Kolkata, India", 4.7, "museums"),
-                    new PlaceResult("110", "Eden Gardens", "https://images.unsplash.com/photo-1622278647429-71a4b3a081e1?w=800", "Kolkata, India", 4.6, "entertainment"),
-                    new PlaceResult("111", "Indian Museum", "https://images.unsplash.com/photo-1690659860607-3b75b1e5a741?w=800", "Kolkata, India", 4.5, "museums"),
-                    new PlaceResult("112", "Science City", "https://images.unsplash.com/photo-1549893074-e2dec99c2147?w=800", "Kolkata, India", 4.4, "entertainment")
+                    new PlaceResult("119","Howrah Bridge","https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Howrah_Bridge%2C_Kolkata%2C_West_Bengal.jpg/1024px-Howrah_Bridge%2C_Kolkata%2C_West_Bengal.jpg","Kolkata, India",4.8,"tours"),
+                    new PlaceResult("120","Victoria Memorial","https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Victoria_memorial_kolkata_india.jpg/960px-Victoria_memorial_kolkata_india.jpg","Kolkata, India",4.9,"museums"),
+                    new PlaceResult("121","Dakshineswar Kali Temple","https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Dakshineswar_Kali_Temple_%28Mandir%29%2C_Kolkata.jpg/500px-Dakshineswar_Kali_Temple_%28Mandir%29%2C_Kolkata.jpg","Kolkata, India",4.8,"tours"),
+                    new PlaceResult("122","Indian Museum","https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Indian_Museum_Kolkata_1529.jpg/960px-Indian_Museum_Kolkata_1529.jpg","Kolkata, India",4.7,"museums"),
+                    new PlaceResult("123","Belur Math","https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Belur_Math.JPG/960px-Belur_Math.JPG","Howrah (Kolkata), India",4.8,"museums"),
+                    new PlaceResult("124","Prinsep Ghat","https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Princep_Ghat%2C_Kolkata%2C_India.JPG/960px-Princep_Ghat%2C_Kolkata%2C_India.JPG","Kolkata, India",4.6,"tours")
             );
         }
+
 // Chennai
         else if (location.contains("chennai")) {
             return List.of(
-                    new PlaceResult("113", "Marina Beach", "https://images.unsplash.com/photo-1646657440732-2c9953f9e0c7?w=800", "Chennai, India", 4.7, "nature"),
-                    new PlaceResult("114", "Kapaleeshwarar Temple", "https://images.unsplash.com/photo-1568733873715-f9bcef1c0947?w=800", "Chennai, India", 4.8, "museums"),
-                    new PlaceResult("115", "Fort St. George", "https://images.unsplash.com/photo-1708744556073-2c7bb84baa2d?w=800", "Chennai, India", 4.6, "museums"),
-                    new PlaceResult("116", "Valluvar Kottam", "https://images.unsplash.com/photo-1614277878833-1fd652f33706?w=800", "Chennai, India", 4.4, "tours"),
-                    new PlaceResult("117", "Government Museum", "https://images.unsplash.com/photo-1697828697716-ef4cf2fdead1?w=800", "Chennai, India", 4.5, "museums"),
-                    new PlaceResult("118", "Guindy National Park", "https://images.unsplash.com/photo-1574197364508-1cdae9c4780f?w=800", "Chennai, India", 4.3, "nature")
+                    new PlaceResult("113","Marina Beach","https://cdn.pixabay.com/photo/2020/05/18/15/43/marina-beach-5187052_1280.jpg","Chennai, India",4.7,"nature"),
+                    new PlaceResult("114","Kapaleeshwarar Temple","https://cdn.pixabay.com/photo/2017/05/18/21/51/chennai-2324861_1280.jpg","Chennai, India",4.8,"museums"),
+                    new PlaceResult("115","Fort St. George","https://cdn.pixabay.com/photo/2017/03/03/20/17/india-2114847_1280.jpg","Chennai, India",4.6,"museums"),
+                    new PlaceResult("116","Valluvar Kottam","https://cdn.pixabay.com/photo/2017/03/03/20/17/india-2114847_1280.jpg","Chennai, India",4.4,"tours"),
+                    new PlaceResult("117","Government Museum","https://upload.wikimedia.org/wikipedia/commons/7/71/Government_Museum_Chennai.jpg","Chennai, India",4.5,"museums"),
+                    new PlaceResult("118","Guindy National Park","https://upload.wikimedia.org/wikipedia/commons/8/8c/Deer_at_Guindy_Childrens_Park%2C_Chennai._-_panoramio.jpg","Chennai, India",4.3,"nature")
             );
         }
+
 // Jaipur
         else if (location.contains("jaipur")) {
             return List.of(
