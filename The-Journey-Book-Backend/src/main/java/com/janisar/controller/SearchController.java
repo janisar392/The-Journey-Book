@@ -413,6 +413,73 @@ public class SearchController {
             );
         }
 
+        else if (location.contains("mussoorie") || location.contains("landour")) {
+            return List.of(
+                    new PlaceResult("269","Mall Road, Mussoorie","https://commons.wikimedia.org/wiki/Special:FilePath/Mall_Road,_Mussoorie_03.JPG","Mussoorie, India",4.7,"tours"),
+                    new PlaceResult("270","Kempty Falls","https://commons.wikimedia.org/wiki/Special:FilePath/Kempty_Falls_near_Mussoorie.jpg","Near Mussoorie, India",4.8,"nature"),
+                    new PlaceResult("271","Mussoorie Lake","https://commons.wikimedia.org/wiki/Special:FilePath/Mussoorie_Lake.jpg","Mussoorie, India",4.6,"nature"),
+                    new PlaceResult("272","Gun Hill Viewpoint","https://commons.wikimedia.org/wiki/Special:FilePath/Gun_Hill_in_Mussoorie_-_panoramio.jpg","Mussoorie, India",4.7,"tours"),
+                    new PlaceResult("273","Company Garden, Mussoorie","https://commons.wikimedia.org/wiki/Special:FilePath/Company_garden,_Mussoorie.jpg","Mussoorie, India",4.6,"nature"),
+                    new PlaceResult("274","Lal Tibba (Hill View)","https://commons.wikimedia.org/wiki/Special:FilePath/View_from_laal_tibba_1.jpg","Mussoorie, India",4.8,"nature"),
+
+                    // Landour additions
+                    new PlaceResult("191","Landour Clock Tower","https://commons.wikimedia.org/wiki/Special:FilePath/Landour_Clock_Tower.jpg","Landour, India",4.6,"tours"),
+                    new PlaceResult("192","St. Paul’s Church, Landour","https://commons.wikimedia.org/wiki/Special:FilePath/St._Paul%27s_Church,_Landour.jpg","Landour, India",4.7,"museums"),
+                    new PlaceResult("193","Ivy Cottage / Ruskin Bond Area","https://commons.wikimedia.org/wiki/Special:FilePath/Landour,_Mussourie.jpg","Landour, India",4.8,"tours")
+            );
+        }
+
+        else if (location.contains("kashmir") || location.contains("srinagar")) {
+            return List.of(
+                    new PlaceResult("275","Dal Lake, Srinagar","https://commons.wikimedia.org/wiki/Special:FilePath/Dal_Lake,_Srinagar,_Kashmir.jpg","Srinagar, Jammu & Kashmir, India",4.9,"nature"),
+                    new PlaceResult("276","Shankaracharya Temple","https://commons.wikimedia.org/wiki/Special:FilePath/Shankaracharya_Temple,_Srinagar.jpg","Srinagar, Jammu & Kashmir, India",4.8,"tours"),
+                    new PlaceResult("277","Shalimar Bagh, Srinagar","https://commons.wikimedia.org/wiki/Special:FilePath/Shalimar_Bagh,_Srinagar.jpg","Srinagar, Jammu & Kashmir, India",4.7,"nature"),
+                    new PlaceResult("278","Nishat Bagh, Srinagar","https://commons.wikimedia.org/wiki/Special:FilePath/Nishat_Bagh_Srinagar_01.jpg","Srinagar, Jammu & Kashmir, India",4.7,"nature"),
+                    new PlaceResult("279","Gulmarg Snow Valley","https://commons.wikimedia.org/wiki/Special:FilePath/Gulmarg_-_Kashmir_5.jpg","Gulmarg, Jammu & Kashmir, India",4.8,"nature"),
+                    new PlaceResult("280","Pahalgam Valley (Lidder Valley)","https://commons.wikimedia.org/wiki/Special:FilePath/Pahalgam_Valley.jpg","Pahalgam, Jammu & Kashmir, India",4.8,"nature")
+            );
+        }
+        else if (location.contains("manali")) {
+            return List.of(
+                    new PlaceResult("281","Manali Town View","https://commons.wikimedia.org/wiki/Special:FilePath/Manali_,Himachal_Pradesh,_India.jpg","Manali, Himachal Pradesh, India",4.8,"tours"),
+                    new PlaceResult("282","Hidimba Devi Temple","https://commons.wikimedia.org/wiki/Special:FilePath/Hidimba_Temple_03.JPG","Manali, Himachal Pradesh, India",4.7,"tours"),
+                    new PlaceResult("283","Solang Valley","https://commons.wikimedia.org/wiki/Special:FilePath/Solang_Valley,_India.jpg","Solang Valley, near Manali, India",4.8,"nature"),
+                    new PlaceResult("284","Beas River, Old Manali","https://commons.wikimedia.org/wiki/Special:FilePath/Beas_River_-_Manali,_Himachal_Pradesh,_India_-_rohanakakaka.jpg","Old Manali, Himachal Pradesh, India",4.6,"nature"),
+                    new PlaceResult("285","Jogini Waterfalls","https://commons.wikimedia.org/wiki/Special:FilePath/Jogini_falls.jpg","Manali, Himachal Pradesh, India",4.7,"nature"),
+                    new PlaceResult("286","Rohtang Pass","https://commons.wikimedia.org/wiki/Special:FilePath/Rohtang_Pass_at_himachal_pradesh.jpg","Near Manali, Himachal Pradesh, India",4.8,"tours")
+            );
+        }
+        else if (location.contains("ladakh") || location.contains("leh")) {
+            return List.of(
+                    new PlaceResult("287","Leh City View from Shanti Stupa","https://commons.wikimedia.org/wiki/Special:FilePath/Leh_City_seen_from_Shanti_Stupa.JPG","Leh, Ladakh, India",4.8,"tours"),
+                    new PlaceResult("288","Shanti Stupa, Leh","https://commons.wikimedia.org/wiki/Special:FilePath/Shanti_Stupa_at_Night_2.jpg","Leh, Ladakh, India",4.8,"tours"),
+                    new PlaceResult("289","Pangong Lake","https://commons.wikimedia.org/wiki/Special:FilePath/Pangong_Lake_(233023585).jpeg","Pangong Tso, Ladakh, India",4.9,"nature"),
+                    new PlaceResult("290","Nubra Valley Sand Dunes","https://commons.wikimedia.org/wiki/Special:FilePath/Sand_dunes_of_Nubra_Valley,_Ladakh.jpg","Nubra Valley, Ladakh, India",4.8,"nature"),
+                    new PlaceResult("291","Khardung La Pass","https://commons.wikimedia.org/wiki/Special:FilePath/Khardung_La_(pass),_Ladakh,_North_India.jpg","Khardung La, Ladakh, India",4.7,"tours"),
+                    new PlaceResult("292","Hemis Monastery","https://commons.wikimedia.org/wiki/Special:FilePath/Hemis_Monastery_02.jpg","Hemis, Ladakh, India",4.7,"museums")
+            );
+        }
+        else if (location.contains("tawang")) {
+            return List.of(
+                    new PlaceResult("293","Tawang Monastery","https://commons.wikimedia.org/wiki/Special:FilePath/Tawang_Monastery,_Arunachal_Pradesh.jpg","Tawang, India",4.8,"tours"),
+                    new PlaceResult("294","Madhuri Lake (Sangetsar Tso)","https://commons.wikimedia.org/wiki/Special:FilePath/Madhuri_Lake.jpg","Near Tawang, India",4.8,"nature"),
+                    new PlaceResult("295","PTSO Lake (Pankang Teng Tso)","https://commons.wikimedia.org/wiki/Special:FilePath/PTSO_Lake.jpg","Near Tawang, India",4.7,"nature"),
+                    new PlaceResult("296","Nuranang Waterfall (Jung Falls)","https://commons.wikimedia.org/wiki/Special:FilePath/Nuranang_Waterfall.jpg","Near Tawang, India",4.8,"nature"),
+                    new PlaceResult("297","Tawang Gateway","https://commons.wikimedia.org/wiki/Special:FilePath/Tawang_Gateway.jpg","Tawang, India",4.6,"tours"),
+                    new PlaceResult("298","Tawang Town & Valley View","https://commons.wikimedia.org/wiki/Special:FilePath/Tawang-town.jpg","Tawang, India",4.5,"tours")
+            );
+        }
+        else if (location.contains("nainital")) {
+            return List.of(
+                    new PlaceResult("299","Nainital Lake Top View","https://commons.wikimedia.org/wiki/Special:FilePath/Nainital_Lake_Top_View.jpg","Nainital, India",4.8,"nature"),
+                    new PlaceResult("300","Mall Road, Nainital","https://commons.wikimedia.org/wiki/Special:FilePath/Upper_Mall_Road,_Nainital.jpg","Nainital, India",4.6,"tours"),
+                    new PlaceResult("301","Maa Naina Devi Temple","https://commons.wikimedia.org/wiki/Special:FilePath/Maa_Naina_Devi_Temple,_Mallital,_Nainital,_Uttarakhand,_India.jpg","Nainital, India",4.7,"tours"),
+                    new PlaceResult("302","Snow View Point, Nainital","https://commons.wikimedia.org/wiki/Special:FilePath/Nainital_Snow_View_Point_2024.jpg","Nainital, India",4.7,"nature"),
+                    new PlaceResult("303","Tiffin Top (Dorothy's Seat)","https://commons.wikimedia.org/wiki/Special:FilePath/Tiffin-top_Nainital.jpg","Nainital, India",4.6,"nature"),
+                    new PlaceResult("304","Nainital Lake in the Evening","https://commons.wikimedia.org/wiki/Special:FilePath/Nainital_Lake_in_the_evening.jpg","Nainital, India",4.8,"nature")
+            );
+        }
+
 
 
 
