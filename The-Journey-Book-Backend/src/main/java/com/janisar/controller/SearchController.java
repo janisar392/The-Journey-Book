@@ -423,9 +423,9 @@ public class SearchController {
                     new PlaceResult("274","Lal Tibba (Hill View)","https://commons.wikimedia.org/wiki/Special:FilePath/View_from_laal_tibba_1.jpg","Mussoorie, India",4.8,"nature"),
 
                     // Landour additions
-                    new PlaceResult("191","Landour Clock Tower","https://commons.wikimedia.org/wiki/Special:FilePath/Landour_Clock_Tower.jpg","Landour, India",4.6,"tours"),
-                    new PlaceResult("192","St. Paul’s Church, Landour","https://commons.wikimedia.org/wiki/Special:FilePath/St._Paul%27s_Church,_Landour.jpg","Landour, India",4.7,"museums"),
-                    new PlaceResult("193","Ivy Cottage / Ruskin Bond Area","https://commons.wikimedia.org/wiki/Special:FilePath/Landour,_Mussourie.jpg","Landour, India",4.8,"tours")
+                    new PlaceResult("191","Landour Clock Tower","https://miro.medium.com/v2/resize:fit:1400/1*QPijhbiWOEvXwj_vQgVXQQ.jpeg","Landour, India",4.6,"tours"),
+                    new PlaceResult("192","St. Paul’s Church, Landour","https://t.eucdn.in/tourism/lg-jpg/kellogg-memorial-church-mussoorie-5621854.jpg","Landour, India",4.7,"museums"),
+                    new PlaceResult("193","Ivy Cottage / Ruskin Bond Area","https://homes-and-villas.marriott.com/hvmb-pictures/40175309/01_Facade__19_.jpeg","Landour, India",4.8,"tours")
             );
         }
 
@@ -479,6 +479,28 @@ public class SearchController {
                     new PlaceResult("304","Nainital Lake in the Evening","https://commons.wikimedia.org/wiki/Special:FilePath/Nainital_Lake_in_the_evening.jpg","Nainital, India",4.8,"nature")
             );
         }
+        else if (location.contains("munnar")) {
+            return List.of(
+                    new PlaceResult("306","Munnar Tea Plantations","https://commons.wikimedia.org/wiki/Special:FilePath/Tea_plantations_in_Munnar,_Kerala.jpg","Munnar, India",4.9,"nature"),
+                    new PlaceResult("307","Mattupetty Dam & Lake","https://commons.wikimedia.org/wiki/Special:FilePath/Mattupetty_Dam_reservoir,_near_Munnar,_Kerala.jpg","Near Munnar, India",4.8,"nature"),
+                    new PlaceResult("308","Munnar View Point","https://commons.wikimedia.org/wiki/Special:FilePath/Munnar_view_point.jpg","Munnar, India",4.8,"nature"),
+                    new PlaceResult("309","Munnar Town (Hill Station View)","https://commons.wikimedia.org/wiki/Special:FilePath/Munnar_.jpg","Munnar, India",4.6,"tours"),
+                    new PlaceResult("310","Munnar Hills & River View","https://commons.wikimedia.org/wiki/Special:FilePath/Munnar_-_View_from_Grand_Plaza_Hotel.jpg","Munnar, India",4.7,"nature"),
+                    new PlaceResult("311","Munnar Town Street View","https://commons.wikimedia.org/wiki/Special:FilePath/Munnar_town.jpg","Munnar, India",4.6,"tours")
+            );
+        }
+
+        else if (location.contains("ooty")) {
+            return List.of(
+                    new PlaceResult("312","Ooty Lake","https://commons.wikimedia.org/wiki/Special:FilePath/Ooty_Lake.jpg","Ooty, India",4.8,"nature"),
+                    new PlaceResult("313","Government Botanical Garden, Ooty","https://commons.wikimedia.org/wiki/Special:FilePath/Ooty_botanical_garden.jpg","Ooty, India",4.7,"nature"),
+                    new PlaceResult("314","Doddabetta Peak Viewpoint","https://commons.wikimedia.org/wiki/Special:FilePath/Pic_from_Doddabetta_Peak.jpg","Near Ooty, India",4.8,"nature"),
+                    new PlaceResult("315","Rose Garden, Ooty","https://commons.wikimedia.org/wiki/Special:FilePath/Rose_Garden_in_Ooty,_Tamil_Nadu.JPG","Ooty, India",4.7,"nature"),
+                    new PlaceResult("316","Nilgiri Mountain Railway (Ooty Station)","https://commons.wikimedia.org/wiki/Special:FilePath/Nilgiri_Mountain_Railways,_Ooty_Station,_India.jpg","Ooty, India",4.8,"tours"),
+                    new PlaceResult("317","Ooty Lake Boating","https://commons.wikimedia.org/wiki/Special:FilePath/Ooty_Lake_Boating2.jpg","Ooty, India",4.7,"tours")
+            );
+        }
+
 
 
 

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './BookingConfirmationPage.css';
+import { generatePDFTicket } from '../../utils/pdfTicketGenerator';
+import { generateTextTicket } from '../../utils/textTicketGenerator';
+
 
 const BookingConfirmationPage = () => {
   const location = useLocation();
@@ -10,6 +13,8 @@ const BookingConfirmationPage = () => {
   
   const [bookingDetails, setBookingDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [downloadingTicket, setDownloadingTicket] = useState(false);
+
 
   useEffect(() => {
     // Check if user is logged in
@@ -32,10 +37,19 @@ const BookingConfirmationPage = () => {
     navigate('/my-trips');
   };
 
-  const handleDownloadTicket = () => {
-    // Simulate ticket download
-    alert('Ticket download feature will be implemented soon!');
-  };
+  const handleDownloadTicket = async () => {
+  try {
+    setDownloadingTicket(true);
+    await generatePDFTicket(bookingDetails, user);
+  } catch (error) {
+    console.error('PDF download failed:', error);
+    alert('PDF generation failed. Downloading text version instead.');
+    generateTextTicket(bookingDetails, user);
+  } finally {
+    setDownloadingTicket(false);
+  }
+};
+
 
   const handleBookAnother = () => {
     navigate('/');
@@ -190,9 +204,11 @@ const BookingConfirmationPage = () => {
               <button 
                 className="btn-primary"
                 onClick={handleDownloadTicket}
+                disabled={downloadingTicket}
               >
-                📄 Download Ticket
+                {downloadingTicket ? '⏳ Downloading...' : '📄 Download Ticket'}
               </button>
+
               
               <button 
                 className="btn-secondary"
