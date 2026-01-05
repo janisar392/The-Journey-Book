@@ -21,6 +21,8 @@ import BookingPage from './components/booking/BookingPage';
 import BookingConfirmationPage from './components/booking/BookingConfirmationPage';
 import MyTripsPage from './components/trips/MyTripsPage';
 import TravelTools from './components/home/TravelTools';
+import Profile from './components/user/Profile';
+import Settings from './components/user/Settings';
 
 
 function App() {
@@ -47,6 +49,8 @@ function App() {
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/booking-confirmation" element={<BookingConfirmationPage />} />
             <Route path="/my-trips" element={<MyTripsPage />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
 
           </Routes>
           <Footer />
