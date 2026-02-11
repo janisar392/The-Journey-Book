@@ -175,12 +175,10 @@ const mockWeatherData = {
 
 
   // Static exchange rates
-  const staticRates = {
-    USD: 1, EUR: 0.85, GBP: 0.73, INR: 83.25, JPY: 150.42, AUD: 1.52, 
-    CAD: 1.35, CHF: 0.88, CNY: 7.23, SGD: 1.34, AED: 3.67, SAR: 3.75,
-    PKR: 278.50, BDT: 109.80, LKR: 322.45, NPR: 133.08, MYR: 4.71,
-    THB: 35.80, KRW: 1330.45, PHP: 56.23
-  };
+  const staticRates = { USD:1, EUR:0.84, GBP:0.73, INR:90.57, JPY:153.06, AUD:1.41,
+   CAD:1.35, CHF:0.77, CNY:6.91, SGD:1.26, AED:3.67, SAR:3.75, PKR:279.00, BDT:109.00,
+    LKR:322.00, NPR:133.00, MYR:3.92, THB:37.27, KRW:1461.65, PHP:56.00 };
+
 
   // Time zones data
   const timeZones = [
