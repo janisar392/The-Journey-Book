@@ -139,12 +139,12 @@ const SearchResultsPage = () => {
 
   const getDefaultPrice = (category) => {
     const prices = {
-      'tours': 25,
+      'tours': 0,
       'museums': 15,
       'nature': 0,
       'entertainment': 20
     };
-    return prices[category] || 25;
+    return prices[category] || 0;
   };
 
   if (isLoading) {
