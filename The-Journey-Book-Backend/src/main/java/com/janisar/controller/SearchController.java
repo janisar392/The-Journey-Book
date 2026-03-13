@@ -500,6 +500,129 @@ public class SearchController {
                     new PlaceResult("317","Ooty Lake Boating","https://commons.wikimedia.org/wiki/Special:FilePath/Ooty_Lake_Boating2.jpg","Ooty, India",4.7,"tours")
             );
         }
+        else if (location.contains("darjeeling")) {
+            return List.of(
+                    new PlaceResult("400", "Darjeeling Himalayan Railway (Toy Train)", "https://commons.wikimedia.org/wiki/Special:FilePath/Darjeeling_Himalayan_Railway.jpg", "Darjeeling, India", 4.8, "tours"),
+                    new PlaceResult("401", "Tiger Hill Viewpoint", "https://commons.wikimedia.org/wiki/Special:FilePath/View_from_Tiger_Hill_Darjeeling_with_praying_flags_1.jpg", "Darjeeling, India", 4.9, "nature"),
+                    new PlaceResult("402", "Batasia Loop", "https://commons.wikimedia.org/wiki/Special:FilePath/Batasia_Loop_of_Darjeeling_Himalayan_Railway.jpg", "Near Darjeeling, India", 4.8, "tours"),
+                    new PlaceResult("403", "Japanese Peace Pagoda", "https://commons.wikimedia.org/wiki/Special:FilePath/Japanese_Peace_Pagoda,_Darjeeling.jpg", "Darjeeling, India", 4.7, "historical"),
+                    new PlaceResult("404", "Darjeeling Tea Garden", "https://commons.wikimedia.org/wiki/Special:FilePath/Tea_Garden_Darjeeling.jpg", "Darjeeling, India", 4.8, "nature"),
+                    new PlaceResult("405", "Ghoom Monastery (Yiga Choeling)", "https://commons.wikimedia.org/wiki/Special:FilePath/Samten_Choling_Buddhist_Ghoom_Monastery.jpg", "Near Darjeeling, India", 4.7, "historical")
+            );
+        }
+        else if (location.contains("haridwar")) {
+            return List.of(
+                    new PlaceResult("406", "Har Ki Pauri", "https://commons.wikimedia.org/wiki/Special:FilePath/Har_Ki_Pauri_Haridwar.jpg", "Haridwar, India", 4.8, "nature"),
+                    new PlaceResult("407", "Mansa Devi Temple", "https://commons.wikimedia.org/wiki/Special:FilePath/Mansa_Devi_Temple,_Haridwar.JPG", "Haridwar, India", 4.7, "historical"),
+                    new PlaceResult("408", "Chandi Devi Temple", "https://commons.wikimedia.org/wiki/Special:FilePath/Chandi_Devi_Mandir,Haridwar.JPG", "Near Haridwar, India", 4.8, "historical"),
+                    new PlaceResult("409", "Ganga Aarti at Har Ki Pauri", "https://commons.wikimedia.org/wiki/Special:FilePath/Ganga_Aarti_Haridwar.jpg", "Haridwar, India", 4.9, "tours"),
+                    new PlaceResult("410", "Daksha Mahadev Temple", "https://commons.wikimedia.org/wiki/Special:FilePath/Daksheshwar_Mahadev_temple,_Kankhal.JPG", "Near Haridwar, India", 4.7, "historical"),
+                    new PlaceResult("411", "Maya Devi Temple", "https://commons.wikimedia.org/wiki/Special:FilePath/Maya_Devi_Temple,_Haridwar.JPG", "Haridwar, India", 4.7, "historical")
+            );
+        }
+
+        else if (location.contains("rishikesh")) {
+            return List.of(
+                    new PlaceResult("318", "Laxman Jhula (Lakshman Jhula)", "https://commons.wikimedia.org/wiki/Special:FilePath/Laxman_Jhula,_Rishikesh,_Uttaranchal.jpg", "Rishikesh, India", 4.8, "tours"),
+                    new PlaceResult("319", "Ram Jhula Bridge", "https://commons.wikimedia.org/wiki/Special:FilePath/Ram_Jhula_of_Rishikesh_01.JPG", "Rishikesh, India", 4.8, "tours"),
+                    new PlaceResult("320", "Beatles Ashram (Maharishi Mahesh Yogi Ashram)", "https://commons.wikimedia.org/wiki/Special:FilePath/Beatles_Ashram_At_Rishikesh.jpg", "Rishikesh, India", 4.7, "historical"),
+                    new PlaceResult("321", "Ganga Aarti at Parmarth Niketan", "https://commons.wikimedia.org/wiki/Special:FilePath/Ganga_Aarti,_Rishikesh.jpg", "Rishikesh, India", 4.9, "tours"),
+                    new PlaceResult("322", "Neelkanth Mahadev Temple", "https://commons.wikimedia.org/wiki/Special:FilePath/NeelKanth_Mahadev_Temple.JPG", "Near Rishikesh, India", 4.7, "historical"),
+                    new PlaceResult("323", "River Rafting on Ganga", "https://commons.wikimedia.org/wiki/Special:FilePath/Rafting_in_rishikesh.jpg", "Rishikesh, India", 4.8, "adventure")
+            );
+        }
+        else if (location.contains("auli")) {
+            return List.of(
+                    new PlaceResult("324", "Auli Ropeway (Gondola)", "https://commons.wikimedia.org/wiki/Special:FilePath/Auli_in_summer.jpg", "Auli, India", 4.8, "tours"),
+                    new PlaceResult("325", "Auli Artificial Lake", "https://commons.wikimedia.org/wiki/Special:FilePath/Auli_Lake_in_Feburary_2015.jpg", "Auli, India", 4.7, "nature"),
+                    new PlaceResult("326", "Gorson Bugyal", "https://commons.wikimedia.org/wiki/Special:FilePath/A_view_from_auli.jpg", "Near Auli, India", 4.8, "nature"),
+                    new PlaceResult("327", "Nanda Devi Viewpoint", "https://commons.wikimedia.org/wiki/Special:FilePath/Mountain_Nanda_Devi_seen_from_Auli.jpg", "Auli, India", 4.9, "nature"),
+                    new PlaceResult("328", "Auli Ski Resort", "https://commons.wikimedia.org/wiki/Special:FilePath/Auli_Ski_Resort_in_summer_2012.jpg", "Auli, India", 4.8, "adventure"),
+                    new PlaceResult("329", "Auli Slopes & Chair Lift Area", "https://commons.wikimedia.org/wiki/Special:FilePath/Auli-slopes.jpg", "Auli, India", 4.7, "adventure")
+            );
+        }
+        else if (location.contains("dharamshala")) {
+            return List.of(
+                    new PlaceResult("330", "HPCA Cricket Stadium", "https://commons.wikimedia.org/wiki/Special:FilePath/HPCA_Stadium_Dharamsala.jpg", "Dharamshala, India", 4.8, "tours"),
+                    new PlaceResult("331", "Dalai Lama Temple (Tsuglagkhang)", "https://commons.wikimedia.org/wiki/Special:FilePath/McLeod_Ganj_from_the_Dalai_Lama_Temple_(6466149411).jpg", "McLeod Ganj, Dharamshala, India", 4.9, "historical"),
+                    new PlaceResult("332", "Dal Lake McLeod Ganj", "https://commons.wikimedia.org/wiki/Special:FilePath/Dal_Lake_McLeodgunj.jpg", "Dharamshala, India", 4.7, "nature"),
+                    new PlaceResult("334", "Triund Hill Viewpoint", "https://commons.wikimedia.org/wiki/Special:FilePath/Triund,_Dharamsala.jpg", "Near Dharamshala, India", 4.8, "nature"),
+                    new PlaceResult("335", "Bhagsunag Waterfall", "https://commons.wikimedia.org/wiki/Special:FilePath/Bhagsu_falls_,_Dharmashala.jpg", "Near Dharamshala, India", 4.8, "nature"),
+                    new PlaceResult("336", "Norbulingka Institute", "https://commons.wikimedia.org/wiki/Special:FilePath/Norbulingka_Institute_Dharamshala.jpg", "Dharamshala, India", 4.7, "historical")
+            );
+        }
+
+        else if (location.contains("kasauli")) {
+            return List.of(
+                    new PlaceResult("337", "Christ Church, Kasauli", "https://commons.wikimedia.org/wiki/Special:FilePath/Christ_Church,_Kasauli.JPG", "Kasauli, India", 4.8, "historical"),
+                    new PlaceResult("338", "Sunset Point, Kasauli", "https://commons.wikimedia.org/wiki/Special:FilePath/Sunset_point_2.jpg", "Kasauli, India", 4.8, "nature"),
+                    new PlaceResult("339", "Central Research Institute (Pasteur Institute), Kasauli", "https://commons.wikimedia.org/wiki/Special:FilePath/Central_Research_Institute,_Kasauli.JPG", "Kasauli, India", 4.7, "historical"),
+                    new PlaceResult("340", "Gilbert Trail (Gulbert Trail)", "https://commons.wikimedia.org/wiki/Special:FilePath/Gulbert_trail_Kasauli.jpg", "Near Kasauli, India", 4.7, "adventure"),
+                    new PlaceResult("341", "Kasauli Hills Panorama", "https://commons.wikimedia.org/wiki/Special:FilePath/Kasauli,_Himachal_Pradesh.jpg", "Kasauli, India", 4.8, "nature"),
+                    new PlaceResult("342", "Early Morning View of Kasauli", "https://commons.wikimedia.org/wiki/Special:FilePath/A_view_of_early_morning_of_Kasauli,India.jpg", "Kasauli, India", 4.7, "nature")
+            );
+        }
+
+        else if (location.contains("udaipur") || location.contains("jodhpur") || location.contains("jaisalmer") || location.contains("pushkar")) {
+            return List.of(
+                    new PlaceResult("343", "Udaipur City Palace", "https://commons.wikimedia.org/wiki/Special:FilePath/City_Palace_of_Udaipur.jpg", "Udaipur, India", 4.8, "historical"),
+                    new PlaceResult("344", "Udaipur City Palace at Night", "https://commons.wikimedia.org/wiki/Special:FilePath/Udaipur_City_Palace_at_Night.jpg", "Udaipur, India", 4.9, "historical"),
+                    new PlaceResult("345", "Jagdish Temple Udaipur", "https://commons.wikimedia.org/wiki/Special:FilePath/Jagdish_Temple_-Udaipur_-Rajasthan_-DSC_0003.jpg", "Udaipur, India", 4.7, "historical"),
+                    new PlaceResult("346", "Mehrangarh Fort Jodhpur", "https://commons.wikimedia.org/wiki/Special:FilePath/Jodhpur_Mehrangarh_fort.jpg", "Jodhpur, India", 4.8, "historical"),
+                    new PlaceResult("347", "Umaid Bhawan Palace Jodhpur", "https://commons.wikimedia.org/wiki/Special:FilePath/Umaid_bhawan_palace_Jodhpur.jpg", "Jodhpur, India", 4.8, "historical"),
+                    new PlaceResult("348", "Jodhpur Clock Tower", "https://commons.wikimedia.org/wiki/Special:FilePath/Jodhpur_Clock_Tower.jpg", "Jodhpur, India", 4.7, "historical"),
+                    new PlaceResult("349", "Jaisalmer Fort (Golden Fort)", "https://commons.wikimedia.org/wiki/Special:FilePath/The_mesmerizing_golden_fort_of_Jaisalmer.jpg", "Jaisalmer, India", 4.9, "historical"),
+                    new PlaceResult("350", "Patwon Ki Haveli Jaisalmer", "https://commons.wikimedia.org/wiki/Special:FilePath/Patwon_Ki_Haveli_Jaisalmer.JPG", "Jaisalmer, India", 4.7, "historical"),
+                    new PlaceResult("351", "Golden Jaisalmer Fort View", "https://commons.wikimedia.org/wiki/Special:FilePath/Golden_Jaisalmer_Fort.jpg", "Jaisalmer, India", 4.8, "historical"),
+                    new PlaceResult("352", "Brahma Temple Pushkar", "https://commons.wikimedia.org/wiki/Special:FilePath/Brambha_Temple-Pushkar.jpg", "Pushkar, India", 4.8, "historical"),
+                    new PlaceResult("353", "Pushkar Lake Ghats", "https://commons.wikimedia.org/wiki/Special:FilePath/Pushkar,_India,_Pushkar_Lake,_Ghats.jpg", "Pushkar, India", 4.7, "nature"),
+                    new PlaceResult("354", "Savitri Temple Pushkar (Hilltop View)", "https://commons.wikimedia.org/wiki/Special:FilePath/Hill_top_temple,_overlooking_Pushkar_lake,_Rajasthan.jpg", "Near Pushkar, India", 4.7, "nature")
+            );
+        }
+
+        else if (location.contains("mathura")) {
+            return List.of(
+                    new PlaceResult("355", "Shri Krishna Janmabhoomi Temple", "https://commons.wikimedia.org/wiki/Special:FilePath/Mathura_Temple-Mathura-India0002.JPG", "Mathura, India", 4.8, "historical"),
+                    new PlaceResult("356", "Vishram Ghat", "https://commons.wikimedia.org/wiki/Special:FilePath/Vishram_Ghat.jpg", "Mathura, India", 4.8, "nature"),
+                    new PlaceResult("357", "Shri Dwarkadhish Temple & Yamuna River View", "https://commons.wikimedia.org/wiki/Special:FilePath/Yamuna_River,_Mathura.jpg", "Mathura, India", 4.8, "historical"),
+                    new PlaceResult("358", "Government Museum, Mathura (Exterior)", "https://commons.wikimedia.org/wiki/Special:FilePath/Government_Museum_-_Mathura_2013-02-23_5112.JPG", "Mathura, India", 4.7, "historical"),
+                    new PlaceResult("359", "Banke Bihari Temple (Vrindavan, near Mathura)", "https://commons.wikimedia.org/wiki/Special:FilePath/Banke_Bihari_Temple,_Vrindavan,_Mathura,_Uttar_Pradesh,_India_(2010).jpg", "Near Mathura, India", 4.9, "historical"),
+                    new PlaceResult("360", "Yamuna Ghat Beauty at Mathura", "https://commons.wikimedia.org/wiki/Special:FilePath/The_beauty_of_Yamuna_river.jpg", "Mathura, India", 4.8, "nature")
+            );
+        }
+
+        else if (location.contains("vrindavan")) {
+            return List.of(
+                    new PlaceResult("361", "Banke Bihari Temple", "https://commons.wikimedia.org/wiki/Special:FilePath/Banke_Bihari_Vrindavan.jpg", "Vrindavan, India", 4.9, "historical"),
+                    new PlaceResult("362", "Prem Mandir (Temple of Divine Love)", "https://commons.wikimedia.org/wiki/Special:FilePath/Prem_Mandir_Vrindavan_2022_03.jpg", "Vrindavan, India", 4.8, "historical"),
+                    new PlaceResult("363", "ISKCON Temple (Sri Krishna Balaram Temple)", "https://commons.wikimedia.org/wiki/Special:FilePath/Iskcon_Vrindavan.jpg", "Vrindavan, India", 4.8, "historical"),
+                    new PlaceResult("364", "Rangji Temple", "https://commons.wikimedia.org/wiki/Special:FilePath/Rangji_temple_(Vrindavan).jpg", "Vrindavan, India", 4.7, "historical"),
+                    new PlaceResult("365", "Govind Dev Temple", "https://commons.wikimedia.org/wiki/Special:FilePath/Govind_Dev_temple_at_vrindavan_from_entrance.jpg", "Vrindavan, India", 4.7, "historical"),
+                    new PlaceResult("366", "Yamuna River Ghat", "https://commons.wikimedia.org/wiki/Special:FilePath/Ghat_at_Yamuna_river,_Vrindavan.jpg", "Vrindavan, India", 4.8, "nature")
+            );
+        }
+        else if (location.contains("chandigarh")) {
+            return List.of(
+                    new PlaceResult("367", "Nek Chand's Rock Garden", "https://commons.wikimedia.org/wiki/Special:FilePath/Chandigarh_Rock_Garden_1.jpg", "Chandigarh, India", 4.8, "nature"),
+                    new PlaceResult("368", "Sukhna Lake", "https://commons.wikimedia.org/wiki/Special:FilePath/Sukhna_Lake_Chandigarh_India.jpg", "Chandigarh, India", 4.8, "nature"),
+                    new PlaceResult("369", "Punjab and Haryana High Court (Capitol Complex)", "https://commons.wikimedia.org/wiki/Special:FilePath/Capitol_High_Court.jpg", "Chandigarh, India", 4.9, "historical"),
+                    new PlaceResult("370", "Open Hand Monument", "https://commons.wikimedia.org/wiki/Special:FilePath/Open_hand_monument_of_Chandigarh,_India.jpg", "Chandigarh, India", 4.8, "historical"),
+                    new PlaceResult("371", "Zakir Hussain Rose Garden", "https://commons.wikimedia.org/wiki/Special:FilePath/Chandigarh,_India_rose_garden_5.jpg", "Chandigarh, India", 4.7, "nature"),
+                    new PlaceResult("372", "Palace of Assembly (Capitol Complex)", "https://commons.wikimedia.org/wiki/Special:FilePath/Palace_of_Assembly_Chandigarh_2006.jpg", "Chandigarh, India", 4.8, "historical")
+            );
+        }
+        else if (location.contains("gangtok")) {
+            return List.of(
+                    new PlaceResult("373","Tsomgo Lake (Changu Lake)","https://commons.wikimedia.org/wiki/Special:FilePath/Tsomgo_Lake_Sikkim.jpg","Gangtok, Sikkim, India",4.9,"nature"),
+                    new PlaceResult("374","Nathula Pass","https://imgcdn.flamingotravels.co.in/Images/PlacesOfInterest/Nathula-Pass-Gangtok-3.jpg","Gangtok, Sikkim, India",4.9,"nature"),
+                    new PlaceResult("375","Rumtek Monastery","https://hblimg.mmtcdn.com/content/hubble/img/gangtok/mmt/activities/m_activities-gangtok-rumtek-monastery_l_400_640.jpg","Gangtok, Sikkim, India",4.8,"historical"),
+                    new PlaceResult("376","MG Marg","https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/6d/8f/92/img-20201203-165738-largejpg.jpg?w=1200&h=-1&s=1","Gangtok, Sikkim, India",4.8,"shopping"),
+                    new PlaceResult("377","Ganesh Tok View Point","https://www.trawell.in/admin/images/upload/901968657Gangtok_Ganesh_Tok_View_Point_Main.jpg","Gangtok, Sikkim, India",4.7,"nature"),
+                    new PlaceResult("378","Tashi View Point","https://s7ap1.scene7.com/is/image/incredibleindia/tashi-view-point-gangtok-sikkim-1-attr-hero?qlt=82&ts=1742160327797","Gangtok, Sikkim, India",4.7,"nature"),
+                    new PlaceResult("379","Namgyal Institute of Tibetology","https://namgyalinstitutesikkim.org/wp-content/uploads/2023/07/about1.jpg","Gangtok, Sikkim, India",4.7,"museum"),
+                    new PlaceResult("380","Enchey Monastery","https://d3gw4aml0lneeh.cloudfront.net/assets/locations/xDCL9DI0QElM.jpg","Gangtok, Sikkim, India",4.7,"historical")
+            );
+        }
 
 
 
