@@ -1,6 +1,7 @@
 package com.janisar.service;
 
 import com.janisar.entity.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -39,11 +40,22 @@ public class JwtService {
     }
 
     public String getEmailFromToken(String token) {
+        return getClaims(token).getSubject();
+    }
+
+    public String getUserIdFromToken(String token) {
+        return getClaims(token).get("userId", String.class);
+    }
+
+    public String getNameFromToken(String token) {
+        return getClaims(token).get("name", String.class);
+    }
+
+    private Claims getClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(secretKey)
                 .build()
                 .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+                .getBody();
     }
 }

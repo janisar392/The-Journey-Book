@@ -37,11 +37,37 @@ const Settings = () => {
         setSuccess('');
 
         try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            setSuccess('Account information updated successfully!');
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${BASE_URL}/api/users/profile`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    name: accountInfo.name,
+                    email: accountInfo.email,
+                    phone: accountInfo.phone
+                })
+            });
+
+            const data = await response.json();
+            
+            if (response.ok) {
+                setSuccess(data.message);
+                // Update user in context
+                if (data.user) {
+                    const currentUser = JSON.parse(localStorage.getItem('user'));
+                    const updatedUser = { ...currentUser, ...data.user };
+                    localStorage.setItem('user', JSON.stringify(updatedUser));
+                    // You can also update context here
+                }
+            } else {
+                setError(data.error || data.message || 'Failed to update profile');
+            }
         } catch (err) {
-            setError('Failed to update account information');
+            setError('Network error. Please try again.');
+            console.error('Update error:', err);
         } finally {
             setLoading(false);
         }
@@ -60,16 +86,35 @@ const Settings = () => {
         }
 
         try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            setSuccess('Password changed successfully!');
-            setSecurityInfo({
-                currentPassword: '',
-                newPassword: '',
-                confirmPassword: ''
+            const token = localStorage.getItem('token');
+            const response = await fetch(`${BASE_URL}/api/users/change-password`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    currentPassword: securityInfo.currentPassword,
+                    newPassword: securityInfo.newPassword,
+                    confirmPassword: securityInfo.confirmPassword
+                })
             });
+
+            const data = await response.json();
+            
+            if (response.ok) {
+                setSuccess(data.message);
+                setSecurityInfo({
+                    currentPassword: '',
+                    newPassword: '',
+                    confirmPassword: ''
+                });
+            } else {
+                setError(data.error || data.message || 'Failed to change password');
+            }
         } catch (err) {
-            setError('Failed to change password');
+            setError('Network error. Please try again.');
+            console.error('Password change error:', err);
         } finally {
             setLoading(false);
         }

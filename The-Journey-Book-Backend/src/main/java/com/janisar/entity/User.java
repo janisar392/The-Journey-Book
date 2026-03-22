@@ -20,8 +20,13 @@ public class User {
     @Email(message = "Email should be valid")
     private String email;
 
-    // Remove @NotBlank and @Size validation for password to allow empty for social users
     private String password;
+
+    // Add phone field
+    private String phone;
+
+    // Add preferences field (store as JSON string or use Map)
+    private String preferences; // You can store as JSON string
 
     public User() {}
 
@@ -34,10 +39,19 @@ public class User {
     // Getters and Setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
+
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
+
+    public String getPreferences() { return preferences; }
+    public void setPreferences(String preferences) { this.preferences = preferences; }
 }
