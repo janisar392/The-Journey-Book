@@ -8,19 +8,54 @@ const Profile = () => {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [profileData, setProfileData] = useState({
+        name: '',
+        email: '',
+        phone: ''
+    });
 
-    // Base URL for API calls
     const BASE_URL = 'https://the-journey-book-backend.onrender.com';
 
+    // Fetch user profile and bookings on mount
     useEffect(() => {
         if (user) {
+            fetchUserProfile();
             fetchUserBookings();
         }
     }, [user]);
 
+    // Fetch user profile data
+    const fetchUserProfile = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        try {
+            const response = await fetch(`${BASE_URL}/api/users/profile`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Profile data:', data);
+                setProfileData({
+                    name: data.name || user?.name || '',
+                    email: data.email || user?.email || '',
+                    phone: data.phone || ''
+                });
+            }
+        } catch (err) {
+            console.error('Error fetching profile:', err);
+        }
+    };
+
+    // Fetch user bookings
     const fetchUserBookings = async () => {
         try {
             const token = localStorage.getItem('token');
+            if (!token || !user?.id) return;
+
             const response = await fetch(`${BASE_URL}/api/bookings/user/${user.id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -34,8 +69,8 @@ const Profile = () => {
                 setError('Failed to fetch bookings');
             }
         } catch (err) {
-            setError('Network error. Please try again.');
             console.error('Error fetching bookings:', err);
+            setError('Network error. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -72,11 +107,11 @@ const Profile = () => {
                             <div className="card-body text-center">
                                 <div className="profile-avatar mb-3">
                                     <div className="avatar-circle">
-                                        {user?.name?.charAt(0) || 'U'}
+                                        {profileData.name?.charAt(0) || user?.name?.charAt(0) || 'U'}
                                     </div>
                                 </div>
-                                <h4 className="mb-2">{user?.name || 'User'}</h4>
-                                <p className="text-muted mb-3">{user?.email}</p>
+                                <h4 className="mb-2">{profileData.name || user?.name || 'User'}</h4>
+                                <p className="text-muted mb-3">{profileData.email || user?.email}</p>
                                 
                                 <div className="profile-stats mb-4">
                                     <div className="stat-item">
@@ -116,7 +151,7 @@ const Profile = () => {
                             {/* Welcome Card */}
                             <div className="welcome-card card mb-4">
                                 <div className="card-body">
-                                    <h2 className="card-title">Welcome back, {user?.name?.split(' ')[0] || 'Explorer'}!</h2>
+                                    <h2 className="card-title">Welcome back, {profileData.name?.split(' ')[0] || 'Explorer'}!</h2>
                                     <p className="card-text">
                                         Manage your profile, view bookings, and update your preferences here.
                                     </p>
@@ -127,22 +162,22 @@ const Profile = () => {
                             <div className="card mb-4">
                                 <div className="card-header d-flex justify-content-between align-items-center">
                                     <h4 className="mb-0">Personal Information</h4>
-                                    <button className="btn btn-outline-primary btn-sm">
+                                    <Link to="/settings" className="btn btn-outline-primary btn-sm">
                                         <i className="fas fa-edit me-1"></i>Edit
-                                    </button>
+                                    </Link>
                                 </div>
                                 <div className="card-body">
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="info-item">
                                                 <label>Full Name</label>
-                                                <p>{user?.name || 'Not set'}</p>
+                                                <p>{profileData.name || user?.name || 'Not set'}</p>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="info-item">
                                                 <label>Email Address</label>
-                                                <p>{user?.email || 'Not set'}</p>
+                                                <p>{profileData.email || user?.email || 'Not set'}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -150,7 +185,7 @@ const Profile = () => {
                                         <div className="col-md-6">
                                             <div className="info-item">
                                                 <label>Phone Number</label>
-                                                <p>+91 9608456392</p>
+                                                <p>{profileData.phone || 'Not set'}</p>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
