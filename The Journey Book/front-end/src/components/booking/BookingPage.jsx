@@ -306,6 +306,7 @@ useEffect(() => {
   }
 
   const { experience, selectedDate, ticketQuantities, totalPrice } = bookingData;
+  const basePrice = experience.price || 0;
 
  console.log('🔍 RENDERING DEBUG:');
   console.log(' - bookingData:', bookingData);
@@ -352,19 +353,19 @@ useEffect(() => {
                 {ticketQuantities.adult > 0 && (
                   <div className="ticket-row">
                     <span>Adult (13+):</span>
-                    <span>{ticketQuantities.adult} x &#8377;{25} = &#8377;{ticketQuantities.adult * 25}</span>
+                    <span>{ticketQuantities.adult} x &#8377;{basePrice} = &#8377;{ticketQuantities.adult * basePrice}</span>
                   </div>
                 )}
                 {ticketQuantities.child > 0 && (
                   <div className="ticket-row">
                     <span>Child (4-12):</span>
-                    <span>{ticketQuantities.child} x &#8377;{15} = &#8377;{ticketQuantities.child * 15}</span>
+                    <span>{ticketQuantities.child} x &#8377;{basePrice} = &#8377;{ticketQuantities.child * basePrice}</span>
                   </div>
                 )}
                 {ticketQuantities.senior > 0 && (
                   <div className="ticket-row">
                     <span>Senior (65+):</span>
-                    <span>{ticketQuantities.senior} x &#8377;{20} = &#8377;{ticketQuantities.senior * 20}</span>
+                    <span>{ticketQuantities.senior} x &#8377;{basePrice} = &#8377;{ticketQuantities.senior * basePrice}</span>
                   </div>
                 )}
               </div>

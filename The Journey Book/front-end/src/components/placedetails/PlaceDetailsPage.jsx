@@ -18,18 +18,18 @@ const PlaceDetailsPage = () => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  // Ticket prices
-  const ticketPrices = {
-    adult: 25,
-    child: 15,
-    senior: 20
-  };
+  const basePrice = experience?.price || 0;
 
-  // Calculate total
+  const adultPrice = basePrice;
+  const childPrice = basePrice > 10 ? basePrice - 10 : basePrice;
+  const seniorPrice = basePrice > 10 ? basePrice - 5 : basePrice;
+
   const calculateTotal = () => {
-    return (ticketQuantities.adult * ticketPrices.adult) +
-           (ticketQuantities.child * ticketPrices.child) +
-           (ticketQuantities.senior * ticketPrices.senior);
+    return (
+      ticketQuantities.adult * adultPrice +
+      ticketQuantities.child * childPrice +
+      ticketQuantities.senior * seniorPrice
+    );
   };
 
   // Replace the entire transformToExperience function with this SIMPLE version:
@@ -260,7 +260,7 @@ const transformToExperience = (data) => {
               <div className="ticket-type">
                 <div className="ticket-info">
                   <span className="ticket-name">Adult (13+)</span>
-                  <span className="ticket-price">&#8377;{ticketPrices.adult}</span>
+                  <span className="ticket-price">&#8377;{adultPrice}</span>
                 </div>
                 <div className="ticket-controls">
                   <button 
@@ -275,7 +275,7 @@ const transformToExperience = (data) => {
               <div className="ticket-type">
                 <div className="ticket-info">
                   <span className="ticket-name">Child (4-12)</span>
-                  <span className="ticket-price">&#8377;{ticketPrices.child}</span>
+                  <span className="ticket-price">&#8377;{childPrice}</span>
                 </div>
                 <div className="ticket-controls">
                   <button 
@@ -290,7 +290,7 @@ const transformToExperience = (data) => {
               <div className="ticket-type">
                 <div className="ticket-info">
                   <span className="ticket-name">Senior (65+)</span>
-                  <span className="ticket-price">&#8377;{ticketPrices.senior}</span>
+                  <span className="ticket-price">&#8377;{seniorPrice}</span>
                 </div>
                 <div className="ticket-controls">
                   <button 
