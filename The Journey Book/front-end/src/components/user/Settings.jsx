@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import './Settings.css';
 
 const Settings = () => {
-    const { user, updateUser } = useAuth(); // Add updateUser if available
+    const { user } = useAuth();
     const [activeTab, setActiveTab] = useState('account');
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState('');
@@ -12,9 +12,9 @@ const Settings = () => {
     const BASE_URL = 'https://the-journey-book-backend.onrender.com';
 
     const [accountInfo, setAccountInfo] = useState({
-        name: '',
-        email: '',
-        phone: ''
+        name: user?.name || '',
+        email: user?.email || '',
+        phone: '+91 9608456392'
     });
 
     const [securityInfo, setSecurityInfo] = useState({
@@ -23,8 +23,8 @@ const Settings = () => {
         confirmPassword: ''
     });
 
-    // Fetch profile on component mount
-    useEffect(() => {
+    // Load profile on component mount
+    React.useEffect(() => {
         fetchUserProfile();
     }, []);
 
@@ -36,7 +36,6 @@ const Settings = () => {
         }
 
         try {
-            console.log('Fetching profile...');
             const response = await fetch(`${BASE_URL}/api/users/profile`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -45,20 +44,19 @@ const Settings = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('Profile data received:', data);
+                console.log('Fetched profile:', data); // Debug
                 
-                // Update form with fetched data
+                // Update the form with fetched data
                 setAccountInfo({
                     name: data.name || '',
                     email: data.email || '',
                     phone: data.phone || ''
                 });
             } else {
-                console.error('Failed to fetch profile, status:', response.status);
+                console.error('Failed to fetch profile');
             }
         } catch (err) {
             console.error('Error fetching profile:', err);
-            setError('Failed to load profile');
         }
     };
 
@@ -84,12 +82,6 @@ const Settings = () => {
             }
         }
 
-        console.log('Sending update with:', {
-            name: accountInfo.name,
-            email: accountInfo.email,
-            phone: cleanPhone
-        });
-
         try {
             const response = await fetch(`${BASE_URL}/api/users/profile`, {
                 method: 'PUT',
@@ -104,27 +96,35 @@ const Settings = () => {
                 })
             });
 
-            const data = await response.json();
-            console.log('Update response:', data);
+            const text = await response.text();
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                console.error('Failed to parse JSON:', text);
+                throw new Error('Invalid response from server');
+            }
 
             if (response.ok) {
-                setSuccess(data.message || 'Profile updated successfully!');
+                setSuccess(data.message);
                 
-                // Update user in localStorage
-                const currentUser = JSON.parse(localStorage.getItem('user'));
-                const updatedUser = { ...currentUser, ...data.user };
-                localStorage.setItem('user', JSON.stringify(updatedUser));
+                // IMPORTANT: Fetch the updated profile again
+                await fetchUserProfile();  // Call this to refresh the data
                 
-                // Refresh profile data
-                await fetchUserProfile();
-                
-                // Clear success message after 3 seconds
-                setTimeout(() => setSuccess(''), 3000);
+                // Also update user in context/localStorage
+                if (data.user) {
+                    const currentUser = JSON.parse(localStorage.getItem('user'));
+                    const updatedUser = { ...currentUser, ...data.user };
+                    localStorage.setItem('user', JSON.stringify(updatedUser));
+                    
+                    // If you have a context update function, call it here
+                    // updateUserInContext(updatedUser);
+                }
             } else {
                 setError(data.error || data.message || 'Failed to update profile');
             }
         } catch (err) {
-            console.error('Update error:', err);
+            console.error('Network error:', err);
             setError('Network error: ' + err.message);
         } finally {
             setLoading(false);
@@ -139,12 +139,6 @@ const Settings = () => {
 
         if (securityInfo.newPassword !== securityInfo.confirmPassword) {
             setError('New passwords do not match');
-            setLoading(false);
-            return;
-        }
-
-        if (securityInfo.newPassword.length < 6) {
-            setError('Password must be at least 6 characters');
             setLoading(false);
             return;
         }
@@ -173,13 +167,12 @@ const Settings = () => {
             const data = await response.json();
 
             if (response.ok) {
-                setSuccess(data.message || 'Password changed successfully!');
+                setSuccess(data.message);
                 setSecurityInfo({
                     currentPassword: '',
                     newPassword: '',
                     confirmPassword: ''
                 });
-                setTimeout(() => setSuccess(''), 3000);
             } else {
                 setError(data.error || data.message || 'Failed to change password');
             }
@@ -190,6 +183,8 @@ const Settings = () => {
             setLoading(false);
         }
     };
+
+    
 
     const tabs = [
         { id: 'account', label: 'Account', icon: 'fas fa-user' },
@@ -229,7 +224,6 @@ const Settings = () => {
                         <div className="settings-content">
                             {success && (
                                 <div className="alert alert-success alert-dismissible fade show" role="alert">
-                                    <i className="fas fa-check-circle me-2"></i>
                                     {success}
                                     <button type="button" className="btn-close" onClick={() => setSuccess('')}></button>
                                 </div>
@@ -237,7 +231,6 @@ const Settings = () => {
 
                             {error && (
                                 <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <i className="fas fa-exclamation-circle me-2"></i>
                                     {error}
                                     <button type="button" className="btn-close" onClick={() => setError('')}></button>
                                 </div>
@@ -275,18 +268,21 @@ const Settings = () => {
                                             </div>
                                             <div className="row mb-3">
                                                 <div className="col-md-6">
-                                                    <label className="form-label">Phone Number</label>
-                                                    <input
-                                                        type="tel"
-                                                        className="form-control"
-                                                        value={accountInfo.phone}
-                                                        onChange={(e) => setAccountInfo({...accountInfo, phone: e.target.value})}
-                                                        placeholder="Enter 10-digit mobile number"
-                                                    />
-                                                    <small className="text-muted">
-                                                        Enter 10-digit mobile number (e.g., 9608456380)
-                                                    </small>
-                                                </div>
+                                                <label className="form-label">Phone Number</label>
+                                                <input
+                                                    type="tel"
+                                                    className="form-control"
+                                                    value={accountInfo.phone}
+                                                    onChange={(e) => {
+                                                        // Allow user to type with spaces, but store as is
+                                                        setAccountInfo({...accountInfo, phone: e.target.value});
+                                                    }}
+                                                    placeholder="Enter 10-digit mobile number"
+                                                />
+                                                <small className="text-muted">
+                                                    Enter 10-digit mobile number (e.g., 9090909090)
+                                                </small>
+                                            </div>
                                             </div>
                                             <button 
                                                 type="submit" 
@@ -374,22 +370,85 @@ const Settings = () => {
                                         <div className="row mb-4">
                                             <div className="col-md-6">
                                                 <label className="form-label">Preferred Currency</label>
-                                                <select className="form-select">
+                                                <select 
+                                                    className="form-select"
+                                                    value={preferences.currency}
+                                                    onChange={(e) => setPreferences({...preferences, currency: e.target.value})}
+                                                >
                                                     <option value="INR">Indian Rupee (₹)</option>
                                                     <option value="USD">US Dollar ($)</option>
                                                     <option value="EUR">Euro (€)</option>
+                                                    <option value="GBP">British Pound (£)</option>
                                                 </select>
                                             </div>
                                             <div className="col-md-6">
                                                 <label className="form-label">Language</label>
-                                                <select className="form-select">
+                                                <select 
+                                                    className="form-select"
+                                                    value={preferences.language}
+                                                    onChange={(e) => setPreferences({...preferences, language: e.target.value})}
+                                                >
                                                     <option value="English">English</option>
                                                     <option value="Hindi">Hindi</option>
                                                     <option value="Spanish">Spanish</option>
+                                                    <option value="French">French</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <button className="btn btn-primary">Save Preferences</button>
+
+                                        <div className="form-check mb-3">
+                                            <input
+                                                className="form-check-input"
+                                                type="checkbox"
+                                                checked={preferences.emailNotifications}
+                                                onChange={(e) => setPreferences({...preferences, emailNotifications: e.target.checked})}
+                                                id="emailNotifications"
+                                            />
+                                            <label className="form-check-label" htmlFor="emailNotifications">
+                                                Email Notifications
+                                            </label>
+                                        </div>
+
+                                        <div className="form-check mb-3">
+                                            <input
+                                                className="form-check-input"
+                                                type="checkbox"
+                                                checked={preferences.smsNotifications}
+                                                onChange={(e) => setPreferences({...preferences, smsNotifications: e.target.checked})}
+                                                id="smsNotifications"
+                                            />
+                                            <label className="form-check-label" htmlFor="smsNotifications">
+                                                SMS Notifications
+                                            </label>
+                                        </div>
+
+                                        <div className="form-check mb-4">
+                                            <input
+                                                className="form-check-input"
+                                                type="checkbox"
+                                                checked={preferences.newsletter}
+                                                onChange={(e) => setPreferences({...preferences, newsletter: e.target.checked})}
+                                                id="newsletter"
+                                            />
+                                            <label className="form-check-label" htmlFor="newsletter">
+                                                Subscribe to Newsletter
+                                            </label>
+                                        </div>
+
+                                        <button 
+                                            className="btn btn-primary"
+                                            onClick={handlePreferencesSave}
+                                            disabled={loading}
+                                        >
+                                            {loading ? (
+                                                <>
+                                                    <i className="fas fa-spinner fa-spin me-2"></i>
+                                                    Saving...
+                                                </>
+                                            ) : (
+                                                'Save Preferences'
+                                            )}
+                                        </button>
                                     </div>
                                 </div>
                             )}
@@ -401,10 +460,17 @@ const Settings = () => {
                                         <h4 className="mb-0">Notification Settings</h4>
                                     </div>
                                     <div className="card-body">
+                                        <h5 className="mb-3">Email Notifications</h5>
                                         <div className="form-check mb-3">
                                             <input className="form-check-input" type="checkbox" id="bookingConfirm" defaultChecked />
                                             <label className="form-check-label" htmlFor="bookingConfirm">
                                                 Booking confirmations
+                                            </label>
+                                        </div>
+                                        <div className="form-check mb-3">
+                                            <input className="form-check-input" type="checkbox" id="paymentReceipts" defaultChecked />
+                                            <label className="form-check-label" htmlFor="paymentReceipts">
+                                                Payment receipts
                                             </label>
                                         </div>
                                         <div className="form-check mb-3">
@@ -413,12 +479,27 @@ const Settings = () => {
                                                 Trip reminders
                                             </label>
                                         </div>
-                                        <div className="form-check mb-3">
+                                        <div className="form-check mb-4">
                                             <input className="form-check-input" type="checkbox" id="specialOffers" defaultChecked />
                                             <label className="form-check-label" htmlFor="specialOffers">
                                                 Special offers and promotions
                                             </label>
                                         </div>
+
+                                        <h5 className="mb-3">Push Notifications</h5>
+                                        <div className="form-check mb-3">
+                                            <input className="form-check-input" type="checkbox" id="pushBooking" defaultChecked />
+                                            <label className="form-check-label" htmlFor="pushBooking">
+                                                Booking updates
+                                            </label>
+                                        </div>
+                                        <div className="form-check mb-4">
+                                            <input className="form-check-input" type="checkbox" id="pushDeals" defaultChecked />
+                                            <label className="form-check-label" htmlFor="pushDeals">
+                                                Exclusive deals
+                                            </label>
+                                        </div>
+
                                         <button className="btn btn-primary">Save Notification Settings</button>
                                     </div>
                                 </div>
@@ -434,15 +515,31 @@ const Settings = () => {
                                         <div className="mb-4">
                                             <h5>Data Privacy</h5>
                                             <p className="text-muted">
-                                                Control how your data is used and shared.
+                                                Control how your data is used and shared. You can download your data or delete your account at any time.
                                             </p>
                                         </div>
+
                                         <div className="form-check mb-3">
                                             <input className="form-check-input" type="checkbox" id="dataAnalytics" defaultChecked />
                                             <label className="form-check-label" htmlFor="dataAnalytics">
                                                 Allow data analytics to improve services
                                             </label>
                                         </div>
+
+                                        <div className="form-check mb-3">
+                                            <input className="form-check-input" type="checkbox" id="personalizedAds" />
+                                            <label className="form-check-label" htmlFor="personalizedAds">
+                                                Show personalized advertisements
+                                            </label>
+                                        </div>
+
+                                        <div className="form-check mb-4">
+                                            <input className="form-check-input" type="checkbox" id="shareData" />
+                                            <label className="form-check-label" htmlFor="shareData">
+                                                Share anonymous usage data with partners
+                                            </label>
+                                        </div>
+
                                         <div className="d-flex gap-3">
                                             <button className="btn btn-outline-primary">
                                                 <i className="fas fa-download me-2"></i>
