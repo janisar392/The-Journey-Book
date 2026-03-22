@@ -3,6 +3,8 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './PlaceDetailsPage.css';
 
+const BASE_URL = 'https://the-journey-book-backend.onrender.com';
+
 const PlaceDetailsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -60,6 +62,7 @@ const transformToExperience = (data) => {
     image: actualImage, // ← THIS IS THE FIX - always use backend image
     location: data.address || 'Location not specified',
     rating: data.rating || 4.5,
+    price: data.price || 0,
     description: enhancedDescriptions[data.placeId] || `Explore this amazing ${data.name} in ${data.address}. A must-visit destination for travelers.`,
     duration: data.duration || '1-2 hours',
     highlights: [
@@ -99,10 +102,27 @@ const transformToExperience = (data) => {
           const transformedExperience = transformToExperience(location.state.experience);
           setExperience(transformedExperience);
         } else {
-          // Try to fetch from backend or use mock data
-          const transformedExperience = transformToExperience({ placeId: id });
-          setExperience(transformedExperience);
-        }
+            const response = await fetch(`${BASE_URL}/api/search`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                location: '',
+                startDate: '',
+                travelers: 1
+              })
+            });
+
+            const data = await response.json();
+
+            const place = data.find(p => p.placeId === id);
+
+            if (place) {
+              const transformedExperience = transformToExperience(place);
+              setExperience(transformedExperience);
+            }
+          }
       } catch (error) {
         console.error('Error loading experience:', error);
         // Final fallback
