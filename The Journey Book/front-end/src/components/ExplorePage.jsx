@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ExplorePage.css';
+import StoryCard from './stories/StoryCard';
 
 const ExplorePage = () => {
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState('all');
   const [animatedText, setAnimatedText] = useState(0);
+  const [stories, setStories] = useState([]);
+  const [storiesLoading, setStoriesLoading] = useState(true);
   const [searchData, setSearchData] = useState({
     destination: '',
     date: '',
@@ -21,7 +24,25 @@ const ExplorePage = () => {
     
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    fetchStories();
+  }, []);
   
+  const fetchStories = async () => {
+      try {
+          const response = await fetch(`${BASE_URL}/api/experiences`);
+          if (response.ok) {
+              const data = await response.json();
+              setStories(data);
+          }
+      } catch (err) {
+          console.error('Error fetching stories:', err);
+      } finally {
+          setStoriesLoading(false);
+      }
+  };
+
   const handleSearchChange = (e) => {
     setSearchData({
       ...searchData,
@@ -32,32 +53,27 @@ const ExplorePage = () => {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     console.log('Search data:', searchData);
-    // Navigate to search results with the search data
     navigate('/search-results', { state: { searchData } });
   };
 
-  // Add the explore destination function (same as TopDestinations.js)
   const handleExploreDestination = (destinationName) => {
-    // Use the exact same structure as Home.jsx search
     const searchData = {
       destination: destinationName,
       date: '',
       travelers: ''
     };
-    
-    // Navigate exactly like Home.jsx does
     navigate('/search-results', { state: { searchData } });
+  };
+
+  // Navigate to create story page
+  const handleCreateStory = () => {
+    navigate('/create-story');
   };
 
   // Featured destinations data
   const destinations = [
-    { id: 1, name: "Bali, Indonesia", category: "beaches", image: "/images/bali2.jpg", description: "Tropical paradise with beaches, culture & adventure." },
-    { id: 2, name: "Paris, France", category: "cities", image: "/images/paris.jpg", description: "The city of lights, art, and romance." },
     { id: 3, name: "Dubai, UAE", category: "desert", image: "/images/dubai.jpg", description: "Ultra-modern architecture and luxury shopping." },
-    { id: 4, name: "Maldives", category: "beaches", image: "/images/maldives.jpg", description: "Crystal clear waters and overwater bungalows." },
     { id: 5, name: "New York, USA", category: "cities", image: "/images/newyork.jpg", description: "The concrete jungle where dreams are made." },
-    { id: 6, name: "Swiss Alps", category: "mountains", image: "/images/alps.jpg", description: "Breathtaking mountain views and skiing." },
-    { id: 7, name: "Santorini, Greece", category: "beaches", image: "/images/santorini.jpg", description: "White buildings with blue domes and stunning sunsets." },
     { id: 8, name: "Tokyo, Japan", category: "cities", image: "/images/tokyo.jpg", description: "A blend of traditional culture and technological innovation." }
   ];
   
@@ -69,12 +85,6 @@ const ExplorePage = () => {
     { id: 4, name: "Jazz Night in New Orleans", image: "/images/jazz-night.jpg", price: "$45", description: "Immerse yourself in the birthplace of jazz music." }
   ];
   
-  // Travel stories data
-  const stories = [
-    { id: 1, title: "10 Hidden Beaches in Asia", image: "/images/beaches-asia.jpg", excerpt: "Discover secluded paradise beaches away from the crowds." },
-    { id: 2, title: "Best Food Markets Around the World", image: "/images/food-markets.jpg", excerpt: "A culinary journey through the world's most vibrant markets." },
-    { id: 3, title: "Top Winter Wonderland Destinations", image: "/images/winter-destinations.jpg", excerpt: "Experience the magic of winter in these stunning locations." }
-  ];
   
   // Filter destinations by category
   const filteredDestinations = activeCategory === 'all' 
@@ -178,41 +188,6 @@ const ExplorePage = () => {
         </div>
       </section>
       
-      {/* Categories */}
-      <section className="section categories-section">
-        <div className="container">
-          <h2 className="section-title">Choose Your Style of Travel</h2>
-          <p className="section-subtitle">Find the perfect experience that matches your travel preferences</p>
-          
-          <div className="categories-grid">
-            <div className="category-card" onClick={() => setActiveCategory('beaches')}>
-              <div className="category-icon">🏖️</div>
-              <h3>Beaches</h3>
-            </div>
-            <div className="category-card" onClick={() => setActiveCategory('mountains')}>
-              <div className="category-icon">🏔️</div>
-              <h3>Adventure</h3>
-            </div>
-            <div className="category-card" onClick={() => setActiveCategory('cities')}>
-              <div className="category-icon">🏙️</div>
-              <h3>City Life</h3>
-            </div>
-            <div className="category-card" onClick={() => setActiveCategory('desert')}>
-              <div className="category-icon">🏜️</div>
-              <h3>Desert Safaris</h3>
-            </div>
-            <div className="category-card" onClick={() => setActiveCategory('nature')}>
-              <div className="category-icon">🌲</div>
-              <h3>Nature Retreats</h3>
-            </div>
-            <div className="category-card" onClick={() => setActiveCategory('cultural')}>
-              <div className="category-icon">🏛️</div>
-              <h3>Historical & Cultural</h3>
-            </div>
-          </div>
-        </div>
-      </section>
-      
       {/* Popular Experiences */}
       <section className="section experiences-section">
         <div className="container">
@@ -239,58 +214,41 @@ const ExplorePage = () => {
         </div>
       </section>
       
-      {/* Inspiration Section */}
-      <section className="section inspiration-section">
-        <div className="container">
-          <h2 className="section-title">Find Inspiration</h2>
-          <p className="section-subtitle">Discover trips based on your travel mood</p>
-          
-          <div className="inspiration-carousel">
-            <div className="mood-card">
-              <div className="mood-icon">💕</div>
-              <h3>Romantic Escapes</h3>
-            </div>
-            <div className="mood-card">
-              <div className="mood-icon">⚡</div>
-              <h3>Adventure Thrills</h3>
-            </div>
-            <div className="mood-card">
-              <div className="mood-icon">✨</div>
-              <h3>Luxury Vacations</h3>
-            </div>
-            <div className="mood-card">
-              <div className="mood-icon">💰</div>
-              <h3>Budget Friendly</h3>
-            </div>
-            <div className="mood-card">
-              <div className="mood-icon">👨‍👩‍👧‍👦</div>
-              <h3>Family Getaways</h3>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Travel Stories */}
+      {/* Travel Stories - Main content hub with Share button */}
       <section className="section stories-section">
         <div className="container">
-          <h2 className="section-title">Travel Stories </h2>
-          <p className="section-subtitle">Get inspired by our latest travel guides and tips</p>
+          <div className="section-header">
+            <div>
+              <h2 className="section-title">Travel Stories</h2>
+              <p className="section-subtitle">Get inspired by our latest travel guides and tips</p>
+            </div>
+            <button className="create-story-btn" onClick={handleCreateStory}>
+              <i className="fas fa-plus"></i> Share Your Story
+            </button>
+          </div>
           
           <div className="stories-grid">
-            {stories.map(story => (
-              <div key={story.id} className="story-card">
-                <div 
-                  className="story-image" 
-                  style={{ backgroundImage: `url(${story.image})` }}
-                ></div>
-                <div className="story-content">
-                  <h3 className="story-title">{story.title}</h3>
-                  <p className="story-excerpt">{story.excerpt}</p>
-                  <a href="#" className="read-more">Read More →</a>
+            {storiesLoading ? (
+                <div className="text-center py-5">
+                    <div className="spinner-border text-primary" role="status">
+                        <span className="visually-hidden">Loading stories...</span>
+                    </div>
                 </div>
-              </div>
-            ))}
-          </div>
+            ) : stories.length === 0 ? (
+                <div className="text-center py-5">
+                    <i className="fas fa-book-open fa-3x text-muted mb-3"></i>
+                    <h4>No stories yet</h4>
+                    <p>Be the first to share your travel experience!</p>
+                    <button className="btn btn-primary" onClick={handleCreateStory}>
+                        Share Your Story
+                    </button>
+                </div>
+            ) : (
+                stories.map(story => (
+                    <StoryCard key={story.id} story={story} />
+                ))
+            )}
+        </div>
         </div>
       </section>
       

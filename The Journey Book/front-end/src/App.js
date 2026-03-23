@@ -23,6 +23,8 @@ import MyTripsPage from './components/trips/MyTripsPage';
 import TravelTools from './components/home/TravelTools';
 import Profile from './components/user/Profile';
 import Settings from './components/user/Settings';
+import CreateStoryPage from './components/stories/CreateStoryPage';
+import StoryDetailPage from './components/stories/StoryDetailPage';
 
 
 function App() {
@@ -51,6 +53,8 @@ function App() {
             <Route path="/my-trips" element={<MyTripsPage />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/create-story" element={<CreateStoryPage />} />
+            <Route path="/story/:id" element={<StoryDetailPage />} />
 
           </Routes>
           <Footer />
