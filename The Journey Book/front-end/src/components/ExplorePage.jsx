@@ -3,12 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import './ExplorePage.css';
 import StoryCard from './stories/StoryCard';
 
+
 const ExplorePage = () => {
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState('all');
   const [animatedText, setAnimatedText] = useState(0);
+
   const [stories, setStories] = useState([]);
   const [storiesLoading, setStoriesLoading] = useState(true);
+  const BASE_URL = 'https://the-journey-book-backend.onrender.com';
+
   const [searchData, setSearchData] = useState({
     destination: '',
     date: '',
@@ -216,40 +220,40 @@ const ExplorePage = () => {
       
       {/* Travel Stories - Main content hub with Share button */}
       <section className="section stories-section">
-        <div className="container">
-          <div className="section-header">
-            <div>
-              <h2 className="section-title">Travel Stories</h2>
-              <p className="section-subtitle">Get inspired by our latest travel guides and tips</p>
-            </div>
-            <button className="create-story-btn" onClick={handleCreateStory}>
-              <i className="fas fa-plus"></i> Share Your Story
-            </button>
+          <div className="container">
+              <div className="section-header">
+                  <div>
+                      <h2 className="section-title">Travel Stories</h2>
+                      <p className="section-subtitle">Get inspired by our latest travel guides and tips</p>
+                  </div>
+                  <button className="create-story-btn" onClick={handleCreateStory}>
+                      <i className="fas fa-plus"></i> Share Your Story
+                  </button>
+              </div>
+              
+              <div className="stories-grid">
+                  {storiesLoading ? (
+                      <div className="text-center py-5" style={{ gridColumn: '1/-1' }}>
+                          <div className="spinner-border text-primary" role="status">
+                              <span className="visually-hidden">Loading stories...</span>
+                          </div>
+                      </div>
+                  ) : stories.length === 0 ? (
+                      <div className="text-center py-5" style={{ gridColumn: '1/-1' }}>
+                          <i className="fas fa-book-open fa-3x text-muted mb-3"></i>
+                          <h4>No stories yet</h4>
+                          <p>Be the first to share your travel experience!</p>
+                          <button className="btn btn-primary" onClick={handleCreateStory}>
+                              Share Your Story
+                          </button>
+                      </div>
+                  ) : (
+                      stories.map(story => (
+                          <StoryCard key={story.id} story={story} />
+                      ))
+                  )}
+              </div>
           </div>
-          
-          <div className="stories-grid">
-            {storiesLoading ? (
-                <div className="text-center py-5">
-                    <div className="spinner-border text-primary" role="status">
-                        <span className="visually-hidden">Loading stories...</span>
-                    </div>
-                </div>
-            ) : stories.length === 0 ? (
-                <div className="text-center py-5">
-                    <i className="fas fa-book-open fa-3x text-muted mb-3"></i>
-                    <h4>No stories yet</h4>
-                    <p>Be the first to share your travel experience!</p>
-                    <button className="btn btn-primary" onClick={handleCreateStory}>
-                        Share Your Story
-                    </button>
-                </div>
-            ) : (
-                stories.map(story => (
-                    <StoryCard key={story.id} story={story} />
-                ))
-            )}
-        </div>
-        </div>
       </section>
       
       {/* Call to Action */}
