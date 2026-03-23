@@ -136,9 +136,9 @@ public class SearchController {
                     new PlaceResult("37", "India Gate", "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800", "New Delhi, India", 4.7, "tours",0),
                     new PlaceResult("38", "Red Fort", "https://cdn.pixabay.com/photo/2022/04/13/13/55/india-7130382_640.jpg", "Old Delhi, India", 4.8, "museums",50),
                     new PlaceResult("39", "Qutub Minar", "https://cdn.pixabay.com/photo/2014/07/01/17/44/qutb-minar-381473_640.jpg", "Mehrauli, Delhi, India", 4.6, "museums",50),
-                    new PlaceResult("40", "Lotus Temple", "https://cdn.pixabay.com/photo/2023/07/22/19/01/lotus-8143968_640.jpg", "New Delhi, India", 4.5, "museums",60),
+                    new PlaceResult("40", "Lotus Temple", "https://cdn.pixabay.com/photo/2023/07/22/19/01/lotus-8143968_640.jpg", "New Delhi, India", 4.5, "museums",0),
                     new PlaceResult("41", "Akshardham Temple", "https://cdn.pixabay.com/photo/2023/06/29/09/52/angkor-thom-8096092_640.jpg", "New Delhi, India", 4.9, "museums",40),
-                    new PlaceResult("42", "Chandni Chowk", "https://cdn.pixabay.com/photo/2018/01/30/12/11/street-life-3118639_640.jpg", "Old Delhi, India", 4.4, "entertainment",40)
+                    new PlaceResult("42", "Chandni Chowk", "https://cdn.pixabay.com/photo/2018/01/30/12/11/street-life-3118639_640.jpg", "Old Delhi, India", 4.4, "entertainment",0)
             );
         }
         // Shimla - Enhanced with 6 attractions

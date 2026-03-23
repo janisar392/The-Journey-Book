@@ -273,7 +273,7 @@ const ExplorePage = () => {
       {/* Travel Stories */}
       <section className="section stories-section">
         <div className="container">
-          <h2 className="section-title">Travel Stories</h2>
+          <h2 className="section-title">Travel Stories </h2>
           <p className="section-subtitle">Get inspired by our latest travel guides and tips</p>
           
           <div className="stories-grid">
