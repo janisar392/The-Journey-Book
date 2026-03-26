@@ -74,6 +74,11 @@ const ExplorePage = () => {
     navigate('/create-story');
   };
 
+  // Navigate to Place Details Page when clicking on an experience
+  const handleExperienceClick = (experience) => {
+    navigate(`/experience/${experience.id}`, { state: { experience } });
+  };
+
   // Featured destinations data
   const destinations = [
     { id: 3, name: "Dubai, UAE", category: "desert", image: "/images/dubai.jpg", description: "Ultra-modern architecture and luxury shopping." },
@@ -83,10 +88,135 @@ const ExplorePage = () => {
   
   // Experiences data
   const experiences = [
-    { id: 1, name: "Sunset Cruise in Maldives", image: "/images/sunset-cruise.jpg", price: "$129", description: "Enjoy a romantic sunset cruise with dinner." },
-    { id: 2, name: "Eiffel Tower Night Tour", image: "/images/eiffel-tower.jpg", price: "$89", description: "See Paris illuminated at night from the iconic tower." },
-    { id: 3, name: "Camel Safari in Dubai", image: "/images/camel-safari.jpg", price: "$75", description: "Experience traditional desert transportation and culture." },
-    { id: 4, name: "Jazz Night in New Orleans", image: "/images/jazz-night.jpg", price: "$45", description: "Immerse yourself in the birthplace of jazz music." }
+    { 
+      id: 101,
+      name: "Sunset Cruise in Maldives", 
+      image: "https://oceangroup.mv/wp-content/uploads/2025/01/Dolphin-Cruise--scaled.jpg", 
+      price: "129", 
+      description: "Enjoy a romantic sunset cruise with dinner.", 
+      location: "Maldives", 
+      duration: "2 hours",
+      rating: 4.8,
+      fullDescription: "Experience the magic of a Maldivian sunset aboard a traditional dhoni. Cruise through crystal-clear waters, spot dolphins, and enjoy a delicious dinner under the stars. This romantic journey includes snorkeling stops, sunset photography opportunities, and a feast of local seafood delicacies.",
+      highlights: [
+        "Romantic sunset views over the Indian Ocean",
+        "Traditional Maldivian dhoni cruise",
+        "Delicious dinner with local seafood",
+        "Dolphin watching opportunity",
+        "Snorkeling equipment provided",
+        "Professional photographer on board"
+      ],
+      included: [
+        "Sunset cruise on traditional dhoni",
+        "Welcome drink on arrival",
+        "Buffet dinner with vegetarian options",
+        "Snorkeling equipment",
+        "Live acoustic music",
+        "Return transfers from resort"
+      ],
+      importantInfo: [
+        "Minimum 2 guests required",
+        "Weather dependent activity",
+        "Vegetarian options available",
+        "Free cancellation 24 hours prior"
+      ]
+    },
+    { 
+      id: 102,
+      name: "Eiffel Tower Night Tour", 
+      image: "https://www.toureiffel.paris/sites/default/files/styles/1200x630/public/actualite/image_principale/IMG_0815.jpg", 
+      price: "89", 
+      description: "See Paris illuminated at night from the iconic tower.", 
+      location: "Paris, France", 
+      duration: "1.5 hours",
+      rating: 4.9,
+      fullDescription: "Experience the magic of the Eiffel Tower after dark. Skip the long lines and ascend to the second floor for breathtaking panoramic views of the City of Lights. Watch as the tower sparkles with thousands of twinkling lights, creating an unforgettable Parisian memory.",
+      highlights: [
+        "Skip-the-line access to Eiffel Tower",
+        "Panoramic night views of Paris",
+        "See the tower sparkle at night",
+        "Expert local guide commentary",
+        "Small group experience",
+        "Perfect photo opportunities"
+      ],
+      included: [
+        "Eiffel Tower second floor entrance ticket",
+        "Professional English-speaking guide",
+        "Small group tour (max 20 people)",
+        "Fun facts and historical insights"
+      ],
+      importantInfo: [
+        "Valid ID required for entry",
+        "Elevator access included",
+        "Not suitable for wheelchairs",
+        "Free cancellation 24 hours prior"
+      ]
+    },
+    { 
+      id: 103,
+      name: "Camel Safari in Dubai", 
+      image: "https://amymarietta.com/wp-content/uploads/2019/10/IMG_8362.jpg", 
+      price: "75", 
+      description: "Experience traditional desert transportation and culture.", 
+      location: "Dubai, UAE", 
+      duration: "3 hours",
+      rating: 4.7,
+      fullDescription: "Embark on an authentic desert adventure with a traditional camel safari. Ride through golden sand dunes, visit a Bedouin camp, and experience the rich culture of the Arabian desert. Enjoy traditional entertainment, henna painting, and a delicious BBQ dinner under the stars.",
+      highlights: [
+        "30-minute camel ride across desert dunes",
+        "Traditional Bedouin camp experience",
+        "Sunset photography in the desert",
+        "Live cultural performances (Tanoura dance)",
+        "Henna painting for ladies",
+        "Arabic coffee and dates tasting"
+      ],
+      included: [
+        "Hotel pickup and drop-off",
+        "Camel ride experience",
+        "BBQ dinner with vegetarian options",
+        "Unlimited soft drinks and water",
+        "Shisha (traditional hookah)",
+        "Entertainment shows"
+      ],
+      importantInfo: [
+        "Comfortable clothing recommended",
+        "Sunglasses and sunscreen advised",
+        "Camel rides suitable for all ages",
+        "Free cancellation 24 hours prior"
+      ]
+    },
+    { 
+      id: 104,
+      name: "Jazz Night in New Orleans", 
+      image: "https://www.tourhero.com/en/magazine/wp-content/uploads/2021/12/robson-hatsukami-morgan-sEoR_ea8KoE-unsplash.jpg", 
+      price: "45", 
+      description: "Immerse yourself in the birthplace of jazz music.", 
+      location: "New Orleans, USA", 
+      duration: "2 hours",
+      rating: 4.6,
+      fullDescription: "Step into the soulful world of jazz at one of New Orleans' most historic venues. Enjoy an evening of authentic live jazz performed by local legends. Sip on a classic cocktail and let the rhythm of the city transport you to the heart of the French Quarter's musical heritage.",
+      highlights: [
+        "Live jazz performance by local artists",
+        "Historic French Quarter venue",
+        "Authentic New Orleans atmosphere",
+        "Signature cocktails available",
+        "Intimate seating experience",
+        "Rich musical history narration"
+      ],
+      included: [
+        "Entry to historic jazz venue",
+        "One complimentary drink",
+        "Live jazz performance (2 hours)",
+        "Professional sound system",
+        "Seated table reservation"
+      ],
+      importantInfo: [
+        "Must be 21+ with valid ID",
+        "Smart casual dress code",
+        "Arrive 15 minutes before show",
+        "No refunds for late arrivals"
+      ]
+    }
   ];
   
   
@@ -200,7 +330,12 @@ const ExplorePage = () => {
           
           <div className="experiences-grid">
             {experiences.map(experience => (
-              <div key={experience.id} className="experience-card">
+              <div 
+                key={experience.id} 
+                className="experience-card"
+                onClick={() => handleExperienceClick(experience)}
+                style={{ cursor: 'pointer' }}
+              >
                 <div 
                   className="experience-image" 
                   style={{ backgroundImage: `url(${experience.image})` }}
@@ -210,7 +345,7 @@ const ExplorePage = () => {
                 <div className="experience-content">
                   <h3 className="experience-name">{experience.name}</h3>
                   <p className="experience-description">{experience.description}</p>
-                  <button className="book-now-button">Book Now</button>
+                  <button className="book-now-button">View Details</button>
                 </div>
               </div>
             ))}
