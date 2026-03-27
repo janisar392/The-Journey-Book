@@ -271,8 +271,18 @@ const MyTripsPage = () => {
           ) : (
             filteredBookings.map(booking => (
               <div key={booking.id} className="booking-card">
-                <div className="booking-image">
-                  <img src={booking.experience.image} alt={booking.experience.name} />
+                <div className="booking-image"
+                 style={{
+                    width: "45%",
+                    height: "350px"   //  FIXED HEIGHT
+                  }}
+                 >
+                  <img src={booking.experience.image} alt={booking.experience.name} 
+                  style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover"
+                      }} />
                   {getStatusBadge(booking.status)}
                 </div>
                 
