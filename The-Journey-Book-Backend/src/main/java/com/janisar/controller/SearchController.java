@@ -619,7 +619,7 @@ public class SearchController {
                     new PlaceResult("376","MG Marg","https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/6d/8f/92/img-20201203-165738-largejpg.jpg?w=1200&h=-1&s=1","Gangtok, Sikkim, India",4.8,"shopping",0),
                     new PlaceResult("377","Ganesh Tok View Point","https://www.trawell.in/admin/images/upload/901968657Gangtok_Ganesh_Tok_View_Point_Main.jpg","Gangtok, Sikkim, India",4.7,"nature",0),
                     new PlaceResult("378","Tashi View Point","https://s7ap1.scene7.com/is/image/incredibleindia/tashi-view-point-gangtok-sikkim-1-attr-hero?qlt=82&ts=1742160327797","Gangtok, Sikkim, India",4.7,"nature",0),
-                    new PlaceResult("379","Namgyal Institute of Tibetology","https://namgyalinstitutesikkim.org/wp-content/uploads/2023/07/about1.jpg","Gangtok, Sikkim, India",4.7,"museum",40),
+                    new PlaceResult("379","Namgyal Institute of Tibetology","https://namgyalinstitutesikkim.org/wp-content/uploads/2023/07/about1.jpg","Gangtok, Sikkim, India",4.7,"museum",45),
                     new PlaceResult("380","Enchey Monastery","https://d3gw4aml0lneeh.cloudfront.net/assets/locations/xDCL9DI0QElM.jpg","Gangtok, Sikkim, India",4.7,"historical",0)
             );
         }
