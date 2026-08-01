@@ -31,6 +31,15 @@ const Footer = () => {
             <li><Link to="/bookings">Bookings</Link></li>
             <li><Link to="/gallery">Gallery</Link></li>
             <li><Link to="/contact">Contact Us</Link></li>
+            <li>
+              <a
+                href="https://the-journey-book-backend.onrender.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Run Backend (Render) to Load Data
+              </a>
+            </li>
           </ul>
         </div>
         
