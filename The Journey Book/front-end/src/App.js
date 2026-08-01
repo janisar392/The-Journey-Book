@@ -12,7 +12,6 @@ import Footer from './components/navigation/Footer';
 import ExplorePage from './components/ExplorePage';
 import ScrollToTop from './components/ScrollToTop';
 import OAuthSuccess from './components/login/OAuthSuccess';
-import TopDestinations from './components/home/TopDestinations';
 import Gallery from './components/home/Gallery';
 import Contact from './components/home/Contact';
 import SearchResultsPage from './pages/SearchResultsPage';
@@ -43,7 +42,6 @@ function App() {
             <Route path="/explore" element={<ExplorePage />} />
             <Route path="/search-results" element={<SearchResultsPage />} /> {/* Add this line */}
             <Route path="/oauth2-success" element={<OAuthSuccess />} />
-            <Route path="/destinations" element={<TopDestinations />} />
             <Route path="/travel-essentials" element={<TravelTools />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />

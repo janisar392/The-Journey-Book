@@ -56,11 +56,6 @@ const NavBar = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/destinations">
-                                Top Destinations
-                            </Link>
-                        </li>
-                        <li className="nav-item">
                             <Link className="nav-link" to="/travel-essentials">
                                 Travel Essentials
                             </Link>
