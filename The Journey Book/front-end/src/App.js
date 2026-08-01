@@ -6,8 +6,6 @@ import NavBar from './components/navigation/NavBar';
 import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Register from './components/login/Register';
-import TourList from './components/packages/TourList';
-import NewTourItem from './components/packages/NewTourItem';
 import Footer from './components/navigation/Footer';
 import ExplorePage from './components/ExplorePage';
 import ScrollToTop from './components/ScrollToTop';
@@ -37,8 +35,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/tours" element={<TourList />} />
-            <Route path="/add" element={<NewTourItem />} />
+            
             <Route path="/explore" element={<ExplorePage />} />
             <Route path="/search-results" element={<SearchResultsPage />} /> {/* Add this line */}
             <Route path="/oauth2-success" element={<OAuthSuccess />} />
