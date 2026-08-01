@@ -27,8 +27,6 @@ const Footer = () => {
           <ul>
             <li><Link to="/">The Journey Book</Link></li>
             <li><Link to="/explore">Explore</Link></li>
-            <li><Link to="/destinations">Top Destinations</Link></li>
-            <li><Link to="/bookings">Bookings</Link></li>
             <li><Link to="/gallery">Gallery</Link></li>
             <li><Link to="/contact">Contact Us</Link></li>
             <li>
