@@ -233,77 +233,38 @@ const TravelTools = () => {
   };
 
   // ============ WEATHER - LIVE API WITH FALLBACK ============
-  const fetchWeatherData = async (location) => {
-    setLoading(true);
-    setWeatherError('');
-    setUsingMockWeather(false);
-    
-    // Your actual API key
-    const API_KEY = 'd252c3e6fda49485f8ef9d0c51a8bc75';
-    
-    try {
-      // Get current weather
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric`
-      );
-      
-      if (response.ok) {
-        const data = await response.json();
-        
-        // Get 5-day forecast
-        const forecastResponse = await fetch(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${API_KEY}&units=metric`
-        );
-        
-        let forecastData = [];
-        if (forecastResponse.ok) {
-          const forecast = await forecastResponse.json();
-          // Process daily forecast (one per day)
-          const dailyForecast = {};
-          forecast.list.forEach(item => {
-            const date = new Date(item.dt * 1000).toLocaleDateString();
-            if (!dailyForecast[date]) {
-              dailyForecast[date] = {
-                day: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][new Date(item.dt * 1000).getDay()],
-                high: item.main.temp_max,
-                low: item.main.temp_min,
-                condition: item.weather[0].main,
-                icon: getWeatherIconEmoji(item.weather[0].main)
-              };
-            } else {
-              dailyForecast[date].high = Math.max(dailyForecast[date].high, item.main.temp_max);
-              dailyForecast[date].low = Math.min(dailyForecast[date].low, item.main.temp_min);
-            }
-          });
-          forecastData = Object.values(dailyForecast).slice(0, 5);
-        }
-        
-        setWeatherData({
-          location: `${data.name}, ${data.sys.country}`,
-          temperature: Math.round(data.main.temp),
-          condition: data.weather[0].main,
-          humidity: data.main.humidity,
-          wind: Math.round(data.wind.speed * 3.6),
-          feelsLike: Math.round(data.main.feels_like),
-          icon: getWeatherIconEmoji(data.weather[0].main),
-          forecast: forecastData.length > 0 ? forecastData : getMockForecast(location)
-        });
-        
-        console.log('✅ Live weather data loaded');
-      } else {
-        // Fallback to mock data
-        console.log('⚠️ API error, using mock data');
-        setUsingMockWeather(true);
-        const mockData = mockWeatherData[location];
-        if (mockData) {
-          setWeatherData(mockData);
-        } else {
-          setWeatherError('Weather data not available. Try London, Paris, or New York.');
-          setWeatherData(null);
-        }
-      }
-    } catch (error) {
-      console.log('⚠️ Network error, using mock data');
+ const fetchWeatherData = async (location) => {
+  setLoading(true);
+  setWeatherError('');
+  setUsingMockWeather(false);
+
+  // Backend API URL (change for production/local)
+  const BASE_URL = 'https://the-journey-book-backend.onrender.com'; // Production
+  // const BASE_URL = 'http://localhost:8080'; // Local development
+
+  try {
+    // Call YOUR backend API – this uses Redis caching
+    const response = await fetch(`${BASE_URL}/api/travel-tools/weather?city=${location}`);
+
+    if (response.ok) {
+      const data = await response.json();
+
+      // Map backend response to frontend format
+      setWeatherData({
+        location: data.city || location,
+        temperature: Math.round(data.temperature),
+        condition: data.description || 'N/A',
+        humidity: data.humidity || 0,
+        wind: data.wind || 0,
+        feelsLike: data.feelsLike || data.temperature,
+        icon: getWeatherIconEmoji(data.description || ''),
+        forecast: getMockForecast(location) // Still uses mock forecast
+      });
+
+      console.log('✅ Weather data from backend (cached)');
+    } else {
+      // Fallback to mock data
+      console.log('⚠️ API error, using mock data');
       setUsingMockWeather(true);
       const mockData = mockWeatherData[location];
       if (mockData) {
@@ -312,60 +273,69 @@ const TravelTools = () => {
         setWeatherError('Weather data not available. Try London, Paris, or New York.');
         setWeatherData(null);
       }
-    } finally {
-      setLoading(false);
     }
-  };
-
-  const getWeatherIconEmoji = (condition) => {
-    const iconMap = {
-      'Clear': '☀️',
-      'Sunny': '☀️',
-      'Clouds': '☁️',
-      'Few clouds': '⛅',
-      'Scattered clouds': '⛅',
-      'Broken clouds': '☁️',
-      'Overcast': '☁️',
-      'Rain': '🌧️',
-      'Drizzle': '🌧️',
-      'Thunderstorm': '⛈️',
-      'Snow': '❄️',
-      'Mist': '🌫️',
-      'Fog': '🌫️',
-      'Haze': '🌫️'
-    };
-    return iconMap[condition] || '🌤️';
-  };
-
-  const getMockForecast = (location) => {
-    const mock = mockWeatherData[location];
-    if (mock && mock.forecast) return mock.forecast;
-    
-    return [
-      { day: 'Today', high: 20, low: 15, condition: 'Partly Cloudy', icon: '⛅' },
-      { day: 'Tomorrow', high: 22, low: 16, condition: 'Sunny', icon: '☀️' },
-      { day: 'Wed', high: 19, low: 14, condition: 'Cloudy', icon: '☁️' },
-      { day: 'Thu', high: 18, low: 13, condition: 'Rainy', icon: '🌧️' },
-      { day: 'Fri', high: 21, low: 15, condition: 'Sunny', icon: '☀️' }
-    ];
-  };
-
-  const handleLocationSearch = (e) => {
-    if (e.key === 'Enter' || e.type === 'click') {
-      if (weatherLocation.trim()) {
-        fetchWeatherData(weatherLocation);
-      }
+  } catch (error) {
+    console.log('⚠️ Network error, using mock data');
+    setUsingMockWeather(true);
+    const mockData = mockWeatherData[location];
+    if (mockData) {
+      setWeatherData(mockData);
+    } else {
+      setWeatherError('Weather data not available. Try London, Paris, or New York.');
+      setWeatherData(null);
     }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
 
-  const getTemperatureColor = (temp) => {
-    if (temp < 0) return '#60a5fa';
-    if (temp < 10) return '#93c5fd';
-    if (temp < 20) return '#86efac';
-    if (temp < 30) return '#fcd34d';
-    return '#f87171';
+const getWeatherIconEmoji = (condition) => {
+  const iconMap = {
+    'Clear': '☀️',
+    'Sunny': '☀️',
+    'Clouds': '☁️',
+    'Few clouds': '⛅',
+    'Scattered clouds': '⛅',
+    'Broken clouds': '☁️',
+    'Overcast': '☁️',
+    'Rain': '🌧️',
+    'Drizzle': '🌧️',
+    'Thunderstorm': '⛈️',
+    'Snow': '❄️',
+    'Mist': '🌫️',
+    'Fog': '🌫️',
+    'Haze': '🌫️'
   };
+  return iconMap[condition] || '🌤️';
+};
 
+const getMockForecast = (location) => {
+  const mock = mockWeatherData[location];
+  if (mock && mock.forecast) return mock.forecast;
+  return [
+    { day: 'Today', high: 20, low: 15, condition: 'Partly Cloudy', icon: '⛅' },
+    { day: 'Tomorrow', high: 22, low: 16, condition: 'Sunny', icon: '☀️' },
+    { day: 'Wed', high: 19, low: 14, condition: 'Cloudy', icon: '☁️' },
+    { day: 'Thu', high: 18, low: 13, condition: 'Rainy', icon: '🌧️' },
+    { day: 'Fri', high: 21, low: 15, condition: 'Sunny', icon: '☀️' }
+  ];
+};
+
+const handleLocationSearch = (e) => {
+  if (e.key === 'Enter' || e.type === 'click') {
+    if (weatherLocation.trim()) {
+      fetchWeatherData(weatherLocation);
+    }
+  }
+};
+
+const getTemperatureColor = (temp) => {
+  if (temp < 0) return '#60a5fa';
+  if (temp < 10) return '#93c5fd';
+  if (temp < 20) return '#86efac';
+  if (temp < 30) return '#fcd34d';
+  return '#f87171';
+};
   // Time Zone functions (keep as is - working perfectly)
   const timeZones = [
     { value: 'America/New_York', label: 'New York', emoji: '🇺🇸' },
